@@ -965,6 +965,21 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
 .qpool-stat-l{font-size:10px;color:var(--text3);margin-top:2px;}
 .qpool-progress{height:6px;background:var(--surface3);border-radius:3px;margin-bottom:14px;overflow:hidden;}
 .qpool-progress-fill{height:100%;background:#27ae60;border-radius:3px;transition:width .5s;}
+/* MCQ Exam Pool Manager cards */
+.ep-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.ep-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px}
+.ep-card-name{font-size:14px;font-weight:800;color:var(--dark);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ep-card-btns{display:flex;gap:5px;flex-shrink:0}
+.ep-card-btn{background:none;border:1px solid var(--border2);border-radius:7px;padding:4px 9px;font-size:12px;cursor:pointer;color:var(--text2);font-family:var(--font-body);transition:background .12s}
+.ep-card-btn:hover{background:var(--surface3)}
+.ep-card-btn.danger{color:var(--red);border-color:var(--red)}
+.ep-add-panel{background:var(--surface3);border-radius:12px;padding:14px;margin-top:8px;border:1.5px dashed var(--border2)}
+/* Host quiz preview grid */
+.host-quiz-preview{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:4px 0}
+.host-quiz-preview .quiz-hub-card{min-height:0;padding:12px 10px}
+.host-quiz-preview .quiz-hub-card-icon{font-size:26px;margin-bottom:6px}
+.host-quiz-preview .quiz-hub-card-title{font-size:14px}
+.host-quiz-preview .quiz-hub-card-sub{font-size:11px;margin-bottom:10px}
 /* Mini Reviewer Overlay */
 .mr-qcard{background:var(--surface);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;cursor:pointer;border:1px solid var(--border);transition:border-color .15s}
 .mr-qcard:hover{border-color:var(--red)}
@@ -1711,18 +1726,6 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
       <div style="font-size:12px;color:var(--text3);margin-bottom:8px">Assign categories, edit quizzes, rename or delete chapters.</div>
       <div id="host-chapter-list"></div>
     </div>
-    <div class="host-section" id="hs-qpm">
-      <div class="section-label">📚 Quiz Pool Manager</div>
-      <div id="qpm-stats" class="qpool-stats"></div>
-      <div class="qpool-progress"><div class="qpool-progress-fill" id="qpm-pbar" style="width:0%"></div></div>
-      <div style="margin-bottom:10px;display:flex;flex-direction:column;gap:8px">
-        <button class="btn-sm btn-quiz" style="width:100%;padding:11px;font-size:13px" onclick="openMiniReviewer()">🔬 Edit Quiz Pool</button>
-        <button class="btn-sm btn-read" style="width:100%;padding:11px;font-size:13px" onclick="window.open('https://maxmos47.github.io/quiz-reviewer/','_blank')">🔗 Open Reviewer Tool</button>
-      </div>
-      <button class="btn-sm btn-danger" style="width:100%;padding:10px;font-size:13px" onclick="clearQuizPool()">🗑 Clear Entire Quiz Pool</button>
-      <div id="qpm-msg" style="font-size:12px;color:var(--text3)">Quiz pool syncs automatically from the Reviewer Tool.</div>
-    </div>
-
     <div class="host-section" id="hs-textbooks">
       <div class="section-label">📚 Textbook Manager</div>
       <button class="btn-sm btn-read" style="width:100%;margin-bottom:10px;padding:10px;font-size:13px" onclick="openTextbookEditor(null)">➕ Add Textbook</button>
@@ -1785,48 +1788,33 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
       </div>
       <!-- ─────────── PANE: QUIZZES ─────────── -->
       <div class="htab-pane" data-htab="quizzes">
+        <!-- ── MCQ Exam Pools Manager ── -->
+        <div class="host-section" id="hs-exam-pools">
+          <div class="section-label">📚 MCQ Exam Pools</div>
+          <div id="exam-pools-list"><div style="font-size:12px;color:var(--text3)">Loading pools…</div></div>
+          <button class="btn-sm btn-read" id="add-pool-btn" style="width:100%;padding:10px;font-size:13px;margin-top:4px" onclick="toggleAddPoolPanel()">➕ Add New Pool</button>
+          <div id="add-pool-panel" class="ep-add-panel" style="display:none">
+            <div class="be-label">Pool Name</div>
+            <input id="add-pool-name" type="text" maxlength="60" placeholder="e.g. USMLE Step 2" class="be-input" style="margin-bottom:10px">
+            <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;margin-bottom:12px">
+              <div><div class="be-label">Icon</div><input id="add-pool-icon" type="text" maxlength="2" value="📗" class="be-input" style="text-align:center;font-size:20px;padding:5px"></div>
+              <div><div class="be-label">Color (card accent)</div><input id="add-pool-color" type="color" value="#16a085" style="width:100%;height:38px;border:1.5px solid var(--border);border-radius:8px;padding:2px 4px;cursor:pointer;background:var(--surface3)"></div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn-sm btn-read" style="flex:1;padding:10px" onclick="saveNewPool()">✅ Create Pool</button>
+              <button class="btn-sm btn-outline" style="flex:1;padding:10px" onclick="toggleAddPoolPanel()">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <!-- ── Host Quiz Preview ── -->
+        <div class="host-section" id="hs-quiz-preview">
+          <div class="section-label">🎮 Test Quizzes (Host Preview)</div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:10px">Launch any quiz mode for testing. Cooldowns bypass for Host.</div>
+          <div id="host-quiz-preview-cards" class="host-quiz-preview"></div>
+        </div>
         <div class="host-section" id="hs-pool-cfg">
-      <div class="section-label">🎲 Pool Quiz Settings</div>
+      <div class="section-label">📖 Chapter Quiz Settings</div>
       <div style="background:var(--surface);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)">
-        <div class="form-group">
-          <label>Number of Questions</label>
-          <select id="host-pool-count" style="width:100%;padding:10px 14px;border:1px solid var(--border2);border-radius:var(--radius);font-family:var(--font-body);font-size:14px;outline:none;">
-            <option value="10">10 questions</option>
-            <option value="20">20 questions</option>
-            <option value="30">30 questions</option>
-            <option value="40">40 questions</option>
-            <option value="50">50 questions</option>
-            <option value="60">60 questions</option>
-            <option value="70">70 questions</option>
-            <option value="80">80 questions</option>
-            <option value="90">90 questions</option>
-            <option value="100">100 questions</option>
-            <option value="999">All questions</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Time per Question</label>
-          <select id="host-pool-time" style="width:100%;padding:10px 14px;border:1px solid var(--border2);border-radius:var(--radius);font-family:var(--font-body);font-size:14px;outline:none;">
-            <option value="60">1 min / question</option>
-            <option value="90">90 sec / question</option>
-            <option value="120">2 min / question</option>
-            <option value="0">No timer</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>🎲 Random Pool Quiz Cooldown</label>
-          <select id="host-pool-cooldown" style="width:100%;padding:10px 14px;border:1px solid var(--border2);border-radius:var(--radius);font-family:var(--font-body);font-size:14px;outline:none;">
-            <option value="0">No cooldown</option>
-            <option value="1">1 hour</option>
-            <option value="2">2 hours</option>
-            <option value="4">4 hours</option>
-            <option value="6">6 hours</option>
-            <option value="8">8 hours</option>
-            <option value="12">12 hours</option>
-            <option value="24">24 hours</option>
-          </select>
-          <div style="font-size:11px;color:var(--text3);margin-top:4px">Wait time before residents can retake the Random Pool Quiz.</div>
-        </div>
         <div class="form-group">
           <label>📖 Chapter Quiz Cooldown</label>
           <select id="host-chapter-cooldown" style="width:100%;padding:10px 14px;border:1px solid var(--border2);border-radius:var(--radius);font-family:var(--font-body);font-size:14px;outline:none;">
@@ -2510,6 +2498,51 @@ function initPoolSync() {
   );
 }
 // initPoolSync() is called inside launchApp() after authentication succeeds
+
+// ── Dynamic MCQ Exam Pools ───────────────────────────────────────────────
+let _examPoolsMeta = [];   // [{id, name, icon, color, createdAt, settings?}] from Firestore config
+let _p1Settings    = {count:20, secPerQ:90, cooldownH:4, passCutoff:50}; // Pool 1 quiz settings cache
+let EXAM_CACHES    = {};   // {poolId: {docId: questionData}} for custom pools
+let _examUnsubs    = {};   // {poolId: unsubscribe fn}
+
+const _subscribeExamPool = (id) => {
+  if(_examUnsubs[id]){ _examUnsubs[id](); }
+  if(!EXAM_CACHES[id]) EXAM_CACHES[id] = {};
+  _examUnsubs[id] = onSnapshot(
+    collection(db, 'exam_pool_' + id),
+    snap => {
+      snap.docChanges().forEach(change => {
+        if(change.type === 'added' || change.type === 'modified'){
+          EXAM_CACHES[id][change.doc.id] = { ...change.doc.data(), _docId: change.doc.id };
+        } else if(change.type === 'removed'){
+          delete EXAM_CACHES[id][change.doc.id];
+        }
+      });
+      renderExamPoolsManager();
+      renderQuizHub();
+      // Refresh mini reviewer list if it's open on this pool
+      if(_mrActivePoolId === id){
+        const mrOv = document.getElementById('mr-overlay');
+        const mrEd = document.getElementById('mr-edit');
+        if(mrOv && mrOv.classList.contains('open') && mrEd && mrEd.style.display==='none'){
+          try{ mrRenderTopics(); mrRenderList(); }catch(_){}
+        }
+      }
+    },
+    err => console.warn('exam_pool_' + id + ' error:', err.message)
+  );
+};
+
+const initExamPoolsSync = async () => {
+  try {
+    const snap = await getDoc(doc(db, 'settings', 'examPools'));
+    _examPoolsMeta = (snap.exists() ? (snap.data().pools || []) : []);
+    _examPoolsMeta.forEach(p => _subscribeExamPool(p.id));
+    renderExamPoolsManager();
+    renderQuizHub();
+  } catch(e){ console.warn('initExamPoolsSync:', e.message); }
+};
+
 const storage = getStorage(app);
 
 // ── utils ──
@@ -2765,9 +2798,10 @@ window.doRegister = async () => {
 };
 
 window.signOut = async () => {
-  // Clean up pool sync listener
-  if (_poolUnsub) { _poolUnsub(); _poolUnsub = null; }
-  POOL_CACHE = {};
+  // Clean up all pool sync listeners
+  if(_poolUnsub){ _poolUnsub(); _poolUnsub = null; }
+  Object.values(_examUnsubs).forEach(fn => { try{ fn(); }catch(_){} });
+  POOL_CACHE = {}; EXAM_CACHES = {}; _examUnsubs = {}; _examPoolsMeta = [];
   _poolSyncReady = false;
   // Best-effort: invalidate the server-side token so re-restore from this browser fails
   if (currentUser && currentUser.username) {
@@ -2799,6 +2833,7 @@ window.signOut = async () => {
 
 const launchApp = () => {
   initPoolSync();
+  initExamPoolsSync();
   const isHost = currentUser.role === 'host';
   const pts    = currentUser.score || 0;
   if(isHost){
@@ -3752,9 +3787,6 @@ const loadPoolSettings = async () => {
     const _psd = $('pool-settings-display'); if(_psd) _psd.textContent =
       `${cLabel} · ${tLabel} · ${pcdLabel} · Scores to leaderboard`;
     // Pre-fill host dropdowns
-    const hc   = $('host-pool-count');       if(hc)   hc.value   = count;
-    const ht   = $('host-pool-time');        if(ht)   ht.value   = time;
-    const hpcd = $('host-pool-cooldown');    if(hpcd) hpcd.value = String(poolCdH);
     const hccd = $('host-chapter-cooldown'); if(hccd) hccd.value = String(chapterCdH);
     // Update pool start button with cooldown if applicable
     const poolBtn = document.getElementById('pool-start-btn');
@@ -3768,28 +3800,78 @@ const loadPoolSettings = async () => {
         poolBtn.disabled = false; poolBtn.style.opacity=''; poolBtn.style.cursor='';
       }
     }
+    _p1Settings = { count: parseInt(count), secPerQ: parseInt(time), cooldownH: poolCdH, passCutoff: _passCutoff };
     return { count: parseInt(count), secPerQ: parseInt(time) };
   } catch(e){ return { count: 10, secPerQ: 90 }; }
 };
 
 window.savePoolSettings = async () => {
-  const count       = parseInt($('host-pool-count').value);
-  const time        = parseInt($('host-pool-time').value);
-  const cutoff      = Math.min(100, Math.max(1, parseInt($('host-pass-cutoff').value) || 50));
-  const poolCdH     = parseInt($('host-pool-cooldown').value)    || 0;
-  const chapterCdH  = parseInt($('host-chapter-cooldown').value) || 0;
+  const cutoff     = Math.min(100, Math.max(1, parseInt($('host-pass-cutoff').value) || 50));
+  const chapterCdH = parseInt($('host-chapter-cooldown').value) || 0;
   try {
-    await setDoc(doc(db,'config','settings'), { poolQuizCount: count, poolQuizTimePerQ: time, passCutoff: cutoff, poolCooldownHours: poolCdH, chapterCooldownHours: chapterCdH }, { merge: true });
-    toast('✅ Pool quiz settings saved!');
+    await setDoc(doc(db,'config','settings'), { passCutoff: cutoff, chapterCooldownHours: chapterCdH }, { merge: true });
+    toast('✅ Chapter quiz settings saved!');
     loadPoolSettings();
   } catch(e){ toast('Error: '+e.message); }
 };
 
+// ── PER-POOL SETTINGS ──────────────────────────────────────────────────────
+const loadPoolSettingsFor = async (poolId) => {
+  if(!poolId || poolId === '_default' || poolId === '_pool') {
+    return await loadPoolSettings();
+  }
+  const meta = (_examPoolsMeta||[]).find(p=>p.id===poolId);
+  const s = (meta && meta.settings) || {};
+  return {
+    count:    s.count    != null ? Number(s.count)    : 20,
+    secPerQ:  s.secPerQ  != null ? Number(s.secPerQ)  : 90,
+    cooldownH:s.cooldownH!= null ? Number(s.cooldownH): 4,
+    passCutoff:s.passCutoff!=null? Number(s.passCutoff): 50
+  };
+};
+
+window.savePoolCardSettings = async (poolId) => {
+  const count     = parseInt(document.getElementById('ps-count-'+ poolId).value)  || 20;
+  const secPerQ   = parseInt(document.getElementById('ps-time-' + poolId).value)  || 90;
+  const cooldownH = parseInt(document.getElementById('ps-cd-'   + poolId).value);
+  const passCutoff= Math.min(100,Math.max(1,parseInt(document.getElementById('ps-pass-'+ poolId).value)||50));
+  try {
+    if(poolId === '_default'){
+      await setDoc(doc(db,'config','settings'), {
+        poolQuizCount: count, poolQuizTimePerQ: secPerQ,
+        poolCooldownHours: cooldownH
+      }, { merge: true });
+      _p1Settings = {count, secPerQ, cooldownH, passCutoff};
+      POOL_CD_MS = cooldownH * 3600000;
+      toast('✅ Main Pool settings saved!');
+      renderExamPoolsManager();
+    } else {
+      const idx = (_examPoolsMeta||[]).findIndex(p=>p.id===poolId);
+      if(idx<0){ toast('Pool not found'); return; }
+      _examPoolsMeta[idx].settings = {count, secPerQ, cooldownH, passCutoff};
+      await setDoc(doc(db,'settings','examPools'), {pools: _examPoolsMeta});
+      toast('✅ Pool settings saved!');
+      renderExamPoolsManager();
+    }
+  } catch(e){ toast('Error: '+e.message); }
+};
+
+window.togglePoolSettings = (poolId) => {
+  const panel = document.getElementById('pool-settings-panel-'+poolId);
+  const btn   = document.getElementById('pool-settings-toggle-'+poolId);
+  if(!panel) return;
+  const open = panel.style.display !== 'none';
+  panel.style.display = open ? 'none' : 'block';
+  if(btn) btn.textContent = open ? '⚙️' : '✖';
+};
+
 // ── POOL QUIZ ──
-window.startPoolQuiz = async () => {
+window.startPoolQuiz = async (mode) => {
+  // mode = undefined (random all) or '_default' (Pool 1 only)
   const isHost = currentUser && currentUser.role === 'host';
   if(currentUser && !isHost){
-    const cd = cdRemaining('_pool');
+    const cdKey = '_pool';
+    const cd = cdRemaining(cdKey);
     if(cd > 0){ toast('⏳ Pool cooldown: available in ' + fmtCd(cd)); return; }
   }
   stopTimer();
@@ -3801,7 +3883,7 @@ window.startPoolQuiz = async () => {
 
   try {
     // Read settings from Firestore
-    const { count: numQ, secPerQ } = await loadPoolSettings();
+    const { count: numQ, secPerQ } = await loadPoolSettingsFor(mode === '_default' ? '_default' : null);
 
     // Fetch chapter quizzes; quiz_pool is served from POOL_CACHE (live onSnapshot)
     const chSnap = await getDocs(collection(db,'quizzes'));
@@ -3809,16 +3891,21 @@ window.startPoolQuiz = async () => {
     chSnap.forEach(d => {
       (d.data().questions || []).forEach(q => allQ.push({...q, _chapterId: d.id}));
     });
-    // Use real-time cache — always up-to-date with Reviewer Tool edits
-    Object.values(POOL_CACHE).forEach(q => {
-      if(q.hasAnswer && q.correct !== null) allQ.push({
-        question:    q.question,
-        options:     q.options,
-        correct:     q.correct,
-        explanation: q.explanation || '',
-        imageUrl:    q.imageUrl    || '',
-        _chapterId:  '_imported',
-        _base: 0,
+    // Merge Pool 1 + all custom exam pools
+    const _allPoolSources = mode === '_default'
+      ? [POOL_CACHE]
+      : [POOL_CACHE, ...Object.values(EXAM_CACHES)];
+    _allPoolSources.forEach(cache => {
+      Object.values(cache).forEach(q => {
+        if(q.hasAnswer && q.correct !== null) allQ.push({
+          question:    q.question,
+          options:     q.options,
+          correct:     q.correct,
+          explanation: q.explanation || '',
+          imageUrl:    q.imageUrl    || '',
+          _chapterId:  '_imported',
+          _base: 0,
+        });
       });
     });
 
@@ -3837,8 +3924,9 @@ window.startPoolQuiz = async () => {
     }
     const selected = allQ.slice(0, Math.min(numQ, allQ.length));
 
+    const poolLabel = mode === '_default' ? '📚 Main MCQ Pool' : '🎲 Random Pool Quiz';
     quizState = { questions: selected, current: 0, score: 0, chapterId: '_pool' };
-    $('quiz-chapter-name').textContent = `🎲 Pool Quiz · ${selected.length} Questions`;
+    $('quiz-chapter-name').textContent = poolLabel + ' · ' + selected.length + ' Questions';
     // Pool quiz actually started — record attempt for cooldown (P1 #7).
     if(currentUser && !isHost){
       const attempts = Object.assign({}, currentUser.quizAttempts || {});
@@ -3854,6 +3942,48 @@ window.startPoolQuiz = async () => {
   } catch(e){
     container.innerHTML=`<div class="empty">Error: ${e.message}</div>`;
   }
+};
+
+// ── EXAM POOL QUIZ (custom pools) ──
+window.startExamPoolQuiz = async (poolId) => {
+  const pool = _examPoolsMeta.find(p=>p.id===poolId);
+  if(!pool){ toast('Pool not found.'); return; }
+  const isHost = currentUser && currentUser.role === 'host';
+  if(currentUser && !isHost){
+    const cd = cdRemaining(poolId);
+    if(cd > 0){ toast('⏳ Cooldown: available in '+fmtCd(cd)); return; }
+  }
+  stopTimer();
+  const container = $('quiz-container');
+  $('quiz-chapter-name').textContent = '⏳ Loading '+pool.name+'…';
+  $('quiz-overlay').classList.add('open');
+  try{ const d=localStorage.getItem('quizDarkMode'); const ov2=document.getElementById('quiz-overlay'); const b2=document.getElementById('quiz-dark-btn'); if(d==='1'){ov2.classList.add('quiz-overlay-dark'); if(b2)b2.textContent='☀️';}else{ov2.classList.remove('quiz-overlay-dark'); if(b2)b2.textContent='🌙';} }catch(_){}
+  container.innerHTML = '<div class="loading-spinner">⏳ Loading '+pool.name+'…</div>';
+  try {
+    const { count: numQ, secPerQ } = await loadPoolSettingsFor(poolId);
+    const cache = EXAM_CACHES[poolId] || {};
+    let allQ = Object.values(cache)
+      .filter(q=>q.hasAnswer && q.correct !== null)
+      .map(q=>({ question:q.question, options:q.options, correct:q.correct,
+                 explanation:q.explanation||'', imageUrl:q.imageUrl||'',
+                 _chapterId:poolId, _base:0 }));
+    if(!allQ.length){
+      container.innerHTML = '<div class="empty">📭 '+pool.name+' has no questions yet. Import a JSON file in Host → Quizzes.</div>';
+      return;
+    }
+    for(let i=allQ.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [allQ[i],allQ[j]]=[allQ[j],allQ[i]]; }
+    const selected = allQ.slice(0, Math.min(numQ, allQ.length));
+    quizState = { questions: selected, current: 0, score: 0, chapterId: poolId };
+    $('quiz-chapter-name').textContent = (pool.icon||'📗')+' '+pool.name+' · '+selected.length+' Questions';
+    if(currentUser && !isHost){
+      const attempts = Object.assign({}, currentUser.quizAttempts||{});
+      attempts[poolId] = Date.now();
+      currentUser.quizAttempts = attempts;
+      updateDoc(doc(db,'users',currentUser.username),{quizAttempts:attempts}).catch(()=>{});
+    }
+    renderQuizQ();
+    if(secPerQ > 0) startTimer(selected.length * secPerQ);
+  } catch(e){ container.innerHTML='<div class="empty">Error: '+e.message+'</div>'; }
 };
 
 const renderQuizQ = () => {
@@ -4345,10 +4475,15 @@ const _saveBadgeConfig = async () => {
 };
 
 // == COOLDOWN HELPERS ======================================================
-let POOL_CD_MS    = 4 * 60 * 60 * 1000; // pool cooldown — updated from Firestore
+let POOL_CD_MS    = 4 * 60 * 60 * 1000; // pool cooldown (Pool 1 + Random) — updated from Firestore
 let CHAPTER_CD_MS = 4 * 60 * 60 * 1000; // chapter cooldown — updated from Firestore
+const _getPoolCdMs = (poolId) => {
+  if(poolId === '_default' || poolId === '_pool') return POOL_CD_MS;
+  const meta = (_examPoolsMeta||[]).find(p=>p.id===poolId);
+  return (meta && meta.settings && meta.settings.cooldownH != null ? Number(meta.settings.cooldownH) : 4) * 3600000;
+};
 const cdRemaining = (chapterId) => {
-  const cdMs = chapterId === '_pool' ? POOL_CD_MS : CHAPTER_CD_MS;
+  const cdMs = _isPoolId(chapterId) || chapterId === '_pool' ? _getPoolCdMs(chapterId) : CHAPTER_CD_MS;
   const attempts = (currentUser && currentUser.quizAttempts) || {};
   const last = attempts[chapterId] || 0;
   return Math.max(0, last + cdMs - Date.now());
@@ -4449,7 +4584,7 @@ const showQuizScore = async () => {
       const snap = await getDoc(ref2);
       if(snap.exists()){
         const d      = snap.data();
-        const isPool = quizState.chapterId === '_pool';
+        const isPool = quizState.chapterId === '_pool' || _isPoolId(quizState.chapterId);
 
         // streak tracking
         const today     = new Date().toISOString().slice(0,10);
@@ -4782,19 +4917,34 @@ window.switchLbTab = tab => {
 
 // == MINI REVIEWER =========================================================
 let _mrPoolVersion = null;
-let _mrPendingImageUrl = null; // holds uploaded image URL for unsaved new questions
+let _mrPendingImageUrl = null;
+let _mrActivePoolId   = '_default';   // '_default' = quiz_pool | 'epXXX' = exam_pool_epXXX
+
+// Mini-reviewer pool helpers
+const _mrCache   = () => _mrActivePoolId === '_default' ? POOL_CACHE : (EXAM_CACHES[_mrActivePoolId] || {});
+const _mrColName = () => _mrActivePoolId === '_default' ? 'quiz_pool' : 'exam_pool_' + _mrActivePoolId;
+const _mrPoolLabel = () => {
+  if(_mrActivePoolId === '_default') return 'Main MCQ Pool';
+  const p = (_examPoolsMeta||[]).find(x=>x.id===_mrActivePoolId);
+  return p ? p.name : 'Pool';
+}; // holds uploaded image URL for unsaved new questions
 let _mrActiveTopic = null;     // currently-selected topic filter chip
 
-window.openMiniReviewer = async () => {
+window.openMiniReviewer = async (poolId) => {
+  _mrActivePoolId = poolId || '_default';
   $('mr-overlay').classList.add('open');
   mrShowList();
   mrRenderTopics();
   mrRenderList();
-  // Fetch reviewer pool version for cross-sync to quizReviews
-  try {
-    const meta = await getDoc(doc(db,'quizReviews','_meta'));
-    if(meta.exists()) _mrPoolVersion = meta.data()?.activePool?.version || null;
-  } catch(e){ console.warn('Mini reviewer: could not read pool version:', e.message); }
+  // Pool version sync only relevant for Main MCQ Pool (Reviewer Tool integration)
+  if(_mrActivePoolId === '_default'){
+    try {
+      const meta = await getDoc(doc(db,'quizReviews','_meta'));
+      if(meta.exists()) _mrPoolVersion = meta.data()?.activePool?.version || null;
+    } catch(e){ console.warn('Mini reviewer: could not read pool version:', e.message); }
+  } else {
+    _mrPoolVersion = null;
+  }
 };
 
 window.closeMiniReviewer = () => {
@@ -4809,7 +4959,11 @@ function mrShowList(){
   $('mr-topics').style.display = '';
   $('mr-back-btn').style.display = 'none';
   $('mr-close-btn').style.display = '';
-  $('mr-title').textContent = '🔬 Quiz Pool Editor';
+  $('mr-title').textContent = '🔬 ' + _mrPoolLabel();
+  // Show Fix/Renumber only for Pool 1 (q_xxxx ID system)
+  const isDefault = _mrActivePoolId === '_default';
+  const renumberBtn = document.querySelector('#mr-overlay .btn-sm:not(.btn-quiz):not(.btn-read)');
+  if(renumberBtn) renumberBtn.style.display = isDefault ? '' : 'none';
 }
 function mrShowEdit(){
   $('mr-list').style.display = 'none';
@@ -4828,7 +4982,7 @@ window.mrSetTopic = (t) => {
 };
 
 function mrRenderTopics(){
-  const all = Object.values(POOL_CACHE);
+  const all = Object.values(_mrCache());
   // Build topic → count map, sorted by topic name
   const map = {};
   all.forEach(q => { const t = q.topic||''; if(t) map[t] = (map[t]||0)+1; });
@@ -4845,7 +4999,7 @@ function mrRenderTopics(){
 window.mrRenderList = () => {
   const search = ($('mr-search')?.value||'').toLowerCase();
   const filter = $('mr-filter')?.value||'all';
-  let items = Object.values(POOL_CACHE);
+  let items = Object.values(_mrCache());
   // Sort
   if(filter==='sort_qnum'){
     items = items.sort((a,b)=>{
@@ -4864,7 +5018,7 @@ window.mrRenderList = () => {
   // Active topic chip filter
   if(_mrActiveTopic) items=items.filter(q=>(q.topic||'')=== _mrActiveTopic);
   // Show/hide Fix IDs button based on whether any h_ docs exist
-  const hasHIds = Object.values(POOL_CACHE).some(q=>/^h_\d{5,}$/.test(q._docId||q.id||''));
+  const hasHIds = _mrActivePoolId === '_default' && Object.values(_mrCache()).some(q=>/^h_\d{5,}$/.test(q._docId||q.id||''));
   if($('mr-fixid-btn')) $('mr-fixid-btn').style.display = hasHIds?'':'none';
   // Search: matches question text, topic, or q_xxx ID
   if(search) items=items.filter(q=>
@@ -4906,7 +5060,7 @@ window.mrRenderList = () => {
 };
 
 window.mrOpenEdit = (docId) => {
-  const q = POOL_CACHE[docId]||{};
+  const q = _mrCache()[docId]||{};
   mrRenderEditForm(q, docId);
 };
 window.mrNewQuestion = () => { _mrPendingImageUrl = null; mrRenderEditForm({}, null); };
@@ -4933,7 +5087,7 @@ function mrRenderEditForm(q, docId){
       <div style="flex:2">
         <div class="mr-field-label" style="margin-bottom:6px">TOPIC</div>
         <input id="mr-topic" type="text" list="mr-topic-list" value="${esc(q.topic&&q.topic!=='General EM'?q.topic:'')}" placeholder="e.g. Cardiology" class="mr-input" style="margin-bottom:0">
-        <datalist id="mr-topic-list">${Object.values(POOL_CACHE).map(x=>x.topic).filter((t,i,a)=>t&&t!=='General EM'&&a.indexOf(t)===i).sort().map(t=>`<option value="${esc(t)}">`).join('')}</datalist>
+        <datalist id="mr-topic-list">${Object.values(_mrCache()).map(x=>x.topic).filter((t,i,a)=>t&&t!=='General EM'&&a.indexOf(t)===i).sort().map(t=>`<option value="${esc(t)}">`).join('')}</datalist>
       </div>
       <div style="flex:1">
         <div class="mr-field-label" style="margin-bottom:6px">DIFFICULTY</div>
@@ -4968,13 +5122,13 @@ window.mrSave = async (docId) => {
   const correctEl = document.querySelector('input[name="mr-correct"]:checked');
   const correct = correctEl?parseInt(correctEl.value):null;
   const explanation = ($('mr-explanation')?.value||'').trim();
-  const existing = docId?(POOL_CACHE[docId]||{}):{};
+  const existing = docId?(_mrCache()[docId]||{}):{};
   const imageUrl = docId ? (existing.imageUrl||null) : (_mrPendingImageUrl||null);
   const topicVal = ($('mr-topic')?.value||'').trim() || existing.topic || 'General EM';
   const diffVal  = $('mr-difficulty')?.value || existing.difficulty || 'medium';
   // Generate sequential h_xxxx ID for new host questions
   const nextHId = () => {
-    const nums = Object.values(POOL_CACHE)
+    const nums = Object.values(_mrCache())
       .map(q=>{ const m=(q._docId||q.id||'').match(/^h_(\d+)$/); return m?parseInt(m[1]):0; })
       .filter(n=>n>0);
     const next = nums.length ? Math.max(...nums)+1 : 1;
@@ -5002,13 +5156,11 @@ window.mrSave = async (docId) => {
   const statusEl=$('mr-save-status');
   statusEl.textContent='⏳ Saving…';
   try {
-    await setDoc(doc(db,'quiz_pool',sid), qpDoc);
-    // Optimistic cache update so list renders correctly without waiting for onSnapshot
-    POOL_CACHE[sid] = { ...qpDoc, _docId: sid };
+    await setDoc(doc(db,_mrColName(),sid), qpDoc);
+    // Optimistic cache update
+    _mrCache()[sid] = { ...qpDoc, _docId: sid };
     _mrPendingImageUrl = null;
-    if(_mrPoolVersion){
-      // Use __reviewerId (the reviewer tool's internal __id) if stored in quiz_pool doc.
-      // New h_ questions skip quizReviews sync — reviewer tool only shows JSON-loaded questions.
+    if(_mrPoolVersion && _mrActivePoolId === '_default'){
       const reviewerQid = existing.__reviewerId || (docId && !docId.startsWith('h_') ? docId : null);
       if(reviewerQid){
         const reviewerPatch = {
@@ -5040,18 +5192,19 @@ window.mrDeleteQ = async (docId) => {
   if(!docId) return;
   if(!await _dlg.danger('Delete this question from the pool? This cannot be undone.','Delete Question','Delete')) return;
   try {
-    await deleteDoc(doc(db,'quiz_pool',docId));
-    if(_mrPoolVersion) await deleteDoc(doc(db,'quizReviews','v'+_mrPoolVersion,'questions',docId)).catch(()=>{});
+    await deleteDoc(doc(db,_mrColName(),docId));
+    if(_mrPoolVersion && _mrActivePoolId === '_default') await deleteDoc(doc(db,'quizReviews','v'+_mrPoolVersion,'questions',docId)).catch(()=>{});
+    delete _mrCache()[docId];
     toast('Question deleted.');
     mrBackToList();
   } catch(e){ toast('Delete failed: '+e.message); }
 };
 
 window.mrFixIds = async () => {
-  const hDocs = Object.values(POOL_CACHE).filter(q=>/^h_\d{5,}$/.test(q._docId||q.id||''));
+  const cache = _mrCache();
+  const hDocs = Object.values(cache).filter(q=>/^h_\d{5,}$/.test(q._docId||q.id||''));
   if(!hDocs.length){ toast('No h_ IDs to fix.'); return; }
-  // Find the highest existing q_NNNN number
-  const qNums = Object.values(POOL_CACHE)
+  const qNums = Object.values(cache)
     .map(q=>{ const m=(q._docId||q.id||'').match(/^q_(\d+)$/); return m?parseInt(m[1]):0; })
     .filter(n=>n>0);
   let nextNum = qNums.length ? Math.max(...qNums)+1 : 1;
@@ -5064,10 +5217,10 @@ window.mrFixIds = async () => {
     try {
       const newDoc = {...q, id:newId, _docId:newId, __reviewerId:undefined, updatedAt:Date.now()};
       delete newDoc._docId; delete newDoc.__reviewerId;
-      await setDoc(doc(db,'quiz_pool',newId), {...newDoc, id:newId});
-      await deleteDoc(doc(db,'quiz_pool',oldId));
-      POOL_CACHE[newId] = {...newDoc, id:newId, _docId:newId};
-      delete POOL_CACHE[oldId];
+      await setDoc(doc(db,_mrColName(),newId), {...newDoc, id:newId});
+      await deleteDoc(doc(db,_mrColName(),oldId));
+      cache[newId] = {...newDoc, id:newId, _docId:newId};
+      delete cache[oldId];
       fixed++;
     } catch(e){ console.warn('Fix ID failed for',oldId,e.message); failed++; }
   }
@@ -5076,7 +5229,8 @@ window.mrFixIds = async () => {
 };
 
 window.mrRenumberAll = async () => {
-  const all = Object.values(POOL_CACHE);
+  const cache = _mrCache();
+  const all = Object.values(cache);
   if(!all.length){ toast('Pool is empty.'); return; }
 
   // Only renumber q_ questions — h_ questions are left untouched
@@ -5118,7 +5272,7 @@ window.mrRenumberAll = async () => {
   // ── PHASE 1: write ALL new docs first (no deletes yet) ──────────────────
   for(let i=0; i<moves.length; i+=BATCH_SZ){
     const b = writeBatch(db);
-    moves.slice(i,i+BATCH_SZ).forEach(({newId,newDoc})=> b.set(doc(db,'quiz_pool',newId),newDoc));
+    moves.slice(i,i+BATCH_SZ).forEach(({newId,newDoc})=> b.set(doc(db,_mrColName(),newId),newDoc));
     try { await b.commit(); }
     catch(e){ console.error('Write batch failed',e.message); failed++; }
   }
@@ -5129,15 +5283,15 @@ window.mrRenumberAll = async () => {
   const toDelete = moves.map(m=>m.oldId).filter(id=>!newIdSet.has(id));
   for(let i=0; i<toDelete.length; i+=BATCH_SZ){
     const b = writeBatch(db);
-    toDelete.slice(i,i+BATCH_SZ).forEach(id=> b.delete(doc(db,'quiz_pool',id)));
+    toDelete.slice(i,i+BATCH_SZ).forEach(id=> b.delete(doc(db,_mrColName(),id)));
     try { await b.commit(); }
     catch(e){ console.warn('Delete batch failed',e.message); failed++; }
   }
 
   // Update local POOL_CACHE
   moves.forEach(({oldId,newId,newDoc})=>{
-    POOL_CACHE[newId] = {...newDoc, _docId:newId};
-    delete POOL_CACHE[oldId];
+    cache[newId] = {...newDoc, _docId:newId};
+    delete cache[oldId];
   });
   mrRenderTopics(); mrRenderList();
   toast(failed ? `Done with ${failed} error(s)` : `✓ Renumbered ${moves.length} questions`);
@@ -5152,10 +5306,12 @@ window.mrUploadImage = async (input, docId) => {
     $('mr-img-preview').innerHTML=`<img src="${url}" style="max-width:100%;border-radius:8px;max-height:180px;object-fit:contain;display:block">`;
     const now = Date.now();
     if(docId){
-      await updateDoc(doc(db,'quiz_pool',docId),{imageUrl:url});
-      const rqid = (POOL_CACHE[docId]||{}).__reviewerId || (!docId.startsWith('h_') ? docId : null);
-      if(_mrPoolVersion && rqid) await setDoc(doc(db,'quizReviews','v'+_mrPoolVersion,'questions',rqid),{imageUrl:url,editedBy:'host',editedAt:now},{merge:true}).catch(()=>{});
-      if(POOL_CACHE[docId]) POOL_CACHE[docId].imageUrl=url;
+      await updateDoc(doc(db,_mrColName(),docId),{imageUrl:url});
+      if(_mrActivePoolId === '_default'){
+        const rqid = (_mrCache()[docId]||{}).__reviewerId || (!docId.startsWith('h_') ? docId : null);
+        if(_mrPoolVersion && rqid) await setDoc(doc(db,'quizReviews','v'+_mrPoolVersion,'questions',rqid),{imageUrl:url,editedBy:'host',editedAt:now},{merge:true}).catch(()=>{});
+      }
+      if(_mrCache()[docId]) _mrCache()[docId].imageUrl=url;
     } else {
       _mrPendingImageUrl = url; // held until mrSave writes the new question
     }
@@ -5166,14 +5322,16 @@ window.mrUploadImage = async (input, docId) => {
 window.mrRemoveImage = async (docId) => {
   try {
     if(docId){
-      await updateDoc(doc(db,'quiz_pool',docId),{imageUrl:null});
-      const rmRqid = (POOL_CACHE[docId]||{}).__reviewerId || (!docId.startsWith('h_') ? docId : null);
-      if(_mrPoolVersion && rmRqid) await setDoc(doc(db,'quizReviews','v'+_mrPoolVersion,'questions',rmRqid),{imageUrl:null,editedBy:'host',editedAt:Date.now()},{merge:true}).catch(e2=>console.warn('reviewer remove-image sync failed:',e2.message));
-      if(POOL_CACHE[docId]) POOL_CACHE[docId].imageUrl=null;
+      await updateDoc(doc(db,_mrColName(),docId),{imageUrl:null});
+      if(_mrActivePoolId === '_default'){
+        const rmRqid = (_mrCache()[docId]||{}).__reviewerId || (!docId.startsWith('h_') ? docId : null);
+        if(_mrPoolVersion && rmRqid) await setDoc(doc(db,'quizReviews','v'+_mrPoolVersion,'questions',rmRqid),{imageUrl:null,editedBy:'host',editedAt:Date.now()},{merge:true}).catch(()=>{});
+      }
+      if(_mrCache()[docId]) _mrCache()[docId].imageUrl=null;
     } else {
       _mrPendingImageUrl = null;
     }
-    const existing = docId?(POOL_CACHE[docId]||{}):{};
+    const existing = docId?(_mrCache()[docId]||{}):{};
     mrRenderEditForm({...existing, imageUrl:null}, docId);
   } catch(e){ toast('Remove image failed: '+e.message); }
 };
@@ -5249,18 +5407,8 @@ window._qprRemoveImage = async (docId) => {
 };
 
 const renderQPMStats = () => {
-  const docs   = Object.values(POOL_CACHE);
-  const total    = docs.length;
-  const answered = docs.filter(d => d.hasAnswer).length;
-  $('qpm-stats').innerHTML =
-    '<div class="qpool-stat-box"><div class="qpool-stat-n">'+total+'</div><div class="qpool-stat-l">Total</div></div>'
-    +'<div class="qpool-stat-box"><div class="qpool-stat-n" style="color:#27ae60">'+answered+'</div><div class="qpool-stat-l">Answered</div></div>'
-    +'<div class="qpool-stat-box"><div class="qpool-stat-n" style="color:#e67e22">'+(total-answered)+'</div><div class="qpool-stat-l">Pending</div></div>';
-  const pct = total ? Math.round((answered/total)*100) : 0;
-  $('qpm-pbar').style.width = pct+'%';
-  $('qpm-msg').textContent  = total
-    ? answered+'/'+total+' questions answered ('+pct+'%) — synced live from Reviewer Tool.'
-    : 'No questions yet — upload a pool via the Reviewer Tool.';
+  // Refresh the full exam pools manager UI (re-renders Pool 1 card with updated stats)
+  renderExamPoolsManager();
 };
 
 // Normalise question text for duplicate comparison:
@@ -5275,8 +5423,15 @@ window.importQuizPoolJSON = async (input) => {
   let arr;
   try {
     const text = await file.text();
-    arr = JSON.parse(text);
-    if(!Array.isArray(arr)){ $('qpm-msg').textContent = '❌ JSON must be an array.'; return; }
+    const parsed = JSON.parse(text);
+    // Accept flat array OR {metadata, questions:[...]} wrapper
+    if(Array.isArray(parsed)){
+      arr = parsed;
+    } else if(parsed && Array.isArray(parsed.questions)){
+      arr = parsed.questions;
+    } else {
+      $('qpm-msg').textContent = '❌ JSON must be an array or {questions:[...]} object.'; return;
+    }
   } catch(e){ $('qpm-msg').textContent = '❌ Parse error: '+e.message; return; }
 
   // Fetch existing pool
@@ -5583,6 +5738,334 @@ window.clearQuizPool = async () => {
     toast('✅ Quiz pool cleared.');
     renderQPMStats();
   } catch(e){ toast('Error: '+e.message); }
+};
+
+// ── EXAM POOLS MANAGER FUNCTIONS ──────────────────────────────────────────
+
+// Helper: is a chapterId a pool-type quiz (not a chapter quiz)?
+const _isPoolId = id => id === '_pool' || (_examPoolsMeta && _examPoolsMeta.some(p => p.id === id));
+
+// Build HTML string for one pool card
+const _buildPoolCard = (opts) => {
+  const { id, name, icon, color, total, answered, pct, isDefault, settings } = opts;
+  const ps = settings || {};
+  const psCount = ps.count != null ? ps.count : 20;
+  const psTime  = ps.secPerQ != null ? ps.secPerQ : 90;
+  const psCd    = ps.cooldownH != null ? ps.cooldownH : 4;
+  const psPass  = ps.passCutoff != null ? ps.passCutoff : 50;
+  const mkSel = (elId, val, opts2) => {
+    const optsHtml = opts2.map(([v,l]) => `<option value="${v}"${String(v)===String(val)?' selected':''}>${l}</option>`).join('');
+    return `<select id="${elId}" style="width:100%;padding:5px 7px;font-size:12px;border:1px solid var(--border2);border-radius:6px;background:var(--surface);color:var(--dark)">${optsHtml}</select>`;
+  };
+  const countOpts   = [[10,'10 Qs'],[20,'20 Qs'],[30,'30 Qs'],[40,'40 Qs'],[50,'50 Qs'],[60,'60 Qs'],[70,'70 Qs'],[80,'80 Qs'],[100,'100 Qs'],[999,'All']];
+  const timeOpts    = [[60,'1 min'],[90,'90 sec'],[120,'2 min'],[0,'No timer']];
+  const cdOpts      = [[0,'None'],[1,'1h'],[2,'2h'],[4,'4h'],[6,'6h'],[8,'8h'],[12,'12h'],[24,'24h']];
+  const settingsPanel = `<div id="pool-settings-panel-${id}" style="display:none;margin-top:10px;border-top:1px solid var(--border2);padding-top:10px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+      <div><div style="font-size:11px;color:var(--text3);margin-bottom:3px">Questions</div>${mkSel('ps-count-'+id, psCount, countOpts)}</div>
+      <div><div style="font-size:11px;color:var(--text3);margin-bottom:3px">Time / Q</div>${mkSel('ps-time-'+id, psTime, timeOpts)}</div>
+      <div><div style="font-size:11px;color:var(--text3);margin-bottom:3px">Cooldown</div>${mkSel('ps-cd-'+id, psCd, cdOpts)}</div>
+      <div><div style="font-size:11px;color:var(--text3);margin-bottom:3px">Pass %</div><input id="ps-pass-${id}" type="number" min="1" max="100" value="${psPass}" style="width:100%;padding:5px 7px;font-size:12px;border:1px solid var(--border2);border-radius:6px;background:var(--surface);color:var(--dark);box-sizing:border-box"></div>
+    </div>
+    <button onclick="savePoolCardSettings('${id}')" style="width:100%;padding:7px;font-size:12px;font-weight:700;background:var(--primary);color:#fff;border:none;border-radius:7px;cursor:pointer">💾 Save Settings</button>
+  </div>`;
+  const pbColor = color || '#27ae60';
+  const statsHtml =
+    '<div class="qpool-stats">'
+    + '<div class="qpool-stat-box"><div class="qpool-stat-n">'+total+'</div><div class="qpool-stat-l">Total</div></div>'
+    + '<div class="qpool-stat-box"><div class="qpool-stat-n" style="color:#27ae60">'+answered+'</div><div class="qpool-stat-l">Answered</div></div>'
+    + '<div class="qpool-stat-box"><div class="qpool-stat-n" style="color:#e67e22">'+(total-answered)+'</div><div class="qpool-stat-l">Pending</div></div>'
+    + '</div>'
+    + '<div class="qpool-progress"><div class="qpool-progress-fill" style="width:'+pct+'%;background:'+pbColor+'"></div></div>';
+  const escId = id;  // pool IDs are alphanumeric, safe for onclick
+  const escName = name.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  let btns = '';
+  btns += '<button class="ep-card-btn" id="pool-settings-toggle-'+id+'" onclick="togglePoolSettings(\''+id+'\')" title="Pool quiz settings">⚙️</button>';
+  if(isDefault){
+    btns += '<button class="ep-card-btn" onclick="openMiniReviewer(\'_default\')" title="Edit in Mini Reviewer">🔬 Edit</button>';
+    btns += '<button class="ep-card-btn" onclick="window.open(\'https://maxmos47.github.io/quiz-reviewer/\',\'_blank\')" title="Open Reviewer Tool">🔗 Reviewer</button>';
+  } else {
+    btns += '<button class="ep-card-btn" onclick="openMiniReviewer(\'' + escId + '\')" title="Edit questions">🔬 Edit</button>';
+    btns += '<button class="ep-card-btn" onclick="renamePoolPrompt(\'' + escId + '\')" title="Rename">✏️</button>';
+    btns += '<button class="ep-card-btn danger" onclick="deletePool(\'' + escId + '\')" title="Delete pool">✕</button>';
+  }
+  const clearFn = isDefault ? 'clearQuizPool()' : 'clearPool(\'' + escId + '\')'; 
+  const fileId  = 'ep-file-' + id;
+  return '<div class="ep-card">'
+    + '<div class="ep-card-header"><span class="ep-card-name">' + icon + ' ' + escName + '</span>'
+    + '<div class="ep-card-btns">' + btns + '</div></div>'
+    + statsHtml
+    + '<div style="display:flex;gap:7px;flex-wrap:wrap">'
+    + '<label class="ep-card-btn" style="cursor:pointer;padding:6px 10px;font-size:12px;background:var(--surface3)">📤 Import JSON<input type="file" id="' + fileId + '" accept=".json" style="display:none" onchange="importExamPoolJson(this,\'' + escId + '\')" ></label>'
+    + '<button class="ep-card-btn danger" onclick="'+clearFn+'" style="padding:6px 10px;font-size:12px">🗑 Clear</button>'
+    + '</div>'
+    + (isDefault ? '<div style="font-size:11px;color:var(--text3);margin-top:8px">🔗 Pool 1 syncs live from the Reviewer Tool. Import JSON to add additional questions.</div>' : '')
+    + settingsPanel
+    + '</div>';
+};
+
+const renderExamPoolsManager = () => {
+  const el = document.getElementById('exam-pools-list');
+  if(!el) return;
+  // Pool 1 card
+  const p1Docs = Object.values(POOL_CACHE);
+  const p1Total = p1Docs.length, p1Ans = p1Docs.filter(d=>d.hasAnswer).length;
+  const p1Pct   = p1Total ? Math.round(p1Ans/p1Total*100) : 0;
+  let html = _buildPoolCard({ id:'_default', name:'Main MCQ Pool', icon:'📚', color:'#27ae60',
+    total:p1Total, answered:p1Ans, pct:p1Pct, isDefault:true, settings:_p1Settings });
+  // Custom pool cards
+  _examPoolsMeta.forEach(pool => {
+    const cache = EXAM_CACHES[pool.id] || {};
+    const docs  = Object.values(cache);
+    const total = docs.length, ans = docs.filter(d=>d.hasAnswer).length;
+    const pct   = total ? Math.round(ans/total*100) : 0;
+    html += _buildPoolCard({ id:pool.id, name:pool.name, icon:pool.icon||'📗',
+      color:pool.color||'#16a085', total, answered:ans, pct, isDefault:false, settings:pool.settings||null });
+  });
+  el.innerHTML = html;
+  renderHostQuizPreview();
+};
+
+
+const renderHostQuizPreview = () => {
+  const el = document.getElementById('host-quiz-preview-cards');
+  if(!el) return;
+  const p1Count  = Object.keys(POOL_CACHE).length;
+  const epCounts = _examPoolsMeta.map(p => ({ p, n: Object.keys(EXAM_CACHES[p.id]||{}).length }));
+  const total    = p1Count + epCounts.reduce((s,x)=>s+x.n,0);
+  let html = '';
+  // Random
+  html += '<div class="quiz-hub-card" onclick="startPoolQuiz()" style="cursor:pointer">'
+    + '<div class="quiz-hub-card-icon">🎲</div>'
+    + '<div class="quiz-hub-card-title">Random (All Pools)</div>'
+    + '<div class="quiz-hub-card-sub">' + total + ' combined</div>'
+    + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();startPoolQuiz()">Launch →</button></div>';
+  // Pool 1 standalone
+  html += '<div class="quiz-hub-card" onclick="startPoolQuiz(\'_default\')" style="cursor:pointer">'
+    + '<div class="quiz-hub-card-icon">📚</div>'
+    + '<div class="quiz-hub-card-title">Main MCQ Pool</div>'
+    + '<div class="quiz-hub-card-sub">' + p1Count + ' questions</div>'
+    + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();startPoolQuiz(\'_default\')">Launch →</button></div>';
+  // Each custom pool
+  epCounts.forEach(({p, n}) => {
+    if(!n) return;
+    const eid = p.id;
+    html += '<div class="quiz-hub-card" onclick="startExamPoolQuiz(\'' + eid + '\') style="cursor:pointer">'
+      + '<div class="quiz-hub-card-icon">'+(p.icon||'📗')+'</div>'
+      + '<div class="quiz-hub-card-title">'+p.name.replace(/</g,'&lt;')+'</div>'
+      + '<div class="quiz-hub-card-sub">'+n+' questions</div>'
+      + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();startExamPoolQuiz(\'' + eid + '\')">Launch →</button></div>';
+  });
+  el.innerHTML = html || '<div style="font-size:12px;color:var(--text3)">No pools with questions yet.</div>';
+};
+
+// ── POOL CRUD ──
+window.toggleAddPoolPanel = () => {
+  const p = document.getElementById('add-pool-panel');
+  if(!p) return;
+  const open = p.style.display === 'none';
+  p.style.display = open ? '' : 'none';
+  const btn = document.getElementById('add-pool-btn');
+  if(btn) btn.textContent = open ? '✕ Cancel' : '➕ Add New Pool';
+  if(open) setTimeout(()=>{ const i=document.getElementById('add-pool-name'); if(i)i.focus(); },50);
+};
+window.closeAddPoolPanel = window.toggleAddPoolPanel;
+
+window.saveNewPool = async () => {
+  const name  = (document.getElementById('add-pool-name')?.value||'').trim();
+  const icon  = (document.getElementById('add-pool-icon')?.value||'📗').trim();
+  const color = document.getElementById('add-pool-color')?.value || '#16a085';
+  if(!name){ toast('Please enter a pool name.'); return; }
+  const id = 'ep' + Date.now();
+  const newPool = { id, name, icon, color, createdAt: Date.now() };
+  _examPoolsMeta = [..._examPoolsMeta, newPool];
+  EXAM_CACHES[id] = {};
+  try {
+    await setDoc(doc(db,'settings','examPools'), { pools: _examPoolsMeta });
+    _subscribeExamPool(id);
+    renderExamPoolsManager();
+    renderQuizHub();
+    toggleAddPoolPanel();
+    // Reset form
+    const ni = document.getElementById('add-pool-name'); if(ni) ni.value='';
+    const ii = document.getElementById('add-pool-icon'); if(ii) ii.value='📗';
+    toast('✅ Pool "'+name+'" created!');
+  } catch(e){ toast('Error: '+e.message); _examPoolsMeta = _examPoolsMeta.filter(p=>p.id!==id); }
+};
+
+window.renamePoolPrompt = async (id) => {
+  const pool = _examPoolsMeta.find(p=>p.id===id);
+  if(!pool) return;
+  const newName = window.prompt('Rename pool:', pool.name);
+  if(!newName || !newName.trim()) return;
+  pool.name = newName.trim();
+  try {
+    await setDoc(doc(db,'settings','examPools'), { pools: _examPoolsMeta });
+    renderExamPoolsManager();
+    renderQuizHub();
+    toast('✅ Pool renamed.');
+  } catch(e){ toast('Error: '+e.message); }
+};
+
+window.deletePool = async (id) => {
+  const pool = _examPoolsMeta.find(p=>p.id===id);
+  if(!pool) return;
+  const cnt   = Object.keys(EXAM_CACHES[id]||{}).length;
+  const ok = await _dlg.danger(
+    'Delete pool <strong>'+pool.name+'</strong>? This will permanently remove all <strong>'+cnt+' question(s)</strong>.',
+    '🗑 Delete Pool', 'Delete Pool'
+  );
+  if(!ok) return;
+  try {
+    // Delete questions
+    if(cnt > 0){
+      const snap = await getDocs(collection(db,'exam_pool_'+id));
+      for(let i=0;i<snap.size;i+=400){
+        const b = writeBatch(db);
+        snap.docs.slice(i,i+400).forEach(d=>b.delete(d.ref));
+        await b.commit();
+      }
+    }
+    // Remove from config
+    _examPoolsMeta = _examPoolsMeta.filter(p=>p.id!==id);
+    await setDoc(doc(db,'settings','examPools'),{ pools: _examPoolsMeta });
+    // Unsub + remove cache
+    if(_examUnsubs[id]){ _examUnsubs[id](); delete _examUnsubs[id]; }
+    delete EXAM_CACHES[id];
+    renderExamPoolsManager();
+    renderQuizHub();
+    toast('✅ Pool deleted.');
+  } catch(e){ toast('Error: '+e.message); }
+};
+
+window.clearPool = async (id) => {
+  const pool = _examPoolsMeta.find(p=>p.id===id);
+  if(!pool) return;
+  const snap = await getDocs(collection(db,'exam_pool_'+id));
+  if(!snap.size){ toast('Pool is already empty.'); return; }
+  const ok = await _dlg.danger(
+    'Clear all <strong>'+snap.size+' question(s)</strong> from <strong>'+pool.name+'</strong>?',
+    '🗑 Clear Pool', 'Clear All'
+  );
+  if(!ok) return;
+  try {
+    for(let i=0;i<snap.size;i+=400){
+      const b=writeBatch(db);
+      snap.docs.slice(i,i+400).forEach(d=>b.delete(d.ref));
+      await b.commit();
+    }
+    EXAM_CACHES[id] = {};
+    renderExamPoolsManager();
+    toast('✅ '+pool.name+' cleared.');
+  } catch(e){ toast('Error: '+e.message); }
+};
+
+// ── IMPORT JSON TO ANY POOL ──
+window.importExamPoolJson = async (input, poolId) => {
+  const isDefault = poolId === '_default';
+  const colName   = isDefault ? 'quiz_pool' : 'exam_pool_' + poolId;
+  const pool      = isDefault ? { name:'Main MCQ Pool' } : _examPoolsMeta.find(p=>p.id===poolId);
+  if(!pool){ toast('Pool not found.'); return; }
+  const file = input.files[0]; if(!file) return;
+  input.value = '';
+  toast('⏳ Reading file…');
+  let arr;
+  try {
+    const text = await file.text();
+    const parsed = JSON.parse(text);
+    // Accept flat array OR {metadata, questions:[...]} wrapper (e.g. PeerIX_pool.json)
+    if(Array.isArray(parsed)){
+      arr = parsed;
+    } else if(parsed && Array.isArray(parsed.questions)){
+      arr = parsed.questions;
+    } else {
+      toast('❌ JSON must be an array or {questions:[...]} object.'); return;
+    }
+  } catch(e){ toast('❌ Parse error: '+e.message); return; }
+
+  // Normalise
+  const norm = arr.map(q => {
+    // Append peer_point to explanation if present
+    let exp = (q.explanation||q.explain||'').trim();
+    if(q.peer_point && q.peer_point.trim()){
+      exp = exp ? exp+'\n\nPEER Point: '+q.peer_point.trim() : 'PEER Point: '+q.peer_point.trim();
+    }
+    return {
+      question:    (q.question||q.q||'').trim(),
+      options:     q.options||q.choices||[],
+      correct:     typeof q.correct!=='undefined' ? q.correct : (q.correctIndex??null),
+      explanation: exp,
+      topic:       q.topic||q.category||'General EM',
+      imageUrl:    q.imageUrl||'',
+      hasAnswer:   typeof q.correct!=='undefined' || typeof q.correctIndex!=='undefined',
+      ...(q.source    ? {source:q.source}       : {}),
+      ...(q.year      ? {year:q.year}           : {}),
+      ...(q.originalNum!=null ? {originalNum:q.originalNum} : {}),
+    };
+  }).filter(q=>q.question && q.options.length>=2);
+
+  // Deduplicate
+  const existSnap = await getDocs(collection(db,colName));
+  const existMap  = {};
+  existSnap.forEach(d=>{ existMap[_normQ(d.data().question)]=true; });
+  const dupes = norm.filter(q=>existMap[_normQ(q.question)]);
+  const fresh = norm.filter(q=>!existMap[_normQ(q.question)]);
+  let toImport = fresh;
+
+  if(!toImport.length){ toast('⚠️ All '+dupes.length+' questions already in pool.'); return; }
+
+  if(dupes.length){
+    const skip = await _dlg.confirm(
+      fresh.length+' new question(s) found; '+dupes.length+' duplicate(s) will be skipped. Proceed?',
+      '📥 Import', 'Import '+fresh.length+' New'
+    );
+    if(!skip){ toast('Cancelled.'); return; }
+  }
+
+  if(existSnap.size > 0){
+    const choice = await _dlg.confirm(
+      '"'+pool.name+'" already has '+existSnap.size+' question(s). ADD '+toImport.length+' or REPLACE all?',
+      '⚠️ Existing Questions', 'Add to Pool'
+    );
+    if(choice === null){ toast('Cancelled.'); return; }
+    if(!choice){
+      const ok2 = await _dlg.danger(
+        'DELETE all '+existSnap.size+' existing questions and replace with '+toImport.length+' new ones?',
+        'Replace Pool', 'Yes, Replace'
+      );
+      if(!ok2){ toast('Cancelled.'); return; }
+      toast('🗑 Deleting old questions…');
+      const ids = existSnap.docs.map(d=>d.id);
+      for(let i=0;i<ids.length;i+=400){
+        const b=writeBatch(db);
+        ids.slice(i,i+400).forEach(id2=>b.delete(doc(db,colName,id2)));
+        await b.commit();
+      }
+      if(isDefault){ for(const k in POOL_CACHE) delete POOL_CACHE[k]; }
+      else { EXAM_CACHES[poolId] = {}; }
+    }
+  }
+
+  toast('⏳ Importing '+toImport.length+' questions…');
+  const prefix = isDefault ? 'p1_' : poolId+'_';
+  let count=0;
+  for(let i=0;i<toImport.length;i+=400){
+    const b=writeBatch(db);
+    toImport.slice(i,i+400).forEach(q=>{
+      const sid=prefix+Date.now()+'_'+Math.random().toString(36).slice(2,7);
+      const qd={question:q.question,options:q.options,correct:q.correct,explanation:q.explanation,topic:q.topic,imageUrl:q.imageUrl,hasAnswer:q.hasAnswer};
+      b.set(doc(db,colName,sid),qd);
+      if(isDefault) POOL_CACHE[sid]={...qd,_docId:sid};
+      else EXAM_CACHES[poolId][sid]={...qd,_docId:sid};
+      count++;
+    });
+    await b.commit();
+    toast('⏳ '+count+'/'+toImport.length+'…');
+  }
+  const msg='✅ '+count+' question(s) imported to "'+pool.name+'"'+(dupes.length?' ('+dupes.length+' skipped)':'')+'!';
+  toast(msg);
+  renderExamPoolsManager();
+  renderQuizHub();
 };
 
 // == ACHIEVEMENT MANAGER ===================================================
@@ -6073,10 +6556,11 @@ const _hostSearchIndex = [
   { id:'hs-pipeline',   tab:'overview',     terms:'pipeline workflow how-to checklist summarize upload guide steps' },
   { id:'hs-upload',     tab:'content',      terms:'upload chapters html files import drop' },
   { id:'hs-ch-mgmt',    tab:'content',      terms:'chapter management rename delete edit quiz icon assign category' },
-  { id:'hs-qpm',        tab:'content',      terms:'quiz pool manager import json review answers clear questions bank' },
+  { id:'hs-exam-pools', tab:'quizzes',      terms:'mcq exam pools manager import json add create rename delete clear questions bank pool' },
+  { id:'hs-quiz-preview', tab:'quizzes',    terms:'test quizzes host preview launch all pools random' },
   { id:'hs-textbooks',  tab:'content',      terms:'textbook book tintinalli rosen library source add edit' },
   { id:'hs-cats',       tab:'content',      terms:'categories filter color icon add edit category' },
-  { id:'hs-pool-cfg',   tab:'quizzes',      terms:'pool quiz settings number questions time per question cooldown pass cutoff random' },
+  { id:'hs-pool-cfg',   tab:'quizzes',      terms:'chapter quiz settings cooldown pass cutoff' },
   { id:'hs-image-quiz', tab:'quizzes',      terms:'saq image quiz manager case ecg cxr echo tox new explanation xp reward' },
   { id:'hs-ta-cfg',     tab:'quizzes',      terms:'time attack settings questions per session seconds xp coins cooldown' },
   { id:'hs-lb-ctrl',    tab:'quizzes',      terms:'leaderboard control reset all scores cooldowns ranks' },
@@ -8800,26 +9284,41 @@ const renderQuizHub = () => {
   showQuizHub();
   const container = document.getElementById('quiz-hub-cards');
   if(!container) return;
-  const poolCount = Object.keys(POOL_CACHE).length;
-  const saqCount = (typeof iqQuestions !== 'undefined' && Array.isArray(iqQuestions))
-    ? iqQuestions.length : null;
-  const saqSub = saqCount !== null
-    ? saqCount + ' questions \xB7 Typed answers'
-    : 'Case-based typed answers';
+  const pool1Count = Object.keys(POOL_CACHE).length;
+  const epCards    = (_examPoolsMeta||[]).map(p=>({ p, n:Object.keys(EXAM_CACHES[p.id]||{}).length }));
+  const totalCount = pool1Count + epCards.reduce((s,x)=>s+x.n, 0);
+  const saqCount   = (typeof iqQuestions!=='undefined'&&Array.isArray(iqQuestions)) ? iqQuestions.length : null;
+  const saqSub     = saqCount!==null ? saqCount+'\xB7 Typed answers' : 'Case-based typed answers';
 
-  container.innerHTML =
+  let cards =
     '<div class="quiz-hub-card" onclick="startPoolQuiz()">'
     + '<div class="quiz-hub-card-icon">🎲</div>'
     + '<div class="quiz-hub-card-title">Random Pool Quiz</div>'
-    + '<div class="quiz-hub-card-sub">' + poolCount + ' questions \xB7 All topics</div>'
-    + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();startPoolQuiz()">Start Random Quiz →</button>'
-    + '</div>'
-    + '<div class="quiz-hub-card" onclick="showSaqView()">'
+    + '<div class="quiz-hub-card-sub">' + totalCount + ' questions \xB7 All pools combined</div>'
+    + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();startPoolQuiz()">Start Random \u2192</button>'
+    + '</div>';
+
+  epCards.forEach(({p, n}) => {
+    if(!n) return;
+    const escId = p.id.replace(/\x27/g, "\\'");
+    cards +=
+      '<div class="quiz-hub-card" onclick="startExamPoolQuiz(\'' + p.id + '\')">'
+      + '<div class="quiz-hub-card-icon">' + (p.icon||'📗') + '</div>'
+      + '<div class="quiz-hub-card-title">' + p.name.replace(/</g,'&lt;') + '</div>'
+      + '<div class="quiz-hub-card-sub">' + n + ' questions</div>'
+      + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();startExamPoolQuiz(\'' + p.id + '\')">Start Exam \u2192</button>'
+      + '</div>';
+  });
+
+  cards +=
+    '<div class="quiz-hub-card" onclick="showSaqView()">'
     + '<div class="quiz-hub-card-icon">📝</div>'
     + '<div class="quiz-hub-card-title">Short Answer (SAQ)</div>'
     + '<div class="quiz-hub-card-sub">' + saqSub + '</div>'
-    + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();showSaqView()">Start SAQ →</button>'
+    + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();showSaqView()">Start SAQ \u2192</button>'
     + '</div>';
+
+  container.innerHTML = cards;
 };
 
 
