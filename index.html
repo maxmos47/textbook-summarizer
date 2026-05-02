@@ -94,6 +94,24 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
 .quiz-explanation{background:var(--surface3);border-radius:var(--radius);padding:14px 16px;font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px;border-left:3px solid var(--red);}
 .score-big{font-family:var(--font-display);font-size:72px;color:var(--red);line-height:1;}
 .reader-overlay{position:fixed;inset:0;background:var(--surface);z-index:200;display:none;flex-direction:column;}
+.quiz-overlay-dark{background:#0f1117!important}
+.quiz-overlay-dark .reader-topbar{background:#1a1a2e!important;border-bottom:1px solid rgba(255,255,255,.1)!important}
+.quiz-overlay-dark .reader-back{background:rgba(255,255,255,.1)!important;color:#fff!important;border-color:transparent!important}
+.quiz-overlay-dark .reader-title-txt{color:#fff!important}
+.quiz-overlay-dark .quiz-timer-display{color:#f39c12!important}
+.quiz-overlay-dark .quiz-container{color:#f0f0f0}
+.quiz-overlay-dark .quiz-question{color:#f0f0f0!important}
+.quiz-overlay-dark .quiz-container div{color:#aaa}
+.quiz-overlay-dark .quiz-opt{background:#1e1e2e!important;border-color:rgba(255,255,255,.15)!important;color:#e0e0e0!important}
+.quiz-overlay-dark .quiz-opt:hover{background:#2a2a3e!important}
+.quiz-overlay-dark .quiz-opt.selected{background:#2c3e50!important;border-color:#3498db!important;color:#fff!important}
+.quiz-overlay-dark .quiz-opt.correct{background:#1a3a2a!important;border-color:#2ecc71!important;color:#2ecc71!important}
+.quiz-overlay-dark .quiz-opt.wrong{background:#3a1a1a!important;border-color:#e74c3c!important;color:#e74c3c!important}
+.quiz-overlay-dark .quiz-explanation{background:#1e1e2e!important;border-color:#f39c12!important;color:#ddd!important}
+.quiz-overlay-dark .quiz-progress-bar{background:#2a2a3e!important}
+.quiz-overlay-dark #quiz-submit-btn,.quiz-overlay-dark #quiz-next .btn-sm{background:#c0392b!important;opacity:1}
+.quiz-dark-toggle{background:rgba(0,0,0,.15);border:none;border-radius:8px;padding:7px 10px;font-size:17px;cursor:pointer;transition:background .15s;flex-shrink:0}
+.quiz-dark-toggle:hover{background:rgba(0,0,0,.25)}
 .reader-overlay.open{display:flex;}
 .reader-topbar{background:var(--dark);color:white;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
 .reader-back{background:none;border:1px solid rgba(255,255,255,.25);color:white;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;font-family:var(--font-body);flex-shrink:0;}
@@ -228,6 +246,40 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
 .av-anim-fire{animation:avFire .65s ease-in-out infinite;}
 .av-bob{animation:avBob 2.2s ease-in-out infinite;display:inline-block;}
 .av-rainbow-wrap{animation:rainbowHue 4s linear infinite;padding:3px;border-radius:50%;background:conic-gradient(#e74c3c,#f39c12,#27ae60,#2980b9,#8e44ad,#e91e8c,#e74c3c);display:inline-flex;flex-shrink:0;align-items:center;justify-content:center;}
+/* == Textbook Library Tabs ============================================= */
+.tb-tab-bar{display:flex;gap:6px;padding:0 16px 12px;flex-wrap:wrap}
+.tb-tab{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;border:1.5px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;transition:all .15s}
+.tb-tab.active{background:var(--red);border-color:var(--red);color:#fff}
+/* == RPG Profile ============================================================ */
+.profile-stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px 16px}
+.profile-stat-box{background:var(--surface2);border-radius:10px;padding:10px 6px;text-align:center}
+.profile-stat-n{font-size:20px;font-weight:800;font-family:var(--font-display)}
+.profile-stat-l{font-size:10px;color:var(--text3);margin-top:2px}
+.skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 16px}
+.skill-card{background:var(--surface2);border-radius:12px;padding:12px;border:1.5px solid var(--border)}
+.skill-card.locked{opacity:.45;filter:grayscale(1)}
+.skill-level-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;color:#fff}
+.skill-xp-bar{height:5px;border-radius:4px;background:var(--surface3);margin-top:6px;overflow:hidden}
+.skill-xp-fill{height:100%;border-radius:4px;background:var(--red);transition:width .5s}
+/* == RPG Guild Leaderboard ================================================= */
+.guild-podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;padding:20px 16px 0}
+.podium-slot{display:flex;flex-direction:column;align-items:center;gap:6px}
+.podium-avatar{border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;border:3px solid transparent}
+.podium-slot.first .podium-avatar{border-color:#f1c40f;box-shadow:0 0 16px #f1c40f88}
+.podium-slot.second .podium-avatar{border-color:#95a5a6;box-shadow:0 0 10px #95a5a688}
+.podium-slot.third .podium-avatar{border-color:#e67e22;box-shadow:0 0 10px #e67e2288}
+.podium-base{padding:5px 12px;border-radius:8px 8px 0 0;font-weight:800;font-size:12px;text-align:center;min-width:60px;margin-top:4px}
+.podium-slot.first .podium-base{background:#f1c40f22;color:#f1c40f;min-width:76px}
+.podium-slot.second .podium-base{background:#95a5a622;color:#95a5a6}
+.podium-slot.third .podium-base{background:#e67e2222;color:#e67e22}
+.guild-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border)}
+.guild-row.me{background:rgba(231,76,60,.08);border-left:3px solid var(--red)}
+.guild-rank-num{font-size:13px;font-weight:800;color:var(--text3);width:24px;text-align:center;flex-shrink:0}
+.guild-info{flex:1;min-width:0}
+.guild-name{font-size:13px;font-weight:700;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.guild-sub{font-size:10px;color:var(--text3);margin-top:1px}
+.guild-skill-pill{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 6px;border-radius:8px;background:var(--surface2);color:var(--text2)}
+.guild-score{font-size:14px;font-weight:800;color:var(--red);flex-shrink:0}
 /* == Avatar / Profile Customization ======================================= */
 .profile-hero{background:linear-gradient(145deg,var(--dark) 0%,var(--dark3) 100%);padding:28px 20px 24px;text-align:center;}
 .profile-avatar-circle{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-size:42px;background:rgba(255,255,255,.1);flex-shrink:0;transition:box-shadow .3s;}
@@ -1265,6 +1317,164 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
 }
 .ta-end-ghost:hover { background: rgba(255,255,255,.12); }
 
+
+/* ── v1.9 QUIZ HUB ────────────────────────────────────────────────────── */
+.quiz-hub{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.quiz-hub-card{background:var(--surface);border-radius:16px;padding:16px 12px;border:1.5px solid var(--border);cursor:pointer;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;min-height:220px}
+.quiz-hub-card:active{transform:scale(.98)}
+.quiz-hub-card-icon{font-size:36px;margin-bottom:10px}
+.quiz-hub-card-title{font-size:18px;font-weight:800;color:var(--dark);margin-bottom:4px}
+.quiz-hub-card-sub{font-size:13px;color:var(--text3);margin-bottom:14px}
+.quiz-hub-card-btn{display:block;width:100%;background:var(--red);color:#fff;border:none;border-radius:10px;padding:10px 8px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-body);margin-top:auto;text-align:center}
+.quiz-hub-card.dark-card{background:linear-gradient(135deg,var(--dark) 0%,#1a0a2e 100%);border-color:rgba(255,255,255,.12)}
+.quiz-hub-card.dark-card .quiz-hub-card-title{color:#fff}
+.quiz-hub-card.dark-card .quiz-hub-card-sub{color:rgba(255,255,255,.55)}
+.quiz-hub-card.dark-card .quiz-hub-card-icon{filter:drop-shadow(0 0 8px rgba(231,76,60,.6))}
+.quiz-hub-back{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;margin:0 0 12px;font-size:13px;font-weight:700;color:#fff;cursor:pointer;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);border-radius:10px;font-family:var(--font-body);backdrop-filter:blur(4px)}
+
+/* ── v1.9 LIBRARY TEXTBOOK GRID ────────────────────────────────────────────── */
+.tb-card-grid{display:grid;grid-template-columns:1fr;gap:14px;padding:14px;max-width:400px;margin:0 auto}
+.tb-card{background:var(--surface);border-radius:16px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.tb-card:active{transform:scale(.97)}
+.tb-card:hover{box-shadow:0 4px 18px rgba(0,0,0,.13)}
+.tb-card-cover{width:100%;height:500px;object-fit:contain;display:block;background:#f0f0f0}
+.tb-card-cover-placeholder{width:100%;height:220px;display:flex;align-items:center;justify-content:center;font-size:56px}
+.tb-card-accent{height:4px;width:100%}
+.tb-card-body{padding:10px 10px 12px}
+.tb-card-title{font-size:13px;font-weight:700;color:var(--dark);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:6px}
+.tb-card-meta{font-size:11px;color:var(--text3);margin-bottom:6px}
+.tb-card-bar-wrap{height:4px;background:var(--surface3);border-radius:4px;overflow:hidden}
+.tb-card-bar-fill{height:100%;background:var(--red);border-radius:4px;transition:width .4s}
+.tb-card-pct{font-size:10px;font-weight:700;color:var(--text3);text-align:right;margin-top:3px}
+
+/* ── v1.9 CHAPTER VIEW ──────────────────────────────────────────────────────── */
+.ch-view-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--dark);position:sticky;top:0;z-index:10}
+.ch-view-back{background:none;border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:5px 12px;font-size:13px;cursor:pointer;font-family:var(--font-body);flex-shrink:0}
+.ch-view-title{font-size:15px;font-weight:700;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ch-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border)}
+.ch-row-name{flex:1;font-size:13px;color:var(--dark);line-height:1.3}
+.ch-score-badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.ch-score-badge.good{background:#eafaf1;color:#1e8449}
+.ch-score-badge.ok{background:#fef9e7;color:#d4ac0d}
+.ch-score-badge.low{background:#fdedec;color:#c0392b}
+.ch-quiz-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-body);flex-shrink:0}
+
+/* ── v1.9 SKILL MANAGER ───────────────────────────────────────────────────────── */
+.smgr-row{border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.smgr-row-hdr{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;background:var(--surface);user-select:none}
+.smgr-row-id{font-size:11px;font-weight:700;color:var(--text3);font-family:monospace;background:var(--surface3);padding:2px 7px;border-radius:6px}
+.smgr-row-name{flex:1;font-size:13px;font-weight:600;color:var(--dark)}
+.smgr-chevron{font-size:12px;color:var(--text3);transition:transform .2s}
+.smgr-fields{display:none;padding:12px;background:var(--surface2);border-top:1px solid var(--border)}
+.smgr-fields.open{display:block}
+.smgr-field-group{margin-bottom:12px}
+.smgr-field-label{font-size:11px;font-weight:700;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.smgr-field-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.smgr-field-row.two{grid-template-columns:1fr 1fr}
+.smgr-inp{width:100%;padding:6px 8px;border:1px solid var(--border2);border-radius:6px;font-family:var(--font-body);font-size:12px;background:var(--surface);color:var(--dark);text-align:center}
+.smgr-inp:disabled{background:var(--surface3);color:var(--text3)}
+.smgr-save-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-body);margin-top:8px}
+.smgr-reset-section{background:var(--surface);border-radius:10px;padding:12px;border:1px solid var(--border);margin-top:12px}
+
+/* ── v1.9 PROFILE HERO ────────────────────────────────────────────────────────── */
+.prof-hero{background:linear-gradient(160deg,var(--dark) 0%,#1a0e2e 100%);padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,.07)}
+.prof-hero-top{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;margin-bottom:14px}
+.prof-av-wrap{position:relative;flex-shrink:0;cursor:pointer}
+.prof-av-edit{position:absolute;bottom:0;right:0;width:20px;height:20px;border-radius:50%;background:var(--red);border:2px solid var(--dark);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff}
+.prof-hero-info{min-width:0;width:100%}
+.prof-hero-name{font-size:17px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prof-hero-title-pill{display:inline-block;background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.35);color:#ff8675;border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;margin-top:3px}
+.prof-skill-rank{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.08);border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700;color:rgba(255,255,255,.85);margin-top:5px;justify-content:center}
+.prof-xp-row{display:flex;align-items:center;gap:10px}
+.prof-xp-num{font-size:24px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;flex-shrink:0}
+.prof-xp-label{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.prof-xp-bar-wrap{flex:1}
+.prof-xp-bar-labels{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.35);margin-bottom:4px}
+.prof-xp-bar{height:5px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.prof-xp-fill{height:100%;background:var(--red);border-radius:4px;transition:width .5s}
+
+/* ── v1.9 STAT STRIP ──────────────────────────────────────────────────────────────── */
+.prof-stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:10px 12px;background:var(--surface2);border-bottom:1px solid var(--border)}
+.prof-stat-cell{background:var(--surface);border-radius:8px;padding:9px 4px;text-align:center}
+.prof-stat-n{font-size:18px;font-weight:800;color:var(--dark);font-variant-numeric:tabular-nums}
+.prof-stat-l{font-size:9px;color:var(--text3);margin-top:2px;line-height:1.2}
+
+/* ── v1.9 SKILL CARDS (colored accent) ──────────────────────────────────────────────── */
+.skill-card-v19{background:var(--surface);border-radius:10px;padding:10px 10px 10px 12px;border-left:4px solid var(--red);position:relative}
+.skill-card-v19.locked{opacity:.45;filter:grayscale(1)}
+
+/* ── v1.9 AVATAR SHEET ─────────────────────────────────────────────────────────────── */
+.av-sheet-overlay{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.5);display:flex;align-items:flex-end}
+.av-sheet{background:var(--surface);border-radius:20px 20px 0 0;padding:12px 0 32px;width:100%;max-height:70vh;overflow-y:auto}
+.av-sheet-handle{width:36px;height:4px;background:var(--border2);border-radius:4px;margin:0 auto 14px}
+.av-sheet-label{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;padding:0 14px 8px}
+.av-sheet-scroll{display:flex;gap:8px;padding:0 14px 12px;overflow-x:auto}
+.av-sheet-scroll::-webkit-scrollbar{display:none}
+.av-sheet-item{flex-shrink:0;width:48px;height:48px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid transparent;transition:border-color .15s}
+.av-sheet-item.active{border-color:var(--red)}
+.av-sheet-upload-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px}
+.av-sheet-upload-btn{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer}
+.av-sheet-upload-ico{font-size:20px;margin-bottom:4px}
+.av-sheet-upload-lbl{font-size:11px;font-weight:700;color:var(--dark)}
+.av-sheet-shop-btn{margin:0 14px;background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.25);border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:700;color:var(--red);cursor:pointer}
+
+/* ── v1.9 SHOP REDESIGN ─────────────────────────────────────────────────────────────── */
+.shop-v19-hdr{background:var(--dark);padding:18px 16px 14px;border-bottom:1px solid rgba(255,255,255,.07)}
+.shop-v19-coins{display:inline-flex;align-items:center;gap:5px;background:rgba(243,156,18,.18);border:1px solid rgba(243,156,18,.3);border-radius:20px;padding:5px 14px;font-size:14px;font-weight:700;color:#ffd380;margin-top:8px}
+.shop-v19-tabs{display:flex;gap:0;background:var(--dark);border-bottom:1px solid rgba(255,255,255,.1)}
+.shop-v19-tab{flex:1;padding:10px 4px;text-align:center;font-size:13px;font-weight:700;color:rgba(255,255,255,.4);border:none;background:none;border-bottom:2px solid transparent;cursor:pointer;font-family:var(--font-body);transition:color .2s}
+.shop-v19-tab.active{color:var(--red-mid);border-bottom-color:var(--red)}
+.shop-v19-body{padding:8px 12px 100px}
+.shop-v19-cat{font-size:10px;font-weight:800;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;padding:10px 0 6px}
+.shop-v19-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:4px}
+.shop-v19-item{background:var(--surface);border-radius:12px;padding:14px 10px;text-align:center;border:2px solid transparent;position:relative;transition:border-color .15s}
+.shop-v19-item.owned{border-color:#27ae60}
+.shop-v19-item.equipped{border-color:var(--red)}
+.shop-v19-preview{display:flex;align-items:center;justify-content:center;height:64px;margin-bottom:8px;font-size:36px}
+.shop-v19-name{font-size:12px;font-weight:700;color:var(--dark);margin-bottom:3px}
+.shop-v19-price{font-size:11px;color:#e67e22;font-weight:700;margin-bottom:4px}
+.shop-v19-btn{font-size:11px;font-weight:700;border:none;border-radius:7px;padding:5px 12px;cursor:pointer;font-family:var(--font-body)}
+.shop-v19-btn.buy{background:var(--red);color:#fff}
+.shop-v19-btn.owned-lbl{background:#eafaf1;color:#1e8449;cursor:default}
+.shop-v19-btn.equipped-lbl{background:rgba(192,57,43,.12);color:var(--red);cursor:default}
+.shop-v19-dot{position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--red)}
+.shop-bd-circle{width:48px;height:48px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto}
+
+
+/* ── CHAPTER ROW PILLS ───────────────────────────────────────────────────── */
+.ch-pill-btn{border:none;border-radius:20px;padding:5px 11px;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font-body);white-space:nowrap}
+.ch-pill-read{background:var(--surface3);color:var(--text2)}
+.ch-pill-cards{background:rgba(52,152,219,.15);color:#2980b9}
+.ch-pill-quiz{background:var(--red);color:#fff}
+
+
+/* ── POOL SCORE CHART ────────────────────────────────────────────────────── */
+.pool-chart-card{background:var(--surface);margin:10px 14px;border-radius:12px;padding:12px 14px;border:1px solid var(--border)}
+.pool-chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.pool-chart-title{font-size:12px;font-weight:700;color:var(--dark)}
+.pool-chart-avg{font-size:11px;font-weight:700;color:var(--red)}
+.pool-chart-svg{width:100%;height:80px;display:block;overflow:visible}
+.pool-chart-empty{font-size:12px;color:var(--text3);text-align:center;padding:16px 0}
+.pool-chart-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-top:2px;padding:0 2px}
+
+/* ── Library Folder View ──────────────────────────────── */
+.lib-folder-list{padding:14px;display:flex;flex-direction:column;gap:10px}
+.lib-folder-card{background:var(--surface);border-radius:16px;padding:18px 16px;border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:transform .15s,box-shadow .15s}
+.lib-folder-card:active{transform:scale(.97)}
+.lib-folder-card:hover{box-shadow:0 4px 18px rgba(0,0,0,.13)}
+.lib-folder-card-icon{font-size:36px;flex-shrink:0}
+.lib-folder-card-name{font-size:15px;font-weight:800;color:var(--dark);line-height:1.3}
+.lib-folder-card-meta{font-size:12px;color:var(--text3);margin-top:3px}
+.lib-folder-card-arrow{font-size:20px;color:var(--text3);flex-shrink:0}
+/* Host folder editor */
+.tb-folder-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--surface3);border-radius:10px;margin-bottom:6px}
+.tb-folder-icon-inp{width:42px;padding:5px;border:1px solid var(--border2);border-radius:7px;font-size:18px;text-align:center;background:var(--surface);color:var(--dark);font-family:var(--font-body)}
+.tb-folder-icon-btn{width:44px;height:44px;font-size:22px;border:1.5px solid var(--border2);border-radius:10px;background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.tb-folder-icon-btn:hover{background:var(--surface3)}
+.tb-folder-name-inp{flex:1;padding:5px 8px;border:1px solid var(--border2);border-radius:7px;font-size:13px;background:var(--surface);color:var(--dark);font-family:var(--font-body)}
+.tb-folder-del{background:none;border:none;color:#e74c3c;font-size:16px;cursor:pointer;padding:4px 6px;border-radius:6px;flex-shrink:0}
+.fcv-exit-btn{background:none;border:1px solid rgba(255,255,255,.28);color:#fff;border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);flex-shrink:0;transition:background .15s}
+.fcv-exit-btn:hover{background:rgba(255,255,255,.1)}
 </style>
 </head>
 <body>
@@ -1320,19 +1530,28 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
 
   <!-- LIBRARY -->
   <div class="page active" id="page-library">
-    <div class="page-title">📚 Library</div>
-    <div class="page-sub">Select a chapter to read or quiz</div>
-    <div class="cat-bar" id="cat-filter-bar"></div>
-    <!-- Pool Quiz Card -->
-    <div class="pool-card">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
-        <div class="pool-card-title">🎲 Random Pool Quiz</div>
-        <button id="pool-configure-btn" onclick="navTo('host')" style="display:none;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);border-radius:8px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:var(--font-body);white-space:nowrap;flex-shrink:0">⚙️ Configure</button>
-      </div>
-      <div class="pool-card-sub" id="pool-settings-display">Loading settings…</div>
-      <button class="btn-pool" id="pool-start-btn" onclick="startPoolQuiz()">Start Quiz →</button>
+    <!-- Textbook grid view -->
+    <div id="lib-grid-view">
+      <div class="page-title" style="padding:16px 16px 4px">📚 Library</div>
+      <div class="page-sub" style="padding:0 16px 12px">Select a textbook</div>
+      <div class="tb-card-grid" id="lib-tb-grid"><div class="loading-spinner">⏳ Loading...</div></div>
     </div>
-    <div id="chapter-cards"><div class="loading-spinner">⏳ Loading chapters...</div></div>
+    <!-- Folder view (hidden until textbook tapped — shows sections/TOC) -->
+    <div id="lib-folder-view" style="display:none">
+      <div class="ch-view-hdr">
+        <button class="ch-view-back" onclick="closeFolderView()">← Back</button>
+        <div class="ch-view-title" id="lib-folder-tb-title">Sections</div>
+      </div>
+      <div id="lib-folder-list" class="lib-folder-list"></div>
+    </div>
+    <!-- Chapter drill-down view (hidden until textbook tapped) -->
+    <div id="lib-chapter-view" style="display:none">
+      <div class="ch-view-hdr">
+        <button class="ch-view-back" onclick="closeChapterView()">← Back</button>
+        <div class="ch-view-title" id="ch-view-title">Chapters</div>
+      </div>
+      <div id="ch-view-list"></div>
+    </div>
   </div>
 
   <!-- LEADERBOARD -->
@@ -1348,17 +1567,27 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
     <div id="leaderboard-list"></div>
   </div>
 
-  <!-- SAQ -->
+  <!-- Quiz Hub -->
   <div class="page" id="page-image-quiz" style="padding:0 0 90px">
-    <div style="background:linear-gradient(180deg,var(--dark) 0%,#16091e 100%);padding:22px 16px 18px;border-bottom:1px solid rgba(255,255,255,.06)">
-      <div class="page-title" style="color:#fff;margin-bottom:4px">📝 SAQ</div>
-      <div style="font-size:12.5px;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:14px">Short Answer Question — case-based exam practice</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-        <span class="coin-pill" id="iq-coins-display" style="background:rgba(243,156,18,.18);color:#ffd380;border:1px solid rgba(243,156,18,.3)">🪙 0</span>
-        <span id="iq-score-display" style="background:rgba(231,76,60,.18);color:#ffb6ad;border:1px solid rgba(231,76,60,.3);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700">📝 0 XP</span>
-      </div>
+    <!-- Quiz Hub Landing -->
+    <div id="quiz-hub-view">
+      <div class="page-title" style="padding:20px 16px 0">🎮 Quiz</div>
+      <div style="font-size:13px;color:var(--text);font-weight:600;padding:4px 16px 0">Choose your mode</div>
+      <div class="quiz-hub" id="quiz-hub-cards"></div>
     </div>
-    <div id="iq-feed-content"></div>
+    <!-- SAQ Sub-view -->
+    <div id="saq-sub-view" style="display:none">
+      <div style="background:linear-gradient(180deg,var(--dark) 0%,#16091e 100%);padding:22px 16px 18px;border-bottom:1px solid rgba(255,255,255,.06)">
+        <button class="quiz-hub-back" onclick="showQuizHub()">← Back to Quiz</button>
+        <div class="page-title" style="color:#fff;margin-bottom:4px">📝 SAQ</div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,.55);letter-spacing:.02em;margin-bottom:14px">Short Answer Question — case-based exam practice</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <span class="coin-pill" id="iq-coins-display" style="background:rgba(243,156,18,.18);color:#ffd380;border:1px solid rgba(243,156,18,.3)">🪙 0</span>
+          <span id="iq-score-display" style="background:rgba(231,76,60,.18);color:#ffb6ad;border:1px solid rgba(231,76,60,.3);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700">📝 0 XP</span>
+        </div>
+      </div>
+      <div id="iq-feed-content"></div>
+    </div>
   </div>
 
   <!-- HOST -->
@@ -1494,6 +1723,37 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
       <div id="qpm-msg" style="font-size:12px;color:var(--text3)">Quiz pool syncs automatically from the Reviewer Tool.</div>
     </div>
 
+    <div class="host-section" id="hs-textbooks">
+      <div class="section-label">📚 Textbook Manager</div>
+      <button class="btn-sm btn-read" style="width:100%;margin-bottom:10px;padding:10px;font-size:13px" onclick="openTextbookEditor(null)">➕ Add Textbook</button>
+      <div id="tb-mgr-list"></div>
+      <div id="tb-editor-panel" style="display:none;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-top:10px">
+        <div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:12px" id="tb-editor-title">New Textbook</div>
+        <input type="hidden" id="tb-edit-id">
+        <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;margin-bottom:10px">
+          <div><div class="be-label">Icon</div><input id="tb-edit-icon" type="text" maxlength="4" placeholder="📚" class="be-input" style="text-align:center;font-size:20px;padding:5px"></div>
+          <div><div class="be-label">Name</div><input id="tb-edit-name" type="text" placeholder="e.g. Tintinalli" class="be-input"></div>
+        </div>
+        <div class="be-label" style="margin-bottom:4px">Color</div>
+        <input id="tb-edit-color" type="color" value="#e74c3c" style="width:48px;height:32px;border:none;cursor:pointer;border-radius:6px;margin-bottom:12px">
+        <div class="be-label" style="margin-top:8px">Cover Image</div>
+        <div id="tb-cover-preview" style="height:60px;border-radius:8px;background:var(--surface3);display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden">
+          <span style="font-size:11px;color:var(--text3)">No cover</span>
+        </div>
+        <label style="display:block;background:var(--red);color:#fff;border-radius:8px;padding:8px;text-align:center;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-body);margin-bottom:12px">
+          📷 Upload Cover Image
+          <input type="file" accept="image/*" style="display:none" onchange="uploadTextbookCover(this)">
+        </label>
+        <input id="tb-edit-cover" type="hidden" value="">
+        <div class="be-label" style="margin-top:16px;margin-bottom:6px">📁 Sections / Folders <span style="font-weight:400;color:var(--text3)">(table of contents)</span></div>
+        <div id="tb-folder-rows"></div>
+        <button type="button" onclick="addTbFolderRow()" style="width:100%;padding:8px;background:var(--surface3);border:1.5px dashed var(--border2);border-radius:8px;font-size:12px;color:var(--text2);cursor:pointer;font-family:var(--font-body);margin-bottom:12px">+ Add Section</button>
+        <div style="display:flex;gap:8px">
+          <button class="btn-sm btn-read" style="flex:1;padding:10px" onclick="saveTextbookEdit()">💾 Save</button>
+          <button class="btn-sm" style="padding:10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;cursor:pointer" onclick="$('tb-editor-panel').style.display='none'">Cancel</button>
+        </div>
+      </div>
+    </div>
     <div class="host-section" id="hs-cats">
       <div class="section-label">📁 Category Manager</div>
       <button class="btn-sm btn-read" style="width:100%;margin-bottom:10px;padding:10px;font-size:13px" onclick="openCatEditor(null)">➕ Add New Category</button>
@@ -1690,6 +1950,20 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
           </div>
       <!-- ─────────── PANE: GAMIFICATION (REWARDS) ─────────── -->
       <div class="htab-pane" data-htab="gamification">
+        <div class="host-section" id="hs-skill-manager">
+          <div class="section-label">⚔️ Skill Manager</div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:10px">Add, edit, or delete skills. Changes sync to all users.</div>
+          <button class="btn-sm btn-read" style="width:100%;margin-bottom:10px;padding:10px;font-size:13px" onclick="addNewSkillRow()">➕ Add New Skill</button>
+          <div id="skill-mgr-list"><div style="font-size:12px;color:var(--text3)">Loading skills…</div></div>
+          <div class="smgr-reset-section">
+            <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:8px">Reset User Skill XP</div>
+            <select id="smgr-user-select" class="be-input" style="width:100%;margin-bottom:8px" onchange="loadSmgrUserSkills()">
+              <option value="">-- Select a user --</option>
+            </select>
+            <div id="smgr-user-skills"></div>
+            <button class="smgr-save-btn" style="background:#c0392b" onclick="resetUserSkillXP()">Reset Selected Skills</button>
+          </div>
+        </div>
         <div class="host-section" id="hs-badges">
       <div class="section-label">🏅 Achievement Manager</div>
       <div id="badge-mgr-list"></div>
@@ -1825,85 +2099,109 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
 
   <!-- PROFILE -->
   <div class="page" id="page-profile" style="padding:0 0 90px">
-    <!-- Hero / Avatar section -->
-    <div class="profile-hero" id="profile-hero">
-      <div id="profile-avatar-display" style="margin-bottom:12px"></div>
-      <div style="font-family:var(--font-display);font-size:21px;color:#fff;margin-bottom:2px" id="profile-hero-name">—</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.5)" id="profile-hero-username">@—</div>
-      <div id="profile-hero-title"></div>
-      <div style="display:flex;justify-content:center;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap">
-        <span class="coin-pill" id="profile-coins-display">🪙 0</span>
-        <span id="profile-hero-rank" style="background:rgba(255,255,255,.12);color:#fff;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700"></span>
+    <!-- Zone 1: Hero Banner -->
+    <div class="prof-hero" id="prof-hero-zone">
+      <div class="prof-hero-top">
+        <div class="prof-av-wrap" onclick="openAvatarSheet()" id="prof-av-wrap">
+          <div id="profile-avatar-display"></div>
+          <div class="prof-av-edit">✏️</div>
+        </div>
+        <div class="prof-hero-info">
+          <div class="prof-hero-name" id="profile-hero-name"></div>
+          <div id="profile-hero-title"></div>
+          <div class="prof-skill-rank" id="prof-skill-rank-badge"></div>
+        </div>
+      </div>
+      <div class="prof-xp-row">
+        <div>
+          <div class="prof-xp-num" id="prof-total-xp">0</div>
+          <div class="prof-xp-label">Skill XP</div>
+        </div>
+        <div class="prof-xp-bar-wrap">
+          <div class="prof-xp-bar-labels">
+            <span id="prof-rank-cur"></span>
+            <span id="prof-rank-next-label"></span>
+          </div>
+          <div class="prof-xp-bar"><div class="prof-xp-fill" id="prof-xp-fill" style="width:0%"></div></div>
+        </div>
       </div>
     </div>
-    <!-- Inline padding wrapper for card sections -->
-    <div style="padding:0 16px">
-      <div class="card" style="margin-top:16px;margin-bottom:0">
-        <div class="section-label">Display Name</div>
-        <div class="inline-form">
-          <input id="profile-display-name" type="text" maxlength="32" placeholder="How your name appears on the scoreboard">
-          <button class="btn-sm btn-read" onclick="saveDisplayName()">Save</button>
+
+    <!-- Zone 2: Stat Strip -->
+    <div class="prof-stat-strip">
+      <div class="prof-stat-cell"><div class="prof-stat-n" id="pstat-quizzes">0</div><div class="prof-stat-l">Quizzes</div></div>
+      <div class="prof-stat-cell"><div class="prof-stat-n" id="pstat-chapters">0</div><div class="prof-stat-l">Chapters</div></div>
+      <div class="prof-stat-cell"><div class="prof-stat-n" id="pstat-best">0%</div><div class="prof-stat-l">Best Pool</div></div>
+      <div class="prof-stat-cell"><div class="prof-stat-n" id="pstat-badges">0</div><div class="prof-stat-l">Badges</div></div>
+    </div>
+
+    <!-- Zone 3: Skill Grid -->
+    <div id="prof-pool-chart" class="pool-chart-card" style="display:none"><div class="pool-chart-empty">No quiz attempts yet</div></div>
+    <div style="padding:14px 14px 6px;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.06em;text-transform:uppercase">Skills</div>
+    <div id="profile-skill-grid" class="skill-grid"></div>
+
+    <!-- Titles -->
+    <div style="padding:14px 14px 6px;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.06em;text-transform:uppercase">Titles</div>
+    <div id="profile-titles-list" style="padding:0 14px 8px"></div>
+
+    <!-- Achievements -->
+    <div style="padding:14px 14px 6px;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.06em;text-transform:uppercase">Achievements</div>
+    <div id="badge-grid" class="badge-grid" style="padding:0 14px 80px"></div>
+
+    <!-- Hidden compat elements -->
+    <input type="hidden" id="profile-display-name">
+    <span class="coin-pill" id="profile-coins-display" style="display:none">🪙 0</span>
+    <div id="profile-hero-username" style="display:none"></div>
+    <div id="profile-hero-rank" style="display:none"></div>
+    <div id="profile-customize-section" style="display:none"></div>
+    <div id="profile-pool-history" style="display:none"></div>
+    <div id="profile-daily-checkin" style="display:none"></div>
+    <div id="profile-rank-section" style="display:none"></div>
+
+    <!-- Avatar bottom sheet -->
+    <div class="av-sheet-overlay" id="av-sheet-overlay" style="display:none" onclick="if(event.target===this)closeAvatarSheet()">
+      <div class="av-sheet">
+        <div class="av-sheet-handle"></div>
+        <div class="av-sheet-label">My Avatars</div>
+        <div class="av-sheet-scroll" id="av-sheet-avatars"></div>
+        <div class="av-sheet-label">My Borders</div>
+        <div class="av-sheet-scroll" id="av-sheet-borders"></div>
+        <div class="av-sheet-label">Upload Photo</div>
+        <div class="av-sheet-upload-row">
+          <label class="av-sheet-upload-btn">
+            <input type="file" accept="image/*" capture="camera" style="display:none" onchange="uploadProfilePhoto(this)">
+            <div class="av-sheet-upload-ico">📷</div>
+            <div class="av-sheet-upload-lbl">Camera</div>
+          </label>
+          <label class="av-sheet-upload-btn">
+            <input type="file" accept="image/*" style="display:none" onchange="uploadProfilePhoto(this)">
+            <div class="av-sheet-upload-ico">🖼️</div>
+            <div class="av-sheet-upload-lbl">Gallery</div>
+          </label>
         </div>
-        <div class="inline-help">Shown on the scoreboard. Your login username stays the same.</div>
+        <div class="av-sheet-shop-btn" onclick="closeAvatarSheet();navTo('shop')">🛍 Shop for more avatars &amp; borders →</div>
       </div>
-      <div id="profile-rank-section"></div>
-      <!-- Daily Check-in -->
-      <div id="profile-daily-checkin" style="margin-top:16px"></div>
-      <div id="profile-pool-history"></div>
-      <!-- Customize / Shop link -->
-      <div style="margin:18px 0 12px;display:flex;align-items:center;justify-content:space-between">
-        <div class="section-label" style="margin:0">🎨 Customize</div>
-        <button class="btn-sm btn-outline" onclick="navTo('shop')" style="font-size:12px;padding:6px 14px">🛍 Shop →</button>
-      </div>
-      <!-- Avatar & Border Customize -->
-      <div style="margin:18px 0 10px;display:flex;align-items:center;gap:8px">
-        <div class="section-label" style="margin:0">🎨 Avatar &amp; Border</div>
-      </div>
-      <div id="profile-customize-section"></div>
-      <!-- Titles -->
-      <div style="margin:18px 0 12px;display:flex;align-items:center;justify-content:space-between">
-        <div class="section-label" style="margin:0">🏷 My Titles</div>
-      </div>
-      <div id="profile-titles-section"></div>
-      <!-- Achievements -->
-      <div class="section-label" style="margin:18px 0 12px">🏅 Achievements</div>
-      <div class="badge-grid" id="badge-grid"></div>
     </div>
   </div>
 
 <!-- SHOP PAGE -->
 <div class="page" id="page-shop" style="padding:0 0 90px">
-  <div style="background:var(--dark);padding:20px 16px 16px">
-    <div class="page-title" style="color:#fff;margin-bottom:2px">🛍 Shop</div>
-    <div style="font-size:13px;color:rgba(255,255,255,.55)">Spend coins to unlock avatars, borders &amp; titles</div>
-    <div style="margin-top:10px"><span class="coin-pill" id="shop-page-coins">🪙 0</span></div>
+  <div class="shop-v19-hdr">
+    <div class="page-title" style="color:#fff">🛍 Shop</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.5)">Spend coins to unlock avatars &amp; borders</div>
+    <div class="shop-v19-coins" id="shop-page-coins">🪙 0</div>
   </div>
-  <div style="padding:16px">
-    <div class="shop-tabs" id="shop-page-tabs">
-      <button class="shop-tab active" onclick="switchShopPageTab('avatars',this)">🎭 Avatars</button>
-      <button class="shop-tab" onclick="switchShopPageTab('borders',this)">🔮 Borders</button>
-    </div>
-    <div id="shop-page-content"></div>
+  <div class="shop-v19-tabs" id="shop-page-tabs">
+    <button class="shop-v19-tab active" onclick="switchShopPageTab('avatars',this)">🎭 Avatars</button>
+    <button class="shop-v19-tab" onclick="switchShopPageTab('borders',this)">🔮 Borders</button>
   </div>
+  <div class="shop-v19-body" id="shop-page-content"></div>
 </div>
-<!-- FLASHCARD EDITOR OVERLAY -->
-<div class="reader-overlay" id="fc-editor-overlay" style="z-index:210">
-  <div class="reader-topbar">
-    <button class="reader-back" onclick="closeFCEditor()">← Back</button>
-    <div class="reader-title-txt" id="fc-editor-title">Edit Flashcards</div>
-    <button class="btn-sm btn-read" style="margin-left:auto;padding:6px 12px;font-size:12px" onclick="saveFCEdits()">💾 Save</button>
-  </div>
-  <div style="flex:1;overflow-y:auto;padding:16px" id="fc-editor-body">
-    <div style="color:var(--text3);text-align:center;padding:40px">Loading…</div>
-  </div>
-  <div style="padding:12px 16px;border-top:1px solid var(--border2)">
-    <button class="btn-sm btn-read" style="width:100%;padding:12px;font-size:14px" onclick="addFCCard()">+ Add Card</button>
-  </div>
-</div>
+
   <nav class="bottom-nav">
     <button class="nav-item active" onclick="navTo('library')"     id="nav-library"><span class="nav-icon">📚</span>Library</button>
     <button class="nav-item"        onclick="navTo('leaderboard')" id="nav-leaderboard"><span class="nav-icon">🏆</span>Ranks</button>
-    <button class="nav-item" onclick="navTo('image-quiz')" id="nav-image-quiz" style="display:none"><span class="nav-icon">📝</span>SAQ</button>
+    <button class="nav-item" onclick="navTo('image-quiz')" id="nav-image-quiz" style="display:none"><span class="nav-icon">🎮</span>Quiz</button>
     <button class="nav-item" onclick="navTo('profile')" id="nav-profile" style="display:none"><span class="nav-icon">🏅</span>Profile</button>
     <button class="nav-item" onclick="navTo('shop')"   id="nav-shop"    style="display:none"><span class="nav-icon">🛍</span>Shop</button>
     <button class="nav-item"        onclick="navTo('host')"        id="nav-host" style="display:none"><span class="nav-icon">⚙️</span>Host</button>
@@ -2059,6 +2357,7 @@ body{font-family:var(--font-body);background:var(--dark);color:var(--text);min-h
       <span style="font-size:16px">⏱</span>
       <span class="quiz-timer-display" id="quiz-timer-display">--:--</span>
     </div>
+    <button class="quiz-dark-toggle" id="quiz-dark-btn" onclick="toggleQuizDark()" title="Toggle dark mode">🌙</button>
   </div>
   <div style="flex:1;overflow-y:auto;padding:20px 16px;">
     <div class="quiz-container" id="quiz-container"></div>
@@ -2399,10 +2698,10 @@ window.navTo = page => {
   if(page === 'library') _startCdTick(); else _stopCdTick();
   if(page==='library')     { renderLibrary(); loadPoolSettings(); }
   if(page==='leaderboard') renderLeaderboard();
-  if(page==='host')        { renderHost(); loadHostStats(); renderMemberList(); loadPoolSettings(); renderQPMStats(); renderBadgeMgr(); renderCategoryMgr(); renderTitleMgr(); renderHostIQSection(); loadTAConfig(); initHostCollapse(); switchHostTab(_hostActiveTab||'overview'); }
+  if(page==='host')        { renderHost(); loadHostStats(); renderMemberList(); loadPoolSettings(); renderQPMStats(); renderBadgeMgr(); renderCategoryMgr(); loadTextbooks().then(()=>renderTextbookMgr()); renderTitleMgr(); loadCategories().then(()=>renderSkillManager()); renderHostIQSection(); loadTAConfig(); initHostCollapse(); switchHostTab(_hostActiveTab||'overview'); }
   if(page==='profile')     renderProfile();
   if(page==='shop')        renderShopPage();
-  if(page==='image-quiz')  renderImageQuizPage();
+  if(page==='image-quiz')  { renderQuizHub(); renderImageQuizPage(); }
 };
 
 // ── AUTH ──
@@ -2514,11 +2813,12 @@ const launchApp = () => {
   $('nav-image-quiz').style.display     = isHost ? 'none' : '';
   $('nav-profile').style.display        = isHost ? 'none' : '';
   $('nav-shop').style.display           = isHost ? 'none' : '';
-  $('pool-configure-btn').style.display = isHost ? '' : 'none';
+  const _pcb = $('pool-configure-btn'); if(_pcb) _pcb.style.display = isHost ? '' : 'none';
   showScreen('app-shell');
   loadCustomBadges();
   loadCustomTitles();
   loadCategories();
+  loadSkillManagerConfig();
   navTo('library');
   // Daily login reward (non-host only)
   if(!isHost) _checkDailyLoginReward();
@@ -2604,8 +2904,8 @@ const _checkDailyLoginReward = async () => {
 
 // ── LIBRARY ──
 const renderLibrary = async () => {
-  const container = $('chapter-cards');
-  container.innerHTML = '<div class="loading-spinner">⏳ Loading chapters...</div>';
+  const gridEl = document.getElementById('lib-tb-grid');
+  if(gridEl) gridEl.innerHTML = '<div class="loading-spinner">⏳ Loading...</div>';
   try {
     const [chapSnap, mqSnap] = await Promise.all([
       getDocs(collection(db,'chapters')),
@@ -2613,26 +2913,21 @@ const renderLibrary = async () => {
     ]);
     const chapters = [];
     chapSnap.forEach(d => chapters.push({id:d.id, ...d.data()}));
-    chapters.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
-    const mqIds = new Set(); mqSnap.forEach(d=>mqIds.add(d.id));
-    try{ const fs=await getDocs(collection(db,'flashcards')); fs.forEach(d=>_fcIdsCache.add(d.id)); }catch(e){}
-    // Cache for category filtering and badge checks
+    chapters.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}));
+    const mqIds = new Set(); mqSnap.forEach(d => mqIds.add(d.id));
+    try { const fs = await getDocs(collection(db,'flashcards')); fs.forEach(d => _fcIdsCache.add(d.id)); } catch(e){}
     _chaptersCache = chapters.map(ch => ({...ch, autoImported: !!(mqIds.has(ch.id) && ch.autoImported)}));
     _mqIdsCache = mqIds;
-    // Populate quizMeta autoImported flag into cache
     mqSnap.forEach(d => {
-      const idx = _chaptersCache.findIndex(c => c.id === d.id);
-      if(idx >= 0) _chaptersCache[idx].autoImported = !!(d.data().autoImported);
+      const idx2 = _chaptersCache.findIndex(c => c.id === d.id);
+      if(idx2 >= 0) _chaptersCache[idx2].autoImported = !!(d.data().autoImported);
     });
-    container.innerHTML = '';
-    if(!chapters.length){
-      container.innerHTML='<div class="empty">📭 No chapters yet.<br>Ask your host to upload content.</div>';
-      renderCategoryFilter();
-      return;
-    }
-    renderCategoryFilter();
-    _renderChapterCards();
-  } catch(e){ container.innerHTML=`<div class="empty">Error loading: ${e.message}</div>`; }
+    await loadTextbooks();
+    renderTextbookGrid();
+  } catch(e) {
+    const g = document.getElementById('lib-tb-grid');
+    if(g) g.innerHTML = '<div class="empty">Error: '+e.message+'</div>';
+  }
 };
 
 // ── READER ──
@@ -2862,6 +3157,165 @@ const _timeUp = () => {
   setTimeout(()=>{ quizState.current = quizState.questions.length; showQuizScore(); }, 1500);
 };
 
+// ── TEXTBOOK CRUD ──────────────────────────────────────────────────────────
+const loadTextbooks = async () => {
+  try {
+    const snap = await getDocs(collection(db,'textbooks'));
+    _textbooks = [];
+    snap.forEach(d => _textbooks.push({id:d.id, ...d.data()}));
+    _textbooks.sort((a,b)=>(a.order||0)-(b.order||0));
+  } catch(e){ console.warn('loadTextbooks failed:', e.message); }
+};
+
+const renderTextbookMgr = () => {
+  const el = $('tb-mgr-list'); if(!el) return;
+  if(!_textbooks.length){
+    el.innerHTML='<div style="font-size:12px;color:var(--text3);padding:4px 0">No textbooks yet.</div>';
+    return;
+  }
+  el.innerHTML = _textbooks.map(t=>{
+    const safeId = (t.id||'').replace(/'/g,"\\'");
+    return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:20px">${esc(t.icon)||'📚'}</span>
+      <span style="flex:1;font-size:13px;font-weight:600;color:var(--dark)">${esc(t.name)}</span>
+      <span style="width:18px;height:18px;border-radius:50%;background:${t.color||'#e74c3c'};display:inline-block"></span>
+      <button class="btn-sm" style="padding:4px 10px;font-size:11px" onclick="openTextbookEditor('${safeId}')">✏️</button>
+      <button class="btn-sm btn-danger" style="padding:4px 10px;font-size:11px" onclick="deleteTextbook('${safeId}')">🗑️</button>
+    </div>`;}).join('');
+};
+
+window.openTextbookEditor = (id) => {
+  const t = id ? _textbooks.find(x=>x.id===id) : null;
+  $('tb-edit-id').value = id||'';
+  $('tb-edit-icon').value = t?.icon||'📚';
+  $('tb-edit-name').value = t?.name||'';
+  $('tb-edit-color').value = t?.color||'#e74c3c';
+  const coverEl = document.getElementById('tb-edit-cover'); if(coverEl){ coverEl.value = t?.coverUrl||''; coverEl.dataset.tbid = t?.id||''; }
+  const previewEl = document.getElementById('tb-cover-preview');
+  if(previewEl){
+    const url = t?.coverUrl||'';
+    previewEl.innerHTML = url
+      ? '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover">'
+      : '<span style="font-size:11px;color:var(--text3)">No cover</span>';
+  }
+  $('tb-editor-title').textContent = id ? 'Edit Textbook' : 'New Textbook';
+  // Populate folder rows
+  _renderTbFolderRows(t?.folders||[]);
+  $('tb-editor-panel').style.display = '';
+};
+
+const _renderTbFolderRows = (folders) => {
+  const el = document.getElementById('tb-folder-rows'); if(!el) return;
+  el.innerHTML = (folders||[]).map((f,i) =>
+    '<div class="tb-folder-row" id="tb-fr-'+i+'">'
+    + '<button type="button" class="tb-folder-icon-btn" onclick="_pickFolderIcon(this)" title="Change icon">'+_esc(f.icon||'📁')+'</button>'
+    + '<input type="hidden" class="tb-folder-icon-inp" value="'+_esc(f.icon||'📁')+'">'
+    + '<input class="tb-folder-name-inp" value="'+_esc(f.name||'')+'" placeholder="Section name…">'
+    + '<button class="tb-folder-del" onclick="this.closest(\'.tb-folder-row\').remove()" title="Delete section">✕</button>'
+    + '</div>'
+  ).join('');
+};
+
+window.addTbFolderRow = () => {
+  const el = document.getElementById('tb-folder-rows'); if(!el) return;
+  const idx = el.children.length;
+  const row = document.createElement('div');
+  row.className = 'tb-folder-row';
+  row.id = 'tb-fr-'+idx;
+  row.innerHTML = '<button type="button" class="tb-folder-icon-btn" onclick="_pickFolderIcon(this)" title="Change icon">📁</button>'
+    + '<input type="hidden" class="tb-folder-icon-inp" value="📁">'
+    + '<input class="tb-folder-name-inp" value="" placeholder="Section name…">'
+    + '<button class="tb-folder-del" onclick="this.closest(\'.tb-folder-row\').remove()" title="Delete section">✕</button>';
+  el.appendChild(row);
+  row.querySelector('.tb-folder-name-inp').focus();
+};
+
+// Generic icon picker for folder/skill rows
+const _GENERAL_ICONS = [
+  '📁','📂','📚','📖','📕','📗','📘','📙',
+  '🧠','🫀','🫁','🦴','🦸','💉','💊','🩹',
+  '🩺','🩻','🏥','🚑','🧬','🔬','🧪','🧫',
+  '⚕️','🔝','⚠️','🚨','🔥','⚡','❤️','🫂',
+  '🧏','🧑‍⚕️','📊','📈','🎯','🥇','📝',
+  '📋','🔒','⭐','🌟','💡','🔧','🛠️','📦'
+];
+window._pickFolderIcon = (btnEl) => {
+  // Create or reuse picker overlay
+  let ov = document.getElementById('_folder-icon-picker');
+  if(!ov){
+    ov = document.createElement('div');
+    ov.id = '_folder-icon-picker';
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px';
+    ov.onclick = e => { if(e.target===ov) ov.style.display='none'; };
+    ov.innerHTML = '<div style="background:var(--surface);border-radius:18px;padding:18px;max-width:340px;width:100%;box-shadow:var(--shadow-lg)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">'
+      +'<div style="font-family:var(--font-display);font-size:17px;color:var(--dark)">Pick an icon</div>'
+      +'<button onclick="document.getElementById(\'_folder-icon-picker\').style.display=\'none\'" style="background:none;border:none;color:var(--text3);font-size:22px;cursor:pointer">✕</button>'
+      +'</div>'
+      +'<div id="_fip-grid" style="display:grid;grid-template-columns:repeat(8,1fr);gap:8px;max-height:260px;overflow-y:auto"></div>'
+      +'</div>';
+    document.body.appendChild(ov);
+  }
+  ov.style.display = 'flex';
+  const grid = document.getElementById('_fip-grid');
+  grid.innerHTML = _GENERAL_ICONS.map(ic =>
+    '<button style="background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:8px;font-size:22px;cursor:pointer;transition:.12s;aspect-ratio:1" title="'+ic+'">'+ic+'</button>'
+  ).join('');
+  grid.querySelectorAll('button').forEach((b,i) => {
+    b.onclick = () => {
+      const ic = _GENERAL_ICONS[i];
+      btnEl.textContent = ic;
+      // Update hidden input in same row
+      const row = btnEl.closest('.tb-folder-row') || btnEl.closest('.smgr-row');
+      if(row){ const h = row.querySelector('.tb-folder-icon-inp,.smgr-icon-inp'); if(h) h.value = ic; }
+      ov.style.display = 'none';
+    };
+  });
+};
+
+window.saveTextbookEdit = async () => {
+  const id  = $('tb-edit-id').value || ('tb_'+Date.now());
+  const icon = $('tb-edit-icon').value.trim()||'📚';
+  const name = $('tb-edit-name').value.trim();
+  const color = $('tb-edit-color').value;
+  const coverUrl = (document.getElementById('tb-edit-cover')?.value||'').trim();
+  if(!name){ toast('Textbook name required.'); return; }
+  // Collect folders from editor rows
+  const folderRows = document.querySelectorAll('#tb-folder-rows .tb-folder-row');
+  const folders = [];
+  folderRows.forEach((row, i) => {
+    const fIcon = row.querySelector('.tb-folder-icon-inp')?.value.trim()||'📁';
+    const fName = row.querySelector('.tb-folder-name-inp')?.value.trim();
+    if(fName){
+      // Preserve existing folder id if same index; otherwise generate new
+      const existingId = row.id?.replace('tb-fr-','');
+      const t = _textbooks.find(x=>x.id===id);
+      const existingFolder = t?.folders?.[parseInt(existingId)];
+      folders.push({ id: existingFolder?.id || 'f_'+Date.now()+'_'+i, name:fName, icon:fIcon, order:i+1 });
+    }
+  });
+  const isNew = !$('tb-edit-id').value;
+  const data = { name, icon, color, folders, ...(coverUrl ? {coverUrl} : {}), ...(isNew ? {order: Date.now()} : {}) };
+  try {
+    await setDoc(doc(db,'textbooks',id), data, {merge:true});
+    const idx = _textbooks.findIndex(x=>x.id===id);
+    if(idx>=0) _textbooks[idx]={id,...data}; else _textbooks.push({id,...data});
+    $('tb-editor-panel').style.display='none';
+    renderTextbookMgr();
+    toast('Textbook saved.');
+  } catch(e){ toast('Save failed: '+e.message); }
+};
+
+window.deleteTextbook = async (id) => {
+  if(!await _dlg.danger('Delete this textbook? Chapters will become ungrouped.','Delete Textbook','Delete')) return;
+  try {
+    await deleteDoc(doc(db,'textbooks',id));
+    _textbooks = _textbooks.filter(t=>t.id!==id);
+    renderTextbookMgr();
+    toast('Textbook deleted.');
+  } catch(e){ toast('Delete failed: '+e.message); }
+};
+
 // ── HOST PANEL STATS + INVITE CODE ──
 const loadHostStats = async () => {
   try {
@@ -2968,9 +3422,14 @@ const renderHost = async () => {
     const noCatHint = !_categories.length
       ? '<div style="font-size:11px;color:#e67e22;margin-top:5px">💡 Go to <strong>Category Manager</strong> below to create categories first.</div>'
       : '';
+    if(!_textbooks.length) await loadTextbooks();
     chapters.forEach(ch=>{
       const hasMQ    = mqIds.has(ch.id);
       const safeName = jsEsc(ch.displayName||ch.name);
+      const tbSel = '<option value="">📚 No textbook</option>'
+        + _textbooks.map(t=>
+            '<option value="'+t.id+'"'+(ch.textbookId===t.id?' selected':'')+'>'+esc((t.icon||'📚')+' '+t.name)+'</option>'
+          ).join('');
       const catSel   = '<option value="">📂 No category</option>'
         + _categories.map(c =>
             '<option value="'+c.id+'"'+(ch.categoryId===c.id?' selected':'')+'>'+esc((c.icon||'📁')+' '+c.name)+'</option>'
@@ -2990,11 +3449,32 @@ const renderHost = async () => {
         +'<button class="btn-sm btn-danger" style="font-size:11px;padding:5px 9px;flex-shrink:0" onclick="deleteChapter(\''+ch.id+'\')">🗑 Delete</button>'
         +'</div>'
         +'<div style="display:flex;align-items:center;gap:8px">'
+        +'<span style="font-size:11px;color:var(--text3);flex-shrink:0;white-space:nowrap">📚 Textbook</span>'
+        +'<select id="ch-edit-textbook" style="flex:1;font-size:12px;padding:5px 8px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface3);color:var(--text)" onchange="assignChapterTextbook(\''+ch.id+'\',this.value)">'
+        +tbSel
+        +'</select>'
+        +'</div>'
+        +'<div style="display:flex;align-items:center;gap:8px">'
         +'<span style="font-size:11px;color:var(--text3);flex-shrink:0;white-space:nowrap">📁 Category</span>'
         +'<select style="flex:1;font-size:12px;padding:5px 8px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface3);color:var(--text)" onchange="assignChapterCategory(\''+ch.id+'\',this.value)">'
         +catSel
         +'</select>'
         +'</div>'
+        +(ch.textbookId ? (()=>{
+            const tb2 = _textbooks.find(t=>t.id===ch.textbookId);
+            const tbFolders = (tb2 && tb2.folders)||[];
+            if(!tbFolders.length) return '';
+            const folderSel = '<option value="">📋 No section</option>'
+              + tbFolders.sort((a,b)=>(a.order||0)-(b.order||0)).map(f=>
+                  '<option value="'+f.id+'"'+(ch.folderId===f.id?' selected':'')+'>'+_esc((f.icon||'📁')+' '+f.name)+'</option>'
+                ).join('');
+            return '<div style="display:flex;align-items:center;gap:8px">'
+              +'<span style="font-size:11px;color:var(--text3);flex-shrink:0;white-space:nowrap">📂 Section</span>'
+              +'<select style="flex:1;font-size:12px;padding:5px 8px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface3);color:var(--text)" onchange="assignChapterFolder(\''+ch.id+'\',this.value)">'
+              +folderSel
+              +'</select>'
+              +'</div>';
+          })() : '')
         +noCatHint;
       container.appendChild(d);
     });
@@ -3222,6 +3702,7 @@ window.startQuiz = async (chapterId, displayName) => {
   quizState = {questions:[], current:0, score:0, chapterId, displayName};
   $('quiz-chapter-name').textContent = displayName;
   $('quiz-overlay').classList.add('open');
+  try{ const d=localStorage.getItem('quizDarkMode'); const ov2=document.getElementById('quiz-overlay'); const b2=document.getElementById('quiz-dark-btn'); if(d==='1'){ov2.classList.add('quiz-overlay-dark'); if(b2)b2.textContent='☀️';}else{ov2.classList.remove('quiz-overlay-dark'); if(b2)b2.textContent='🌙';} }catch(_){}
   const container = $('quiz-container');
   container.innerHTML = '<div class="loading-spinner">⏳ Loading questions...</div>';
   try {
@@ -3268,7 +3749,7 @@ const loadPoolSettings = async () => {
     const tLabel   = TIME_LABELS[time]  || time+'s/Q';
     const cLabel   = COUNT_LABELS[count] || count+' Qs';
     const pcdLabel = poolCdH    === 0 ? 'No cooldown' : (poolCdH    === 1 ? '1h pool CD'    : poolCdH+'h pool CD');
-    $('pool-settings-display').textContent =
+    const _psd = $('pool-settings-display'); if(_psd) _psd.textContent =
       `${cLabel} · ${tLabel} · ${pcdLabel} · Scores to leaderboard`;
     // Pre-fill host dropdowns
     const hc   = $('host-pool-count');       if(hc)   hc.value   = count;
@@ -3315,6 +3796,7 @@ window.startPoolQuiz = async () => {
   const container = $('quiz-container');
   $('quiz-chapter-name').textContent = '⏳ Loading pool…';
   $('quiz-overlay').classList.add('open');
+  try{ const d=localStorage.getItem('quizDarkMode'); const ov2=document.getElementById('quiz-overlay'); const b2=document.getElementById('quiz-dark-btn'); if(d==='1'){ov2.classList.add('quiz-overlay-dark'); if(b2)b2.textContent='☀️';}else{ov2.classList.remove('quiz-overlay-dark'); if(b2)b2.textContent='🌙';} }catch(_){}
   container.innerHTML = '<div class="loading-spinner">⏳ Loading question pool…</div>';
 
   try {
@@ -3417,6 +3899,52 @@ const getRank = pts => {
 const xpPct = (pts, rank) => {
   if(!rank.next) return 100;
   return Math.min(100, Math.round(((pts - rank.min) / (rank.next - rank.min)) * 100));
+};
+
+// ── OVERALL PROFILE SKILL RANK (sum of all skillXP) ────────────────────────
+const SKILL_RANKS = [
+  { min:   0, title:'Intern',          emoji:'🏥' },
+  { min:  50, title:'Resident',        emoji:'📚' },
+  { min: 150, title:'Senior Resident', emoji:'⚕️'  },
+  { min: 400, title:'Chief Resident',  emoji:'⚔️'  },
+  { min: 900, title:'Attending',       emoji:'👑'  },
+];
+const SKILL_ACCENT_COLORS = ['#e74c3c','#e67e22','#f1c40f','#2ecc71','#1abc9c',
+  '#3498db','#9b59b6','#e91e63','#00bcd4','#8bc34a'];
+const getSkillRank = totalXp => {
+  let r = SKILL_RANKS[0];
+  for(const sr of SKILL_RANKS){ if((totalXp||0) >= sr.min) r = sr; }
+  return r;
+};
+
+// ── SKILL TREE ────────────────────────────────────────────────────────────
+const SKILL_LEVELS = [
+  { level:1, title:'Novice',      min:0    },
+  { level:2, title:'Apprentice',  min:100  },
+  { level:3, title:'Competent',   min:300  },
+  { level:4, title:'Expert',      min:700  },
+  { level:5, title:'Master',      min:1500 },
+];
+const getSkillLevel = (xp, topicId) => {
+  if(topicId && _skillManagerConfig?.skills?.[topicId]?.xpThresholds) {
+    const thresh = _skillManagerConfig.skills[topicId].xpThresholds;
+    const titles = SKILL_LEVELS.map(s => s.title);
+    let level = 0;
+    for(let i = 0; i < thresh.length; i++){ if((xp||0) >= thresh[i]) level = i; }
+    return { level: level+1, title: titles[level]||'Novice', min: thresh[level]||0,
+      _thresholds: thresh };
+  }
+  let sl = SKILL_LEVELS[0];
+  for(const s of SKILL_LEVELS){ if((xp||0) >= s.min) sl = s; }
+  return sl;
+};
+const skillXpToNext = (xp, sl) => {
+  if(sl._thresholds) {
+    const nextMin = sl._thresholds[sl.level];
+    return nextMin !== undefined ? nextMin - (xp||0) : 0;
+  }
+  const next = SKILL_LEVELS[sl.level]; // sl.level is 1-indexed; array index gives next entry
+  return next ? next.min - (xp||0) : 0;
 };
 
 // == SHOP ITEMS & CURRENCY =================================================
@@ -3542,9 +4070,12 @@ const BADGE_DEFS = [];  // Host defines all achievements via Achievement Manager
 let _passCutoff     = 50;  // loaded from Firestore config/settings
 let _categories     = [];  // [{id,name,color,icon}]
 let _chaptersCache  = [];  // full chapter list from last library fetch
+let _skillManagerConfig = null; // { skills: { [id]: { id, name, levelValues, xpThresholds } } }
 let _fcIdsCache    = new Set();
 let _mqIdsCache     = new Set();
 let _selectedCat    = 'all';
+let _textbooks      = [];    // [{id,name,icon,color,order}]
+let _selectedTextbook = 'all';
 let _customBadges   = [];
 let _badgeOverrides = {};
 
@@ -3617,11 +4148,33 @@ window.selectCategory = (id) => {
   _renderChapterCards();
 };
 
+const renderTextbookFilter = () => {
+  const bar = $('textbook-filter'); if(!bar) return;
+  if(!_textbooks.length){ bar.style.display='none'; return; }
+  bar.style.display='flex';
+  bar.innerHTML = [
+    {id:'all', icon:'📖', name:'All'},..._textbooks
+  ].map(t=>{
+    const safeId = (t.id||'all').replace(/'/g,"\'");
+    return `<button class="tb-tab ${_selectedTextbook===t.id?'active':''}" onclick="selectTextbook('${safeId}')">${t.icon||'📚'} ${esc(t.name)}</button>`;
+  }).join('');
+};
+
+window.selectTextbook = (id) => {
+  _selectedTextbook = id;
+  _selectedCat = 'all';
+  renderTextbookFilter();
+  renderCategoryFilter();
+  _renderChapterCards();
+};
+
 const _renderChapterCards = () => {
   const container = $('chapter-cards'); if(!container) return;
-  const chapters = _selectedCat === 'all'
+  let chapters = _selectedCat === 'all'
     ? _chaptersCache
     : _chaptersCache.filter(ch => ch.categoryId === _selectedCat);
+  if(_selectedTextbook !== 'all')
+    chapters = chapters.filter(ch => ch.textbookId === _selectedTextbook);
   if(!chapters.length){
     container.innerHTML = '<div class="empty">📭 No chapters in this category yet.</div>';
     return;
@@ -3755,6 +4308,24 @@ window.assignChapterCategory = async (chapterId, catId) => {
   } catch(e){ toast('Error: '+e.message); }
 };
 
+window.assignChapterTextbook = async (chapterId, textbookId) => {
+  try {
+    await updateDoc(doc(db,'chapters',chapterId), { textbookId: textbookId || null });
+    const idx = _chaptersCache.findIndex(c => c.id === chapterId);
+    if(idx >= 0) _chaptersCache[idx].textbookId = textbookId || null;
+    toast('✅ Textbook assigned.');
+  } catch(e){ toast('Error: '+e.message); }
+};
+
+window.assignChapterFolder = async (chapterId, folderId) => {
+  try {
+    await updateDoc(doc(db,'chapters',chapterId), { folderId: folderId || null });
+    const idx = _chaptersCache.findIndex(c => c.id === chapterId);
+    if(idx >= 0) _chaptersCache[idx].folderId = folderId || null;
+    toast('✅ Section assigned.');
+  } catch(e){ toast('Error: '+e.message); }
+};
+
 const loadCustomBadges = async () => {
   try {
     const snap = await getDoc(doc(db,'settings','badges'));
@@ -3869,6 +4440,7 @@ const showQuizScore = async () => {
 
   let rankCardHtml = '';
   let didLevelUp   = false;
+  let skillLevelUp = null;
   let newRankObj   = null;
 
   if(currentUser && currentUser.role !== 'host'){
@@ -3931,6 +4503,9 @@ const showQuizScore = async () => {
           updateObj.chapterScores    = newCS;
           updateObj.chapterNames     = newCN;
           updateObj.chapterLatestPct = newLP;
+          const newBP  = Object.assign({}, d.chapterBestPct||{});
+          newBP[cid]   = Math.max(newBP[cid]||0, pct);
+          updateObj.chapterBestPct = newBP;
         }
         if(isPool){
           const oldHist = d.poolQuizHistory || [];
@@ -3938,6 +4513,34 @@ const showQuizScore = async () => {
             ...oldHist.slice(-19),
             { ts: Date.now(), pct, score, total: questions.length }
           ];
+        }
+        // ── Skill XP (chapter quizzes only, v1.8) ──────────────────────────────
+        if(!isPool){
+          const ch = _chaptersCache.find(c=>c.id===quizState.chapterId);
+          const topic = (ch && _categories.find(cat=>cat.id===ch.categoryId)?.name) || null;
+          if(topic){
+            const earnedXP  = Math.round(pct * 0.1); // score_pct * 0.1, max 10 XP
+            const oldSkillXP = (d.skillXP||{})[topic] || 0;
+            const prevPct    = (d.chapterBestPct||{})[quizState.chapterId] || 0;
+            const prevXP     = Math.round(prevPct * 0.1);
+            const deltaXP    = Math.max(0, earnedXP - prevXP);
+            if(deltaXP > 0){
+              const newSkillXP    = oldSkillXP + deltaXP;
+              const newSkillXPMap = Object.assign({}, d.skillXP||{}, {[topic]: newSkillXP});
+              const oldLevel = getSkillLevel(oldSkillXP).level;
+              const newLevel = getSkillLevel(newSkillXP).level;
+              updateObj.skillXP = newSkillXPMap;
+              // Derive skillLevels map from full skillXP
+              const newLevelsMap = {};
+              Object.entries(newSkillXPMap).forEach(([t,x])=>{ newLevelsMap[t]=getSkillLevel(x).level; });
+              updateObj.skillLevels = newLevelsMap;
+              currentUser.skillXP    = newSkillXPMap;
+              currentUser.skillLevels = newLevelsMap;
+              if(newLevel > oldLevel){
+                skillLevelUp = { topic, oldLevel, newLevel, title: getSkillLevel(newSkillXP).title };
+              }
+            }
+          }
         }
         await updateDoc(ref2, updateObj);
 
@@ -4021,6 +4624,19 @@ const showQuizScore = async () => {
   if(didLevelUp && newRankObj){
     setTimeout(() => showLevelUp(newRankObj, currentUser.score||0), 1000);
   }
+  if(skillLevelUp){
+    const { topic, title, newLevel } = skillLevelUp;
+    setTimeout(() => toast('⚔️ ' + topic + ' Skill Lv.' + newLevel + ' — ' + title + '!'), 1800);
+  }
+};
+
+window.toggleQuizDark = () => {
+  const ov  = document.getElementById('quiz-overlay');
+  const btn = document.getElementById('quiz-dark-btn');
+  if(!ov) return;
+  const isDark = ov.classList.toggle('quiz-overlay-dark');
+  if(btn) btn.textContent = isDark ? '☀️' : '🌙';
+  try{ localStorage.setItem('quizDarkMode', isDark ? '1':'0'); }catch(_){}
 };
 
 window.closeQuiz = () => {
@@ -5436,6 +6052,8 @@ window.switchHostTab = (name, btn) => {
   document.querySelectorAll('.host-section.search-match').forEach(el => el.classList.remove('search-match'));
   // Scroll the host content area to the top so the user starts from the pane head
   try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (_) {}
+  // Re-render skill manager fresh on every gamification tab switch
+  if(name === 'gamification') renderSkillManager();
 };
 
 window.jumpToHostTool = (tab, sectionId) => {
@@ -5456,11 +6074,13 @@ const _hostSearchIndex = [
   { id:'hs-upload',     tab:'content',      terms:'upload chapters html files import drop' },
   { id:'hs-ch-mgmt',    tab:'content',      terms:'chapter management rename delete edit quiz icon assign category' },
   { id:'hs-qpm',        tab:'content',      terms:'quiz pool manager import json review answers clear questions bank' },
+  { id:'hs-textbooks',  tab:'content',      terms:'textbook book tintinalli rosen library source add edit' },
   { id:'hs-cats',       tab:'content',      terms:'categories filter color icon add edit category' },
   { id:'hs-pool-cfg',   tab:'quizzes',      terms:'pool quiz settings number questions time per question cooldown pass cutoff random' },
   { id:'hs-image-quiz', tab:'quizzes',      terms:'saq image quiz manager case ecg cxr echo tox new explanation xp reward' },
   { id:'hs-ta-cfg',     tab:'quizzes',      terms:'time attack settings questions per session seconds xp coins cooldown' },
   { id:'hs-lb-ctrl',    tab:'quizzes',      terms:'leaderboard control reset all scores cooldowns ranks' },
+  { id:'hs-skill-manager', tab:'gamification', terms:'skill manager id name level values xp thresholds reset user topic' },
   { id:'hs-badges',     tab:'gamification', terms:'badges achievements emoji color hidden description target add edit unlock' },
   { id:'hs-titles-mgr', tab:'gamification', terms:'titles manager unlock score quiz count chapter daily checkin streak grant' },
   { id:'hs-invite',     tab:'community',    terms:'invite code change copy register new member' },
@@ -5519,6 +6139,7 @@ const initHostCollapse = () => {
     { id:'hs-pool-cfg',   label:'🎲 Pool Settings' },
     { id:'hs-qpm',        label:'📚 Quiz Pool' },
     { id:'hs-cats',       label:'📁 Categories' },
+    { id:'hs-skill-manager', label:'⚔️ Skill Manager' },
     { id:'hs-badges',     label:'🏅 Achievements' },
     { id:'hs-titles-mgr', label:'🏷 Titles' },
     { id:'hs-image-quiz', label:'📝 SAQ' },
@@ -5614,6 +6235,7 @@ const renderLeaderboard = async () => {
         quizzesDone: u.quizzesDone || 0,
         chapterQuizzesDone: u.chapterQuizzesDone || 0,
         poolQuizzesDone: u.poolQuizzesDone || 0,
+        skillLevels: u.skillLevels || {},
       });
     });
     _renderLbFromCache();
@@ -5662,19 +6284,75 @@ const _renderLbFromCache = () => {
   if(!sorted || !sorted.length){ el.innerHTML='<div class="empty">No scores yet.</div>'; return; }
   const pts_fn  = u => _lbTab==='pool' ? u.poolScore : u.score;
   const pts_lbl = _lbTab==='pool' ? 'Pt' : 'XP';
-  el.innerHTML = '<div style="background:var(--surface);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)">'
-    + sorted.map((u,i)=>{
-      const isMe = currentUser && u.username===currentUser.username;
-      const ti   = SHOP_ITEMS.titles.find(x=>x.id===u.equippedTitle);
-      return '<div class="lb-row'+(isMe?' lb-me':'')+'">'
-        +'<span class="lb-rank">'+(medals[i]||('#'+(i+1)))+'</span>'
-        +_avatarHtml(u.equippedAvatar, u.equippedBorder, 36)
-        +'<span class="lb-name" style="line-height:1.3">'+esc(u.displayName)
-        +(ti&&ti.text?'<br><span style="font-size:10px;color:var(--text3);font-weight:400">'+esc(ti.text)+'</span>':'')+'</span>'
-        +'<span class="lb-pts">'+pts_fn(u)+' '+pts_lbl+'</span>'
-        +'</div>';
-    }).join('')
-    +'</div>';
+
+  // Pool tab: keep simple list
+  if(_lbTab === 'pool'){
+    el.innerHTML = '<div style="background:var(--surface);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)">'
+      + sorted.map((u,i)=>{
+        const isMe = currentUser && u.username===currentUser.username;
+        const ti   = SHOP_ITEMS.titles.find(x=>x.id===u.equippedTitle);
+        return '<div class="lb-row'+(isMe?' lb-me':'')+'">'
+          +'<span class="lb-rank">'+(medals[i]||('#'+(i+1)))+'</span>'
+          +_avatarHtml(u.equippedAvatar, u.equippedBorder, 36)
+          +'<span class="lb-name" style="line-height:1.3">'+esc(u.displayName)
+          +(ti&&ti.text?'<br><span style="font-size:10px;color:var(--text3);font-weight:400">'+esc(ti.text)+'</span>':'')+'</span>'
+          +'<span class="lb-pts">'+pts_fn(u)+' '+pts_lbl+'</span>'
+          +'</div>';
+      }).join('')
+      +'</div>';
+    return;
+  }
+
+  // Total XP tab: RPG Guild Board
+  const topSkill = u => {
+    const sl  = u.skillLevels || {};
+    const top = Object.entries(sl).sort((a,b)=>b[1]-a[1])[0];
+    if(!top || top[1]===0) return '';
+    const cat = _categories.find(c=>c.name===top[0]);
+    const col = cat?.color || '#e74c3c';
+    return '<span class="guild-skill-pill" style="background:'+col+'22;color:'+col+'">\u2694\ufe0f '+esc(top[0])+' Lv.'+top[1]+'</span>';
+  };
+
+  const podium   = sorted.slice(0,3);
+  const rest     = sorted.slice(3);
+  const myIdx    = sorted.findIndex(u=>currentUser&&u.username===currentUser.username);
+  // Arrange podium: 2nd left, 1st center, 3rd right
+  const podiumOrder = podium.length >= 3 ? [podium[1],podium[0],podium[2]] : podium;
+  const podiumClass = podium.length >= 3 ? ['second','first','third'] : ['first','second','third'];
+  const crowns      = podium.length >= 3 ? ['\ud83e\udd48','\ud83e\udd47','\ud83e\udd49'] : ['\ud83e\udd47','\ud83e\udd48','\ud83e\udd49'];
+
+  let html = '<div class="guild-podium">';
+  podiumOrder.forEach((u,i)=>{
+    if(!u) return;
+    const rk  = getRank(pts_fn(u));
+    const avSize = podiumClass[i]==='first' ? 64 : 48;
+    html += '<div class="podium-slot '+podiumClass[i]+'">'
+      +'<div style="font-size:20px">'+crowns[i]+'</div>'
+      +'<div class="podium-avatar">'+_avatarHtml(u.equippedAvatar,u.equippedBorder,avSize)+'</div>'
+      +'<div style="font-size:11px;font-weight:700;color:var(--dark);text-align:center;max-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(u.displayName)+'</div>'
+      +'<div style="font-size:10px;color:var(--text3)">'+rk.emoji+' '+rk.title+'</div>'
+      +'<div class="podium-base">'+pts_fn(u)+' '+pts_lbl+'</div>'
+      +'</div>';
+  });
+  html += '</div><div style="height:1px;background:var(--border);margin:12px 0"></div>';
+
+  rest.forEach((u,i)=>{
+    const isMe = currentUser && u.username===currentUser.username;
+    const rk   = getRank(pts_fn(u));
+    const ti   = SHOP_ITEMS.titles.find(x=>x.id===u.equippedTitle);
+    html += '<div class="guild-row'+(isMe?' me':'')+'">'
+      +'<div class="guild-rank-num">#'+(i+4)+'</div>'
+      +_avatarHtml(u.equippedAvatar,u.equippedBorder,32)
+      +'<div class="guild-info">'
+      +'<div class="guild-name">'+esc(u.displayName)+'</div>'
+      +'<div class="guild-sub">'+rk.emoji+' '+rk.title+(ti&&ti.text?' &middot; <em>'+esc(ti.text)+'</em>':'')+' '+topSkill(u)+'</div>'
+      +'</div>'
+      +'<div class="guild-score">'+pts_fn(u)+'</div>'
+      +'</div>';
+  });
+
+
+  el.innerHTML = html;
 };
 
 // == MEMBER MANAGEMENT ====================================================
@@ -5685,7 +6363,7 @@ window.resetScores = async () => {
     const b = writeBatch(db);
     snap.forEach(d => {
       if(d.data().role==='host') return;
-      b.update(d.ref, { score:0, poolScore:0, chapterScore:0, chapterScores:{}, bestPoolScore:0, chaptersCompleted:[], chapterLatestPct:{}, quizzesDone:0, chapterQuizzesDone:0, poolQuizzesDone:0, quizAttempts:{}, badges:[] });
+      b.update(d.ref, { score:0, poolScore:0, chapterScore:0, chapterScores:{}, bestPoolScore:0, chaptersCompleted:[], chapterLatestPct:{}, chapterBestPct:{}, quizzesDone:0, chapterQuizzesDone:0, poolQuizzesDone:0, quizAttempts:{}, badges:[], skillXP:{}, skillLevels:{} });
     });
     await b.commit();
     toast('✅ All scores reset.');
@@ -5720,7 +6398,7 @@ window.resetMemberCooldown = async (uid) => {
 window.resetMemberScore = async (uid) => {
   if(!await _dlg.danger('Reset score and quiz history for <strong>@'+esc(uid)+'</strong>?<br>This cannot be undone.', 'Reset Member Score', 'Reset')) return;
   try {
-    await updateDoc(doc(db,'users',uid), { score:0, poolScore:0, chapterScore:0, chapterScores:{}, bestPoolScore:0, chaptersCompleted:[], chapterLatestPct:{}, quizzesDone:0, chapterQuizzesDone:0, poolQuizzesDone:0, quizAttempts:{}, badges:[] });
+    await updateDoc(doc(db,'users',uid), { score:0, poolScore:0, chapterScore:0, chapterScores:{}, bestPoolScore:0, chaptersCompleted:[], chapterLatestPct:{}, chapterBestPct:{}, quizzesDone:0, chapterQuizzesDone:0, poolQuizzesDone:0, quizAttempts:{}, badges:[], skillXP:{}, skillLevels:{} });
     toast('✅ Score reset for @'+uid);
     renderMemberList(); renderLeaderboard();
   } catch(e){ toast('Error: '+e.message); }
@@ -5799,62 +6477,130 @@ let _shopTab = 'avatars';
 // ── SHOP PAGE ──────────────────────────────────────────────────────────────
 window.switchShopPageTab = (tab, btn) => {
   _shopTab = tab;
-  document.querySelectorAll('#shop-page-tabs .shop-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#shop-page-tabs .shop-v19-tab').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   renderShopPage();
 };
 
 const renderShopPage = () => {
-  const cont = $('shop-page-content');
-  if (!cont || !currentUser) return;
-  // Sync coin pill in shop header
-  const coinPill = $('shop-page-coins');
-  if (coinPill) coinPill.textContent = '🪙 ' + (currentUser.coins || 0);
+  const container = document.getElementById('shop-page-content'); if(!container) return;
+  const coinsEl   = document.getElementById('shop-page-coins');
+  if(coinsEl) coinsEl.textContent = '🪙 '+(currentUser ? currentUser.coins||0 : 0);
+  if(currentUser && !currentUser.unlockedAvatars) currentUser.unlockedAvatars = ['av_doc'];
+  if(currentUser && !currentUser.unlockedBorders) currentUser.unlockedBorders = ['bd_none'];
 
-  // Defaults
-  if (!currentUser.unlockedAvatars) currentUser.unlockedAvatars = ['av_doc'];
-  if (!currentUser.unlockedBorders) currentUser.unlockedBorders = ['bd_none'];
+  const tab      = _shopTab || 'avatars';
+  const capTab   = tab.charAt(0).toUpperCase()+tab.slice(1);
+  const capEquip = tab.charAt(0).toUpperCase()+tab.slice(1,-1);
+  const owned    = new Set((currentUser && currentUser['unlocked'+capTab]) || []);
+  const equipped = (currentUser && currentUser['equipped'+capEquip]) || '';
+  const _e = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
-  const items = SHOP_ITEMS[_shopTab] || [];
-  const unlockedKey = 'unlocked' + _shopTab.charAt(0).toUpperCase() + _shopTab.slice(1);
-  const equippedKey = 'equipped' + _shopTab.charAt(0).toUpperCase() + _shopTab.slice(1).replace('s','');
-  const owned = new Set(currentUser[unlockedKey] || []);
-  const equipped = currentUser[equippedKey] || (_shopTab==='avatars' ? 'av_doc' : 'bd_none');
-  const coins = currentUser.coins || 0;
+  if(tab === 'avatars'){
+    const CATS = [
+      { label:'Medical',             ids:['av_doc','av_attnd','av_brain','av_heart','av_ambul','av_lab','av_pill','av_xray','av_skull'] },
+      { label:'Characters',          ids:['av_robot','av_zombie','av_ghost','av_wizard','av_alien','av_clown','av_ninja','av_pirate'] },
+      { label:'Animals',             ids:['av_cat','av_dog','av_fox','av_frog','av_duck','av_lion','av_panda','av_shark'] },
+      { label:'Night Shift & Vibes', ids:['av_coffee','av_pizza','av_sleep','av_chaos'] },
+      { label:'Power',               ids:['av_fire','av_star','av_crown','av_rocket','av_diamond'] },
+    ];
+    let html = '';
+    CATS.forEach(cat => {
+      const items = cat.ids.map(id => SHOP_ITEMS.avatars.find(x=>x.id===id)).filter(Boolean);
+      if(!items.length) return;
+      html += '<div class="shop-v19-cat">'+_e(cat.label)+'</div><div class="shop-v19-grid">';
+      items.forEach(it => {
+        const isOwned    = owned.has(it.id);
+        const isEquipped = it.id === equipped;
+        const preview    = '<div class="shop-v19-preview">'+_avatarHtml(it.id,'bd_none',44)+'</div>';
+        const oid = it.id.replace(/'/g, "&#39;");
+        const btn = isEquipped
+          ? '<button class="shop-v19-btn equipped-lbl">&#10003; Equipped</button>'
+          : isOwned
+          ? '<button class="shop-v19-btn owned-lbl" onclick="buyOrEquipShopItem(&#39;avatars&#39;,&#39;'+oid+'&#39;)">Equip</button>'
+          : '<button class="shop-v19-btn buy" onclick="buyOrEquipShopItem(&#39;avatars&#39;,&#39;'+oid+'&#39;)">🪙 '+it.price+'</button>';
+        html += '<div class="shop-v19-item'+(isEquipped?' equipped':isOwned?' owned':'')+'">'
+          +(isEquipped?'<div class="shop-v19-dot"></div>':'')
+          +preview
+          +'<div class="shop-v19-name">'+_e(it.name)+'</div>'
+          +btn+'</div>';
+      });
+      html += '</div>';
+    });
+    container.innerHTML = html || '<div class="empty">No avatars found.</div>';
 
-  // Sort: equipped > owned > price asc
-  const sorted = items.slice().sort((a,b) => {
-    const ae = a.id===equipped, be = b.id===equipped;
-    if (ae !== be) return ae ? -1 : 1;
-    const ao = owned.has(a.id), bo = owned.has(b.id);
-    if (ao !== bo) return ao ? -1 : 1;
-    return (a.price||0) - (b.price||0);
-  });
-
-  let html = '<div class="shop-grid" style="grid-template-columns:repeat(auto-fill,minmax(96px,1fr))">';
-  html += sorted.map(it => {
-    const isOwned   = owned.has(it.id);
-    const isEquip   = it.id === equipped;
-    const canAfford = coins >= (it.price||0);
-    const preview = _shopTab === 'avatars'
-      ? _avatarHtml(it.id, 'bd_none', 56)
-      : _avatarHtml('av_doc', it.id, 56);
-    let btn;
-    if (isEquip)       btn = '<button class="pc-equip-btn is-equipped" disabled>✓ Equipped</button>';
-    else if (isOwned)  btn = '<button class="pc-equip-btn do-equip" onclick="equipShopItem(\''+_shopTab+'\',\''+it.id+'\')">Equip</button>';
-    else if (canAfford)btn = '<button class="pc-equip-btn do-equip" onclick="buyShopItem(\''+_shopTab+'\',\''+it.id+'\')">🪙 '+it.price+'</button>';
-    else               btn = '<button class="pc-equip-btn" disabled style="opacity:.5">🪙 '+it.price+'</button>';
-    const wrapStyle = isOwned ? '' : 'opacity:.85;';
-    return '<div class="pc-item'+(isEquip?' pc-equipped':'')+'" style="'+wrapStyle+'">' +
-             '<div class="pc-item-preview">'+preview+'</div>' +
-             '<div class="pc-item-name">'+esc(it.name)+'</div>' +
-             btn +
-           '</div>';
-  }).join('');
-  html += '</div>';
-  if (!sorted.length) html = '<div style="text-align:center;color:var(--text3);padding:40px 0">No items.</div>';
-  cont.innerHTML = html;
+  } else {
+    const BORDER_CATS = [
+      { label:'Basic',        ids:['bd_none','bd_red','bd_blue','bd_green','bd_pink','bd_teal','bd_black','bd_white','bd_purple','bd_orange'] },
+      { label:'Animated',     ids:['bd_dashed','bd_dotted','bd_gold','bd_double'] },
+      { label:'Glow Effects', ids:['bd_glowred','bd_glowblue','bd_glowpink','bd_glowgold','bd_glowgrn'] },
+      { label:'Legendary',    ids:['bd_rainbow','bd_fire'] },
+    ];
+    let html = '';
+    BORDER_CATS.forEach(cat => {
+      const items = cat.ids.map(id => SHOP_ITEMS.borders.find(x=>x.id===id)).filter(Boolean);
+      if(!items.length) return;
+      html += '<div class="shop-v19-cat">'+_e(cat.label)+'</div><div class="shop-v19-grid">';
+      items.forEach(it => {
+        const isOwned    = owned.has(it.id);
+        const isEquipped = it.id === equipped;
+        const preview    = '<div class="shop-v19-preview">'+_avatarHtml('av_doc',it.id,48)+'</div>';
+        const oid = it.id.replace(/'/g, "&#39;");
+        const btn = isEquipped
+          ? '<button class="shop-v19-btn equipped-lbl">&#10003; Equipped</button>'
+          : isOwned
+          ? '<button class="shop-v19-btn owned-lbl" onclick="buyOrEquipShopItem(&#39;borders&#39;,&#39;'+oid+'&#39;)">Equip</button>'
+          : '<button class="shop-v19-btn buy" onclick="buyOrEquipShopItem(&#39;borders&#39;,&#39;'+oid+'&#39;)">🪙 '+it.price+'</button>';
+        html += '<div class="shop-v19-item'+(isEquipped?' equipped':isOwned?' owned':'')+'">'
+          +(isEquipped?'<div class="shop-v19-dot"></div>':'')
+          +preview
+          +'<div class="shop-v19-name">'+_e(it.name)+'</div>'
+          +(it.price>0&&!isOwned ? '<div class="shop-v19-price">🪙 '+it.price+'</div>' : '')
+          +btn+'</div>';
+      });
+      html += '</div>';
+    });
+    container.innerHTML = html || '<div class="empty">No borders found.</div>';
+  }
 };
+
+const buyOrEquipShopItem = async (tab, id) => {
+  const items    = SHOP_ITEMS[tab] || [];
+  const it       = items.find(x=>x.id===id); if(!it) return;
+  const capTab   = tab.charAt(0).toUpperCase()+tab.slice(1);
+  const capEquip = tab.charAt(0).toUpperCase()+tab.slice(1,-1);
+  const ownedKey = 'unlocked'+capTab;
+  const equippedKey = 'equipped'+capEquip;
+  const owned    = new Set((currentUser && currentUser[ownedKey]) || []);
+
+  if(!owned.has(id)){
+    if((currentUser.coins||0) < it.price){ toast('Not enough coins! 🪙'); return; }
+    const newCoins = (currentUser.coins||0) - it.price;
+    const newOwned = [...owned, id];
+    try {
+      await updateDoc(doc(db,'users',currentUser.username), {
+        coins: newCoins,
+        [ownedKey]: newOwned,
+        [equippedKey]: id,
+      });
+      currentUser.coins = newCoins;
+      currentUser[ownedKey]    = newOwned;
+      currentUser[equippedKey] = id;
+      toast('Purchased & equipped!');
+      ['shop-page-coins','profile-coins-display','iq-coins-display'].forEach(elId => {
+        const el = document.getElementById(elId); if(el) el.textContent = '🪙 '+newCoins;
+      });
+    } catch(e){ toast('Purchase failed: '+e.message); return; }
+  } else {
+    try {
+      await updateDoc(doc(db,'users',currentUser.username), {[equippedKey]: id});
+      currentUser[equippedKey] = id;
+      toast('Equipped!');
+    } catch(e){ toast('Equip failed: '+e.message); return; }
+  }
+  renderShopPage();
+};
+window.buyOrEquipShopItem = buyOrEquipShopItem;
 
 window.buyShopItem = async (tab, itemId) => {
   if (!currentUser || currentUser.username === 'host' || currentUser.role === 'host') {
@@ -5948,7 +6694,7 @@ window.openFlashcards = async (chapterId, displayName) => {
     ov.id = 'fc-viewer-overlay';
     ov.innerHTML =
       '<div class="fcv-top">' +
-        '<button class="fcv-back" onclick="closeFCViewer()">←</button>' +
+        '<button class="fcv-exit-btn" onclick="closeFCViewer()">← Back</button>' +
         '<div class="fcv-title-block">' +
           '<div class="fcv-title-eyebrow">Flashcards</div>' +
           '<div class="fcv-title-main" id="fcv-title">—</div>' +
@@ -6289,7 +7035,7 @@ window.grantCoinsToMember = async (memberUid) => {
 
 // ── PROFILE TITLES ──
 const renderProfileTitles = () => {
-  const sec = $('profile-titles-section'); if(!sec||!currentUser) return;
+  const sec = $('profile-titles-list'); if(!sec||!currentUser) return;
   const allTitles = allTitleDefs();
   const unlocked = new Set(currentUser.unlockedTitles || ['ti_none','ti_intern']);
   const equipped = currentUser.equippedTitle || '';
@@ -6335,6 +7081,68 @@ window.equipTitle = async (titleId) => {
     heroTitle.innerHTML = (ti&&ti.text) ? '<span class="profile-title-pill">'+esc(ti.text)+'</span>' : '';
   }
 };
+const renderSkillGrid = () => {
+  const container = $('profile-skill-grid'); if(!container) return;
+  const hdr = $('profile-skills-header');
+  const skillXP     = currentUser.skillXP     || {};
+  const skillLevels = currentUser.skillLevels || {};
+  // Use skillManager config if available — respects Add/Delete from Skill Manager
+  const smgrSkills = _skillManagerConfig && _skillManagerConfig.skills && Object.keys(_skillManagerConfig.skills).length
+    ? Object.values(_skillManagerConfig.skills)
+    : null;
+  const catMap = {};
+  (_categories||[]).forEach(c => { catMap[c.name] = c; });
+  let skills;
+  if(smgrSkills){
+    skills = smgrSkills.map(sk => {
+      const cat = catMap[sk.id] || {};
+      return {
+        topic: sk.name || sk.id,
+        icon:  sk.icon || cat.icon  || '📁',
+        color: cat.color || '#e74c3c',
+        xp:    skillXP[sk.id]    || 0,
+        level: skillLevels[sk.id] || 0,
+      };
+    });
+  } else {
+    if(!_categories.length){ container.innerHTML=''; if(hdr) hdr.style.display='none'; return; }
+    skills = _categories.map(cat => ({
+      topic: cat.name, icon: cat.icon||'📁', color: cat.color||'#e74c3c',
+      xp: skillXP[cat.name] || 0, level: skillLevels[cat.name] || 0,
+    }));
+  }
+  // Sort: active (xp>0) first by level desc, then inactive (xp=0) at end
+  const sorted = [...skills].sort((a,b) => {
+    const aActive = a.xp > 0, bActive = b.xp > 0;
+    if(aActive !== bActive) return bActive - aActive;
+    return (b.level||0)-(a.level||0) || (b.xp||0)-(a.xp||0);
+  });
+  if(hdr) hdr.style.display = sorted.length ? '' : 'none';
+  const renderCard = (s, idx) => {
+    const isGrey  = s.xp === 0;
+    const accentColor = SKILL_ACCENT_COLORS[idx % SKILL_ACCENT_COLORS.length];
+    const sl     = getSkillLevel(s.xp);
+    const nextSl = sl.level < SKILL_LEVELS.length ? SKILL_LEVELS[sl.level] : null;
+    const barPct = nextSl ? Math.min(100,Math.round(((s.xp-sl.min)/(nextSl.min-sl.min))*100)) : 100;
+    const cardStyle = isGrey ? ' style="opacity:.38;filter:grayscale(1)"' : '';
+    return '<div class="skill-card"'+cardStyle+'>'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">'
+      +'<span style="font-size:22px">'+s.icon+'</span>'
+      +'<div style="flex:1;min-width:0">'
+      +'<div style="font-size:12px;font-weight:700;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(s.topic)+'</div>'
+      +'<span class="skill-level-badge" style="background:'+(isGrey?'#aaa':accentColor)+'">'+(isGrey?'Not started':sl.title)+'</span>'
+      +'</div>'
+      +'<div style="font-size:16px;font-weight:800;color:'+(isGrey?'#aaa':accentColor)+'">Lv.'+sl.level+'</div>'
+      +'</div>'
+      +'<div class="skill-xp-bar"><div class="skill-xp-fill" style="width:'+(isGrey?0:barPct)+'%;background:'+(isGrey?'#ccc':accentColor)+'"></div></div>'
+      +(!isGrey ? '<div style="font-size:10px;color:var(--text3);text-align:right;margin-top:2px">'+s.xp+' XP'+(nextSl?' · '+skillXpToNext(s.xp,sl)+' to '+nextSl.title:' · MAX')+'</div>' : '')
+      +'</div>';
+  };
+  container.innerHTML = sorted.length
+    ? sorted.map((s,i) => renderCard(s, i)).join('')
+    : '<div style="grid-column:1/-1;text-align:center;color:var(--text3);padding:20px;font-size:13px">Complete chapter quizzes to earn Skill XP</div>';
+};
+
 const renderProfile = async () => {
   if(!currentUser) return;
   try {
@@ -6342,7 +7150,6 @@ const renderProfile = async () => {
     if(snap.exists()) currentUser = {username:currentUser.username, ...snap.data()};
   } catch(_){}
 
-  // defaults for new fields
   if(!currentUser.equippedAvatar)  currentUser.equippedAvatar  = 'av_doc';
   if(!currentUser.equippedBorder)  currentUser.equippedBorder  = 'bd_none';
   if(!currentUser.equippedTitle)   currentUser.equippedTitle   = '';
@@ -6350,54 +7157,65 @@ const renderProfile = async () => {
   if(!currentUser.unlockedBorders) currentUser.unlockedBorders = ['bd_none'];
   if(!currentUser.unlockedTitles)  currentUser.unlockedTitles  = ['ti_none','ti_intern'];
 
-  const pts  = currentUser.score || 0;
-  const rank = getRank(pts);
+  // ── Zone 1: Hero ──
+  const avDisp = document.getElementById('profile-avatar-display');
+  if(avDisp) avDisp.innerHTML = _avatarHtml(currentUser.equippedAvatar, currentUser.equippedBorder, 60);
 
-  // — Hero —
-  const avDisp = $('profile-avatar-display');
-  if(avDisp) avDisp.innerHTML = _avatarHtml(currentUser.equippedAvatar, currentUser.equippedBorder, 88);
-
-  const heroName = $('profile-hero-name');
+  const heroName = document.getElementById('profile-hero-name');
   if(heroName) heroName.textContent = (currentUser.displayName||'').trim() || currentUser.username;
 
-  const heroUser = $('profile-hero-username');
-  if(heroUser) heroUser.textContent = '@'+currentUser.username;
-
-  const heroTitle = $('profile-hero-title');
+  const heroTitle = document.getElementById('profile-hero-title');
   if(heroTitle){
     const ti = SHOP_ITEMS.titles.find(x=>x.id===currentUser.equippedTitle);
     heroTitle.innerHTML = (ti && ti.text)
-      ? '<span class="profile-title-pill">'+esc(ti.text)+'</span>' : '';
+      ? '<span class="prof-hero-title-pill">'+ti.text+'</span>' : '';
   }
 
-  const coinsEl = $('profile-coins-display');
+  const skillXpMap = currentUser.skillXP || {};
+  const totalSkillXp = Object.values(skillXpMap).reduce((a,b)=>a+(b||0), 0);
+  const sr     = getSkillRank(totalSkillXp);
+  const srNext = SKILL_RANKS[SKILL_RANKS.indexOf(sr)+1] || null;
+  const srPct  = srNext ? Math.min(100, Math.round(((totalSkillXp - sr.min)/(srNext.min - sr.min))*100)) : 100;
+
+  const rankBadge = document.getElementById('prof-skill-rank-badge');
+  if(rankBadge) rankBadge.textContent = sr.emoji+' '+sr.title;
+
+  const totalXpEl = document.getElementById('prof-total-xp');
+  if(totalXpEl) totalXpEl.textContent = totalSkillXp;
+
+  const fillEl = document.getElementById('prof-xp-fill');
+  if(fillEl) fillEl.style.width = srPct+'%';
+
+  const curEl = document.getElementById('prof-rank-cur');
+  if(curEl) curEl.textContent = sr.emoji+' '+sr.title;
+
+  const nextLbl = document.getElementById('prof-rank-next-label');
+  if(nextLbl) nextLbl.textContent = srNext ? (srNext.min - totalSkillXp)+' XP to '+srNext.title : 'Max Rank 🎉';
+
+  const coinsEl = document.getElementById('profile-coins-display');
   if(coinsEl) coinsEl.textContent = '🪙 '+(currentUser.coins||0);
 
-  const heroRank = $('profile-hero-rank');
-  if(heroRank) heroRank.textContent = rank.emoji+' '+rank.title;
+  const heroUser = document.getElementById('profile-hero-username');
+  if(heroUser) heroUser.textContent = '@'+currentUser.username;
 
-  // display name input
-  const nameEl = $('profile-display-name');
+  // ── Zone 2: Stat Strip ──
+  const qs = document.getElementById('pstat-quizzes'); if(qs) qs.textContent = currentUser.quizzesDone||0;
+  const cs = document.getElementById('pstat-chapters'); if(cs) cs.textContent = (currentUser.chaptersCompleted||[]).length;
+  const bs = document.getElementById('pstat-best'); if(bs) bs.textContent = (currentUser.bestPoolScore||0)+'%';
+  const bgs = document.getElementById('pstat-badges'); if(bgs) bgs.textContent = (currentUser.badges||[]).length;
+
+  // Pool score chart
+  renderPoolScoreChart();
+
+  // display name input compat
+  const nameEl = document.getElementById('profile-display-name');
   if(nameEl) nameEl.value = currentUser.displayName || '';
 
-  // — Rank section —
-  const pct  = xpPct(pts, rank);
-  const next = RANKS[rank.level] || null;
-  const rankSec = $('profile-rank-section');
-  if(rankSec) rankSec.innerHTML =
-    '<div class="card" style="margin:16px 0 0">'
-    +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">'
-    +'<span style="font-size:32px">'+rank.emoji+'</span>'
-    +'<div><div style="font-family:var(--font-display);font-size:17px;color:var(--dark)">'+rank.title+'</div>'
-    +'<div style="font-size:12px;color:var(--text3)">Level '+rank.level+'</div></div></div>'
-    +'<div style="background:var(--surface3);border-radius:20px;height:8px;overflow:hidden;margin-bottom:5px">'
-    +'<div style="height:100%;border-radius:20px;background:'+rank.color+';width:'+pct+'%;transition:width .5s"></div></div>'
-    +(next ? '<div style="font-size:11px;color:var(--text3);text-align:right">'+pts+' / '+rank.next+' XP → '+next.title+'</div>' : '<div style="font-size:11px;color:var(--text3);text-align:right">MAX RANK 🎉</div>')
-    +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px">'
-    +'<div class="qpool-stat-box"><div class="qpool-stat-n" style="color:var(--red)">'+pts+'</div><div class="qpool-stat-l">Total XP</div></div>'
-    +'<div class="qpool-stat-box"><div class="qpool-stat-n" style="color:#2980b9">'+(currentUser.bestPoolScore||0)+'%</div><div class="qpool-stat-l">Best Pool</div></div>'
-    +'<div class="qpool-stat-box"><div class="qpool-stat-n" style="color:#27ae60">'+((currentUser.chaptersCompleted||[]).length)+'</div><div class="qpool-stat-l">Chapters</div></div>'
-    +'</div></div>';
+  // Catch-up: grant any titles the user now qualifies for
+  checkAndGrantTitles(currentUser);
+
+  // ── Avatar & Border customize panel (hidden compat) ──
+  renderProfileCustomize(_pcActiveTab);
 
   _renderPoolHistorySection();
   _loadDailyCheckin();
@@ -6406,6 +7224,7 @@ const renderProfile = async () => {
 
   // — Avatar & Border customize panel —
   renderProfileCustomize(_pcActiveTab);
+  renderSkillGrid();
   // — Titles —
   renderProfileTitles();
 
@@ -7510,6 +8329,591 @@ window.saveDisplayName = async () => {
     if (heroName) heroName.textContent = name;
     toast('✅ Display name saved!');
   } catch(e) { toast('Error saving name: ' + e.message); }
+};
+
+// ── QUIZ HUB ───────────────────────────────────────────
+// ── TEXTBOOK GRID + CHAPTER DRILL-DOWN ───────────────────────────────────
+const TB_ACCENT_COLORS = ['#e74c3c','#e67e22','#f1c40f','#2ecc71','#1abc9c',
+  '#3498db','#9b59b6','#e91e63','#00bcd4','#8bc34a'];
+
+const renderTextbookGrid = () => {
+  const el = document.getElementById('lib-tb-grid'); if(!el) return;
+  if(!_textbooks || !_textbooks.length){
+    el.innerHTML = '<div class="empty" style="grid-column:1/-1">📚 No textbooks yet.</div>';
+    return;
+  }
+  const bestPct = (currentUser && currentUser.chapterBestPct) || {};
+  el.innerHTML = _textbooks.map((tb, i) => {
+    const color = TB_ACCENT_COLORS[i % TB_ACCENT_COLORS.length];
+    const tbChapters = (_chaptersCache || []).filter(ch => ch.textbookId === tb.id);
+    const done = tbChapters.filter(ch => (bestPct[ch.id] || 0) > 0).length;
+    const pct  = tbChapters.length ? Math.round((done / tbChapters.length) * 100) : 0;
+    const safeId = (tb.id||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const coverHtml = tb.coverUrl
+      ? '<img class="tb-card-cover" src="'+_esc(tb.coverUrl)+'" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'" alt="">'
+        + '<div class="tb-card-cover-placeholder" style="background:'+color+'20;display:none">'+_esc(tb.icon||'\U0001f4da')+'</div>'
+      : '<div class="tb-card-cover-placeholder" style="background:'+color+'20">'+_esc(tb.icon||'\U0001f4da')+'</div>';
+    return '<div class="tb-card" onclick="openChapterView(\''+safeId+'\')">'  
+      + coverHtml
+      + '<div class="tb-card-accent" style="background:'+color+'"></div>'
+      + '<div class="tb-card-body">'
+      + '<div class="tb-card-title">'+_esc(tb.name)+'</div>'
+      + '<div class="tb-card-meta">'+tbChapters.length+' ch \xB7 '+done+' done</div>'
+      + '<div class="tb-card-bar-wrap"><div class="tb-card-bar-fill" style="width:'+pct+'%"></div></div>'
+      + '<div class="tb-card-pct">'+pct+'%</div>'
+      + '</div></div>';
+  }).join('');
+};
+
+// ── LIBRARY NAVIGATION STATE ─────────────────────────────────────────────
+let _libTbId = null;        // currently-open textbook id
+let _libFromFolder = false; // whether chapter view reached via a folder
+
+// Entry: click a textbook card
+window.openChapterView = (tbId) => {
+  const tb = (_textbooks||[]).find(x => x.id === tbId);
+  if(!tb) return;
+  _libTbId = tbId;
+  _libFromFolder = false;
+  const folders = (tb.folders||[]).filter(f=>f&&f.id);
+  if(folders.length){ _renderFolderView(tbId); }
+  else               { _renderChapterList(tbId, null, tb.name); }
+};
+
+// Show folder/section list for a textbook
+const _renderFolderView = (tbId) => {
+  const tb = (_textbooks||[]).find(x => x.id === tbId);
+  if(!tb) return;
+  document.getElementById('lib-grid-view').style.display    = 'none';
+  document.getElementById('lib-folder-view').style.display  = '';
+  document.getElementById('lib-chapter-view').style.display = 'none';
+  const titleEl = document.getElementById('lib-folder-tb-title');
+  if(titleEl) titleEl.textContent = tb.name;
+
+  const folders = (tb.folders||[]).filter(f=>f&&f.id).sort((a,b)=>(a.order||0)-(b.order||0));
+  const chAll   = (_chaptersCache||[]).filter(ch => ch.textbookId === tbId);
+  const counts  = {};
+  chAll.forEach(ch => { const k = ch.folderId||'__none__'; counts[k]=(counts[k]||0)+1; });
+  const bestPct = (currentUser&&currentUser.chapterBestPct)||{};
+
+  let html = folders.map(f => {
+    const cnt       = counts[f.id]||0;
+    const folderChs = chAll.filter(ch=>ch.folderId===f.id);
+    const done      = folderChs.filter(ch=>(bestPct[ch.id]||0)>=80).length;
+    const doneHtml  = folderChs.length
+      ? '<span style="font-size:11px;font-weight:700;color:'+(done===folderChs.length&&done>0?'#2ecc71':'var(--text3)')+'">'+done+'/'+folderChs.length+' done</span>'
+      : '';
+    const safeF = (f.id||'').replace(/'/g,"\\'");
+    const safeN = (f.name||'').replace(/'/g,"\\'");
+    return '<div class="lib-folder-card" onclick="window._openFolderChapters(\''+f.id+'\',\''+f.name+'\')">\n'
+      + '<div class="lib-folder-card-icon">'+(f.icon||'\u{1F4C1}')+'</div>\n'
+      + '<div style="flex:1;min-width:0">\n'
+      + '<div class="lib-folder-card-name">'+_esc(f.name)+'</div>\n'
+      + '<div class="lib-folder-card-meta">'+cnt+' chapter'+(cnt!==1?'s':'')+' &nbsp;'+doneHtml+'</div>\n'
+      + '</div>\n'
+      + '<div class="lib-folder-card-arrow">&#8250;</div>\n'
+      + '</div>';
+  }).join('');
+
+  const uncatCnt = counts['__none__']||0;
+  if(uncatCnt){
+    html += '<div class="lib-folder-card" style="opacity:.7" onclick="window._openFolderChapters(\'__none__\',\'Uncategorized\')">'
+      + '<div class="lib-folder-card-icon">\u{1F4CB}</div>'
+      + '<div style="flex:1;min-width:0">'
+      + '<div class="lib-folder-card-name">Uncategorized</div>'
+      + '<div class="lib-folder-card-meta">'+uncatCnt+' chapter'+(uncatCnt!==1?'s':'')+'</div>'
+      + '</div><div class="lib-folder-card-arrow">&#8250;</div></div>';
+  }
+  document.getElementById('lib-folder-list').innerHTML = html
+    || '<div style="padding:32px;text-align:center;color:var(--text3);font-size:14px">\u{1F4EB} No sections yet.</div>';
+};
+
+// Click a folder card → show its chapters
+window._openFolderChapters = (folderId, folderName) => {
+  _libFromFolder = true;
+  document.getElementById('lib-folder-view').style.display = 'none';
+  _renderChapterList(_libTbId, folderId, folderName);
+};
+
+// Shared chapter-list renderer (direct or folder path)
+const _renderChapterList = (tbId, folderId, title) => {
+  document.getElementById('lib-grid-view').style.display    = 'none';
+  document.getElementById('lib-chapter-view').style.display = '';
+  const titleEl = document.getElementById('ch-view-title');
+  if(titleEl) titleEl.textContent = title||'';
+
+  let chapters = (_chaptersCache||[]).filter(ch => ch.textbookId === tbId);
+  if(folderId !== null){
+    chapters = folderId === '__none__'
+      ? chapters.filter(ch => !ch.folderId)
+      : chapters.filter(ch => ch.folderId === folderId);
+  }
+  chapters.sort((a,b)=>(a.order||0)-(b.order||0)||(a.name||'').localeCompare(b.name||'',undefined,{numeric:true}));
+
+  const bestPct = (currentUser&&currentUser.chapterBestPct)||{};
+  const listEl  = document.getElementById('ch-view-list');
+  if(!listEl) return;
+  if(!chapters.length){
+    listEl.innerHTML = '<div style="padding:32px;text-align:center;color:var(--text3);font-size:14px">\u{1F4EB} No chapters here yet.</div>';
+    return;
+  }
+  listEl.innerHTML = chapters.map(ch => {
+    const pct = bestPct[ch.id]||0;
+    let badge = '';
+    if(pct>0){ const cls=pct>=80?'good':pct>=60?'ok':'low'; badge='<span class="ch-score-badge '+cls+'">&#10003; '+pct+'%</span>'; }
+    const safeId   = (ch.id||'').replace(/'/g,"\'");
+    const safeName = (ch.displayName||ch.name||'').replace(/'/g,"\'");
+    return '<div class="ch-row">'
+      +'<div class="ch-row-name">'+_esc(ch.displayName||ch.name)+'</div>'
+      +badge
+      +'<div style="display:flex;gap:4px;flex-shrink:0">'
+      +'<button class="ch-pill-btn ch-pill-read" onclick="openReader(\''+safeId+'\',\''+safeName+'\')">Read</button>'
+      +(_fcIdsCache&&_fcIdsCache.has(ch.id)?'<button class="ch-pill-btn ch-pill-cards" onclick="openFlashcards(\''+safeId+'\',\''+safeName+'\')">Cards</button>':'')
+      +'<button class="ch-pill-btn ch-pill-quiz" onclick="startQuiz(\''+safeId+'\',\''+safeName+'\')">Quiz</button>'
+      +'</div></div>';
+  }).join('');
+};
+
+// Back from folder list → textbook grid
+window.closeFolderView = () => {
+  document.getElementById('lib-folder-view').style.display = 'none';
+  document.getElementById('lib-grid-view').style.display   = '';
+  _libTbId = null;
+};
+
+// Back from chapter list → folder (if via folder) or grid
+window.closeChapterView = () => {
+  document.getElementById('lib-chapter-view').style.display = 'none';
+  if(_libFromFolder && _libTbId){
+    _libFromFolder = false;
+    _renderFolderView(_libTbId);
+  } else {
+    document.getElementById('lib-grid-view').style.display = '';
+    _libTbId = null;
+  }
+};
+
+
+
+// ── SKILL MANAGER ─────────────────────────────────────────────────────────
+const loadSkillManagerConfig = async () => {
+  try {
+    const snap = await getDoc(doc(db,'config','skillManager'));
+    if(snap.exists()) _skillManagerConfig = snap.data();
+  } catch(e){ console.warn('loadSkillManagerConfig:', e.message); }
+};
+
+const renderSkillManager = async () => {
+  const el = document.getElementById('skill-mgr-list'); if(!el) return;
+  // Always fetch fresh config from Firestore
+  try {
+    const cfgSnap = await getDoc(doc(db,'config','skillManager'));
+    if(cfgSnap.exists()) _skillManagerConfig = cfgSnap.data();
+    else _skillManagerConfig = { skills:{} };
+  } catch(e) { toast('Could not load skill config: '+e.message); return; }
+  if(!_skillManagerConfig.skills) _skillManagerConfig.skills = {};
+
+  const skills = Object.values(_skillManagerConfig.skills);
+  if(!skills.length){
+    el.innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 0">No skills yet. Click ➕ Add New Skill to create one.</div>';
+  } else {
+    const _e = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    el.innerHTML = skills.map(sk => {
+      const id      = sk.id || '';
+      const name    = sk.name || '';
+      const lvVals  = sk.levelValues  || [1,2,3,5,10];
+      const thresh  = sk.xpThresholds || [0,100,300,700,1500];
+      const icon    = sk.icon || '📁';
+      const safeId  = id.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      return '<div class="smgr-row" id="smgr-row-'+_e(id)+'">'  
+        + '<div class="smgr-row-hdr" onclick="toggleSmgrRow(\''+safeId+'\')">'
+        + '<span style="font-size:20px;flex-shrink:0">'+_e(icon)+'</span>'
+        + '<span class="smgr-row-id">'+_e(id)+'</span>'
+        + '<span class="smgr-row-name">'+_e(name)+'</span>'
+        + '<button class="smgr-save-btn" style="background:#c0392b;padding:4px 10px;font-size:11px;margin-left:auto;margin-right:8px" onclick="event.stopPropagation();deleteSkill(\''+safeId+'\')">🗑 Delete</button>'
+        + '<span class="smgr-chevron" id="smgr-chev-'+_e(id)+'">▼</span>'
+        + '</div>'
+        + '<div class="smgr-fields" id="smgr-fields-'+_e(id)+'">'  
+        + '<div class="smgr-field-group"><div class="smgr-field-label">Icon</div>'
+        + '<div style="display:flex;align-items:center;gap:8px">'
+        + '<button type="button" class="tb-folder-icon-btn" onclick="_pickFolderIcon(this)" style="width:44px;height:44px">'+_e(icon)+'</button>'
+        + '<input type="hidden" class="smgr-icon-inp" id="smgr-icon-'+_e(id)+'" value="'+_e(icon)+'">'
+        + '<span style="font-size:11px;color:var(--text3)">Click to change</span>'
+        + '</div></div>'
+        + '<div class="smgr-field-group"><div class="smgr-field-label">Skill ID</div>'
+        + '<input class="smgr-inp" id="smgr-sid-'+_e(id)+'" value="'+_e(id)+'" placeholder="skill-id" style="text-align:left;width:100%"></div>'
+        + '<div class="smgr-field-group"><div class="smgr-field-label">Display Name</div>'
+        + '<input class="smgr-inp" id="smgr-name-'+_e(id)+'" value="'+_e(name)+'" style="text-align:left;width:100%"></div>'
+        + '<div class="smgr-field-group"><div class="smgr-field-label">Level Values (Lv1 – Lv5)</div>'
+        + '<div class="smgr-field-row">'
+        + lvVals.map((v,i) => '<input class="smgr-inp" id="smgr-lv'+(i+1)+'-'+_e(id)+'" type="number" min="1" value="'+v+'">').join('')
+        + '</div></div>'
+        + '<div class="smgr-field-group"><div class="smgr-field-label">XP to reach Lv1 – Lv5</div>'
+        + '<div class="smgr-field-row">'
+        + '<input class="smgr-inp" value="0" disabled title="Lv1 always 0">'
+        + thresh.slice(1).map((v,i) => '<input class="smgr-inp" id="smgr-xp'+(i+2)+'-'+_e(id)+'" type="number" min="1" value="'+v+'">').join('')
+        + '</div></div>'
+        + '<button class="smgr-save-btn" onclick="saveSkillConfig(\''+safeId+'\')">💾 Save Skill</button>'
+        + '</div></div>';
+    }).join('');
+  }
+
+  // Populate user dropdown for reset section
+  const sel = document.getElementById('smgr-user-select');
+  if(sel && sel.options.length < 2){
+    getDocs(collection(db,'users')).then(snap => {
+      snap.forEach(d => {
+        if(d.data().role==='host') return;
+        const o = document.createElement('option');
+        o.value = d.id; o.textContent = d.id;
+        sel.appendChild(o);
+      });
+    });
+  }
+};
+
+window.toggleSmgrRow = (id) => {
+  const fields = document.getElementById('smgr-fields-'+id);
+  const chev   = document.getElementById('smgr-chev-'+id);
+  if(!fields) return;
+  const open = fields.classList.toggle('open');
+  if(chev) chev.textContent = open ? '▲' : '▼';
+};
+
+// Add a blank new-skill row at the top of the list
+window.addNewSkillRow = () => {
+  const el = document.getElementById('skill-mgr-list');
+  if(!el) return;
+  // If a new-skill draft form already exists, just open it
+  if(document.getElementById('smgr-row-__new__')){
+    toggleSmgrRow('__new__');
+    return;
+  }
+  const draft = document.createElement('div');
+  draft.className = 'smgr-row';
+  draft.id = 'smgr-row-__new__';
+  draft.innerHTML = '<div class="smgr-row-hdr" onclick="toggleSmgrRow(\'__new__\')" style="background:var(--surface2)">'
+    + '<span class="smgr-row-id" style="color:var(--red)">NEW</span>'
+    + '<span class="smgr-row-name">New Skill</span>'
+    + '<span class="smgr-chevron" id="smgr-chev-__new__">▲</span>'
+    + '</div>'
+    + '<div class="smgr-fields open" id="smgr-fields-__new__">'
+    + '<div class="smgr-field-group"><div class="smgr-field-label">Icon</div>'
+    + '<div style="display:flex;align-items:center;gap:8px">'
+    + '<button type="button" class="tb-folder-icon-btn" onclick="_pickFolderIcon(this)" style="width:44px;height:44px">📁</button>'
+    + '<input type="hidden" class="smgr-icon-inp" id="smgr-icon-__new__" value="📁">'
+    + '<span style="font-size:11px;color:var(--text3)">Click to change</span>'
+    + '</div></div>'
+    + '<div class="smgr-field-group"><div class="smgr-field-label">Skill ID</div>'
+    + '<input class="smgr-inp" id="smgr-sid-__new__" value="" placeholder="e.g. cardiology" style="text-align:left;width:100%"></div>'
+    + '<div class="smgr-field-group"><div class="smgr-field-label">Display Name</div>'
+    + '<input class="smgr-inp" id="smgr-name-__new__" value="" placeholder="e.g. Cardiology" style="text-align:left;width:100%"></div>'
+    + '<div class="smgr-field-group"><div class="smgr-field-label">Level Values (Lv1 – Lv5)</div>'
+    + '<div class="smgr-field-row">'
+    + [1,2,3,5,10].map((v,i) => '<input class="smgr-inp" id="smgr-lv'+(i+1)+'-__new__" type="number" min="1" value="'+v+'">').join('')
+    + '</div></div>'
+    + '<div class="smgr-field-group"><div class="smgr-field-label">XP to reach Lv1 – Lv5</div>'
+    + '<div class="smgr-field-row">'
+    + '<input class="smgr-inp" value="0" disabled>'
+    + [100,300,700,1500].map((v,i) => '<input class="smgr-inp" id="smgr-xp'+(i+2)+'-__new__" type="number" min="1" value="'+v+'">').join('')
+    + '</div></div>'
+    + '<button class="smgr-save-btn" onclick="saveSkillConfig(\'__new__\')">💾 Create Skill</button>'
+    + '</div>';
+  el.insertBefore(draft, el.firstChild);
+};
+
+window.deleteSkill = async (id) => {
+  if(!confirm('Delete skill "'+id+'"? This cannot be undone.')) return;
+  if(!_skillManagerConfig) _skillManagerConfig = { skills:{} };
+  if(!_skillManagerConfig.skills) _skillManagerConfig.skills = {};
+  delete _skillManagerConfig.skills[id];
+  try {
+    await setDoc(doc(db,'config','skillManager'), _skillManagerConfig);
+    toast('Skill "'+id+'" deleted.');
+    renderSkillManager();
+  } catch(e){ toast('Delete failed: '+e.message); }
+};
+
+window.saveSkillConfig = async (oldId) => {
+  const isNew = oldId === '__new__';
+  const newId   = (document.getElementById('smgr-sid-'+oldId)?.value||'').trim();
+  const name    = (document.getElementById('smgr-name-'+oldId)?.value||'').trim();
+  const icon    = (document.getElementById('smgr-icon-'+oldId)?.value||'📁').trim();
+  const lvVals  = [1,2,3,4,5].map(i => parseInt(document.getElementById('smgr-lv'+i+'-'+oldId)?.value||'0',10));
+  const thresh  = [0,2,3,4,5].map(i => i===0 ? 0 : parseInt(document.getElementById('smgr-xp'+i+'-'+oldId)?.value||'0',10));
+
+  if(!newId || !/^[a-zA-Z0-9 _-]+$/.test(newId)){ toast('Skill ID invalid — use letters, numbers, spaces, hyphens, underscores.'); return; }
+  if(!name){ toast('Display name required.'); return; }
+  if(lvVals.some(v => isNaN(v)||v<1)){ toast('Level values must be positive integers.'); return; }
+  for(let i=1;i<thresh.length;i++){ if(thresh[i]<=thresh[i-1]){ toast('XP thresholds must be ascending.'); return; } }
+
+  if(!_skillManagerConfig) _skillManagerConfig = { skills:{} };
+  if(!_skillManagerConfig.skills) _skillManagerConfig.skills = {};
+
+  // If renaming, remove old key
+  if(!isNew && oldId !== newId){ delete _skillManagerConfig.skills[oldId]; }
+
+  _skillManagerConfig.skills[newId] = { id:newId, name, icon, levelValues:lvVals, xpThresholds:thresh };
+
+  try {
+    await setDoc(doc(db,'config','skillManager'), _skillManagerConfig);
+    if(!isNew && oldId !== newId){ await migrateSkillId(oldId, newId); }
+    toast(isNew ? 'Skill "'+newId+'" created!' : 'Skill saved!');
+    renderSkillManager();
+  } catch(e){ toast('Save failed: '+e.message); }
+};
+
+const migrateSkillId = async (oldId, newId) => {
+  toast('Migrating skill ID across all users…');
+  try {
+    const snap = await getDocs(collection(db,'users'));
+    const batch = writeBatch(db);
+    snap.forEach(d => {
+      const data = d.data();
+      const skillXP  = data.skillXP     || {};
+      const skillLvl = data.skillLevels || {};
+      if(!(oldId in skillXP) && !(oldId in skillLvl)) return;
+      const newXP  = Object.assign({}, skillXP,  { [newId]: skillXP[oldId]  || 0 });
+      const newLvl = Object.assign({}, skillLvl, { [newId]: skillLvl[oldId] || 0 });
+      delete newXP[oldId]; delete newLvl[oldId];
+      batch.update(d.ref, { skillXP: newXP, skillLevels: newLvl });
+    });
+    await batch.commit();
+    toast('Migration complete!');
+  } catch(e){ toast('Migration error: '+e.message); }
+};
+
+window.loadSmgrUserSkills = async () => {
+  const uid = document.getElementById('smgr-user-select')?.value; if(!uid) return;
+  const el  = document.getElementById('smgr-user-skills'); if(!el) return;
+  el.innerHTML = '<div style="font-size:12px;color:var(--text3)">Loading…</div>';
+  try {
+    const snap = await getDoc(doc(db,'users',uid));
+    if(!snap.exists()){ el.innerHTML = 'User not found.'; return; }
+    const xp = snap.data().skillXP || {};
+    if(!Object.keys(xp).length){ el.innerHTML = '<div style="font-size:12px;color:var(--text3)">No skill XP yet.</div>'; return; }
+    const _e = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    el.innerHTML = Object.entries(xp).map(([k,v]) =>
+      '<label style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;cursor:pointer">'
+      +'<input type="checkbox" value="'+_e(k)+'" style="width:14px;height:14px"> '+_e(k)+' <span style="color:var(--text3)">'+v+' XP</span></label>'
+    ).join('');
+  } catch(e){ el.innerHTML = 'Error: '+e.message; }
+};
+
+window.resetUserSkillXP = async () => {
+  const uid = document.getElementById('smgr-user-select')?.value; if(!uid){ toast('Select a user first.'); return; }
+  const boxes = document.querySelectorAll('#smgr-user-skills input[type=checkbox]:checked');
+  if(!boxes.length){ toast('Check at least one skill.'); return; }
+  const updates = {};
+  boxes.forEach(b => {
+    updates['skillXP.'+b.value]     = 0;
+    updates['skillLevels.'+b.value] = 0;
+  });
+  try {
+    await updateDoc(doc(db,'users',uid), updates);
+    toast('Skills reset for '+uid+'!');
+    loadSmgrUserSkills();
+  } catch(e){ toast('Reset failed: '+e.message); }
+};
+
+
+// ── PROFILE AVATAR SHEET ──────────────────────────────────────────────────
+window.openAvatarSheet = () => {
+  const overlay = document.getElementById('av-sheet-overlay'); if(!overlay) return;
+  const avEl = document.getElementById('av-sheet-avatars');
+  if(avEl){
+    const owned   = new Set(currentUser.unlockedAvatars || ['av_doc']);
+    const equipped = currentUser.equippedAvatar || 'av_doc';
+    avEl.innerHTML = [...owned].map(id => {
+      const av = SHOP_ITEMS.avatars.find(x=>x.id===id);
+      if(!av) return '';
+      return '<div class="av-sheet-item'+(id===equipped?' active':'')+'" onclick="equipFromSheet(\'avatar\',\''+id+'\')">'
+        +_avatarHtml(id,'bd_none',40)+'</div>';
+    }).join('');
+  }
+  const bdEl = document.getElementById('av-sheet-borders');
+  if(bdEl){
+    const owned   = new Set(currentUser.unlockedBorders || ['bd_none']);
+    const equipped = currentUser.equippedBorder || 'bd_none';
+    bdEl.innerHTML = [...owned].map(id => {
+      const bd = SHOP_ITEMS.borders.find(x=>x.id===id);
+      if(!bd) return '';
+      return '<div class="av-sheet-item'+(id===equipped?' active':'')+'" onclick="equipFromSheet(\'border\',\''+id+'\')">'
+        +_avatarHtml('av_doc',id,44)+'</div>';
+    }).join('');
+  }
+  overlay.style.display = 'flex';
+};
+
+window.closeAvatarSheet = () => {
+  const overlay = document.getElementById('av-sheet-overlay');
+  if(overlay) overlay.style.display = 'none';
+};
+
+window.equipFromSheet = async (type, id) => {
+  const field = type === 'avatar' ? 'equippedAvatar' : 'equippedBorder';
+  try {
+    await updateDoc(doc(db,'users',currentUser.username), {[field]: id});
+    currentUser[field] = id;
+    const avDisp = document.getElementById('profile-avatar-display');
+    if(avDisp) avDisp.innerHTML = _avatarHtml(currentUser.equippedAvatar, currentUser.equippedBorder, 60);
+    openAvatarSheet();
+    toast(type==='avatar' ? 'Avatar equipped!' : 'Border equipped!');
+  } catch(e){ toast('Equip failed: '+e.message); }
+};
+
+window.uploadProfilePhoto = async (input) => {
+  const file = input && input.files && input.files[0]; if(!file) return;
+  if(file.size > 5*1024*1024){ toast('Image too large (max 5 MB)'); return; }
+  try {
+    const storageModule = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js');
+    const { ref: storageRef, uploadBytes, getDownloadURL } = storageModule;
+    const photoRef = storageRef(storage, 'profile_photos/'+currentUser.username);
+    const snap = await uploadBytes(photoRef, file);
+    const url  = await getDownloadURL(snap.ref);
+    await updateDoc(doc(db,'users',currentUser.username), {photoURL: url});
+    currentUser.photoURL = url;
+    const avDisp = document.getElementById('profile-avatar-display');
+    if(avDisp) avDisp.innerHTML = '<img src="'+url+'" style="width:60px;height:60px;border-radius:50%;object-fit:cover">';
+    toast('Photo updated!');
+    closeAvatarSheet();
+  } catch(e){ toast('Upload failed: '+e.message); }
+};
+
+
+// ── QUIZ HUB ─────────────────────────────────────────────────────────────
+window.showQuizHub = () => {
+  const hub = document.getElementById('quiz-hub-view');
+  const saq = document.getElementById('saq-sub-view');
+  if(hub) hub.style.display = '';
+  if(saq) saq.style.display = 'none';
+};
+
+window.showSaqView = () => {
+  const hub = document.getElementById('quiz-hub-view');
+  const saq = document.getElementById('saq-sub-view');
+  if(hub) hub.style.display = 'none';
+  if(saq) saq.style.display = '';
+};
+
+const renderQuizHub = () => {
+  showQuizHub();
+  const container = document.getElementById('quiz-hub-cards');
+  if(!container) return;
+  const poolCount = Object.keys(POOL_CACHE).length;
+  const saqCount = (typeof iqQuestions !== 'undefined' && Array.isArray(iqQuestions))
+    ? iqQuestions.length : null;
+  const saqSub = saqCount !== null
+    ? saqCount + ' questions \xB7 Typed answers'
+    : 'Case-based typed answers';
+
+  container.innerHTML =
+    '<div class="quiz-hub-card" onclick="startPoolQuiz()">'
+    + '<div class="quiz-hub-card-icon">🎲</div>'
+    + '<div class="quiz-hub-card-title">Random Pool Quiz</div>'
+    + '<div class="quiz-hub-card-sub">' + poolCount + ' questions \xB7 All topics</div>'
+    + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();startPoolQuiz()">Start Random Quiz →</button>'
+    + '</div>'
+    + '<div class="quiz-hub-card" onclick="showSaqView()">'
+    + '<div class="quiz-hub-card-icon">📝</div>'
+    + '<div class="quiz-hub-card-title">Short Answer (SAQ)</div>'
+    + '<div class="quiz-hub-card-sub">' + saqSub + '</div>'
+    + '<button class="quiz-hub-card-btn" onclick="event.stopPropagation();showSaqView()">Start SAQ →</button>'
+    + '</div>';
+};
+
+
+// ── POOL SCORE LINE CHART ─────────────────────────────────────────────────
+const renderPoolScoreChart = () => {
+  const el = document.getElementById('prof-pool-chart'); if(!el) return;
+  const history = (currentUser && currentUser.poolQuizHistory) || [];
+  if(!history.length){
+    el.style.display = 'none';
+    return;
+  }
+  el.style.display = '';
+  const data = history.slice(-10);  // last 10 attempts
+  const avg = Math.round(data.reduce((a,b) => a+(b.pct||0), 0) / data.length);
+
+  const W = 280, H = 72, PAD = 8;
+  const xStep = data.length > 1 ? (W - PAD*2) / (data.length - 1) : 0;
+  const yScale = v => PAD + (H - PAD*2) * (1 - (v||0)/100);
+
+  // Build SVG path
+  const pts = data.map((d,i) => ({
+    x: PAD + i * xStep,
+    y: yScale(d.pct||0),
+    pct: d.pct||0
+  }));
+  const pathD = pts.map((p,i) => (i===0?'M':'L')+p.x.toFixed(1)+' '+p.y.toFixed(1)).join(' ');
+  // Area fill path (close back to bottom)
+  const areaD = pathD
+    + ' L'+pts[pts.length-1].x.toFixed(1)+' '+(H-PAD)
+    + ' L'+PAD+' '+(H-PAD)+' Z';
+
+  // Guide lines at 80% and 60%
+  const y80 = yScale(80), y60 = yScale(60);
+
+  const dots = pts.map(p => {
+    const col = p.pct >= 80 ? '#2ecc71' : p.pct >= 60 ? '#f39c12' : '#e74c3c';
+    return `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="${col}" stroke="#fff" stroke-width="1.5"/><title>${p.pct}%</title>`;
+  }).join('');
+
+  el.innerHTML =
+    '<div class="pool-chart-header">'
+    +'<span class="pool-chart-title">📊 Last '+data.length+' Pool Quiz Scores</span>'
+    +'<span class="pool-chart-avg">avg '+avg+'%</span>'
+    +'</div>'
+    +'<svg class="pool-chart-svg" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'
+    // Guide lines
+    +'<line x1="'+PAD+'" y1="'+y80.toFixed(1)+'" x2="'+(W-PAD)+'" y2="'+y80.toFixed(1)+'" stroke="#2ecc71" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.5"/>'
+    +'<line x1="'+PAD+'" y1="'+y60.toFixed(1)+'" x2="'+(W-PAD)+'" y2="'+y60.toFixed(1)+'" stroke="#f39c12" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.5"/>'
+    // Area fill
+    +'<path d="'+areaD+'" fill="rgba(231,76,60,.08)" stroke="none"/>'
+    // Line
+    +'<path d="'+pathD+'" fill="none" stroke="#e74c3c" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'
+    // Dots
+    +dots
+    +'</svg>'
+    +'<div class="pool-chart-labels">'
+    +data.map((_,i) => '<span>'+(i+1)+'</span>').join('')
+    +'</div>';
+};
+
+
+// ── TEXTBOOK COVER UPLOAD ──────────────────────────────────────────────────
+window.uploadTextbookCover = async (input) => {
+  const file = input && input.files && input.files[0]; if(!file) return;
+  if(file.size > 8*1024*1024){ toast('Image too large (max 8 MB)'); return; }
+  const coverEl   = document.getElementById('tb-edit-cover');
+  const previewEl = document.getElementById('tb-cover-preview');
+  const tbId      = coverEl && coverEl.dataset.tbid;
+
+  if(previewEl) previewEl.innerHTML = '<span style="font-size:11px;color:var(--text3)">Uploading…</span>';
+  try {
+    const safeName = (tbId||'unknown')+'_'+Date.now();
+    const photoRef = ref(storage, 'textbook_covers/'+safeName);
+    const { uploadBytes, getDownloadURL } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js');
+    const snap = await uploadBytes(photoRef, file);
+    const url  = await getDownloadURL(snap.ref);
+
+    if(coverEl) coverEl.value = url;
+    if(previewEl) previewEl.innerHTML = '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover">';
+
+    // If editing an existing textbook, save coverUrl immediately
+    if(tbId){
+      await updateDoc(doc(db,'textbooks',tbId), {coverUrl: url});
+      // Update in-memory textbook cache
+      const t = _textbooks && _textbooks.find(x=>x.id===tbId);
+      if(t) t.coverUrl = url;
+      toast('Cover uploaded!');
+    } else {
+      toast('Cover ready — save the textbook to apply.');
+    }
+  } catch(e){
+    if(previewEl) previewEl.innerHTML = '<span style="font-size:11px;color:#e74c3c">Upload failed</span>';
+    toast('Upload failed: '+e.message);
+  }
 };
 
 </script>
