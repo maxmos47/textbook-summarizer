@@ -2501,7 +2501,8 @@ function initPoolSync() {
 
 // ── Dynamic MCQ Exam Pools ───────────────────────────────────────────────
 let _examPoolsMeta = [];   // [{id, name, icon, color, createdAt, settings?}] from Firestore config
-let _p1Settings    = {count:20, secPerQ:90, cooldownH:4, passCutoff:50}; // Pool 1 quiz settings cache
+let _p1Settings      = {count:20, secPerQ:90, cooldownH:4, passCutoff:50}; // Pool 1 quiz settings cache
+let _randomSettings  = {count:20, secPerQ:90, cooldownH:4, passCutoff:50}; // Random Pool quiz settings cache
 let EXAM_CACHES    = {};   // {poolId: {docId: questionData}} for custom pools
 let _examUnsubs    = {};   // {poolId: unsubscribe fn}
 
@@ -3779,6 +3780,13 @@ const loadPoolSettings = async () => {
     const chapterCdH     = Number(data.chapterCooldownHours ?? 4);
     POOL_CD_MS           = poolCdH    * 60 * 60 * 1000;
     CHAPTER_CD_MS        = chapterCdH * 60 * 60 * 1000;
+    // Random Pool settings (stored separately so they're independent of Pool 1)
+    _randomSettings = {
+      count:      Number(data.randomPoolCount    ?? data.poolQuizCount    ?? 20),
+      secPerQ:    Number(data.randomPoolSecPerQ  ?? data.poolQuizTimePerQ ?? 90),
+      cooldownH:  Number(data.randomPoolCooldownH ?? data.poolCooldownHours ?? 4),
+      passCutoff: Number(data.randomPoolPassCutoff ?? data.passCutoff ?? 50)
+    };
     const hpc = $('host-pass-cutoff'); if(hpc) hpc.value = _passCutoff;
     // Update display label on Library card
     const tLabel   = TIME_LABELS[time]  || time+'s/Q';
@@ -3817,8 +3825,13 @@ window.savePoolSettings = async () => {
 
 // ── PER-POOL SETTINGS ──────────────────────────────────────────────────────
 const loadPoolSettingsFor = async (poolId) => {
-  if(!poolId || poolId === '_default' || poolId === '_pool') {
-    return await loadPoolSettings();
+  if(!poolId || poolId === '_pool') {
+    // Random Pool — use its own settings (lazy-load if first call)
+    if(!_randomSettings || _randomSettings.count===20 && !_randomSettings._loaded) await loadPoolSettings();
+    return { count: _randomSettings.count, secPerQ: _randomSettings.secPerQ };
+  }
+  if(poolId === '_default') {
+    return await loadPoolSettings(); // Pool 1
   }
   const meta = (_examPoolsMeta||[]).find(p=>p.id===poolId);
   const s = (meta && meta.settings) || {};
@@ -3836,7 +3849,15 @@ window.savePoolCardSettings = async (poolId) => {
   const cooldownH = parseInt(document.getElementById('ps-cd-'   + poolId).value);
   const passCutoff= Math.min(100,Math.max(1,parseInt(document.getElementById('ps-pass-'+ poolId).value)||50));
   try {
-    if(poolId === '_default'){
+    if(poolId === '_random'){
+      await setDoc(doc(db,'config','settings'), {
+        randomPoolCount: count, randomPoolSecPerQ: secPerQ,
+        randomPoolCooldownH: cooldownH, randomPoolPassCutoff: passCutoff
+      }, { merge: true });
+      _randomSettings = {count, secPerQ, cooldownH, passCutoff};
+      toast('✅ Random Pool settings saved!');
+      renderExamPoolsManager();
+    } else if(poolId === '_default'){
       await setDoc(doc(db,'config','settings'), {
         poolQuizCount: count, poolQuizTimePerQ: secPerQ,
         poolCooldownHours: cooldownH
@@ -4478,7 +4499,8 @@ const _saveBadgeConfig = async () => {
 let POOL_CD_MS    = 4 * 60 * 60 * 1000; // pool cooldown (Pool 1 + Random) — updated from Firestore
 let CHAPTER_CD_MS = 4 * 60 * 60 * 1000; // chapter cooldown — updated from Firestore
 const _getPoolCdMs = (poolId) => {
-  if(poolId === '_default' || poolId === '_pool') return POOL_CD_MS;
+  if(poolId === '_pool') return (_randomSettings && _randomSettings.cooldownH != null ? Number(_randomSettings.cooldownH) : 4) * 3600000;
+  if(poolId === '_default') return POOL_CD_MS; // Pool 1
   const meta = (_examPoolsMeta||[]).find(p=>p.id===poolId);
   return (meta && meta.settings && meta.settings.cooldownH != null ? Number(meta.settings.cooldownH) : 4) * 3600000;
 };
@@ -5747,7 +5769,7 @@ const _isPoolId = id => id === '_pool' || (_examPoolsMeta && _examPoolsMeta.some
 
 // Build HTML string for one pool card
 const _buildPoolCard = (opts) => {
-  const { id, name, icon, color, total, answered, pct, isDefault, settings } = opts;
+  const { id, name, icon, color, total, answered, pct, isDefault, isRandom, settings } = opts;
   const ps = settings || {};
   const psCount = ps.count != null ? ps.count : 20;
   const psTime  = ps.secPerQ != null ? ps.secPerQ : 90;
@@ -5781,7 +5803,9 @@ const _buildPoolCard = (opts) => {
   const escName = name.replace(/</g,'&lt;').replace(/>/g,'&gt;');
   let btns = '';
   btns += '<button class="ep-card-btn" id="pool-settings-toggle-'+id+'" onclick="togglePoolSettings(\''+id+'\')" title="Pool quiz settings">⚙️</button>';
-  if(isDefault){
+  if(isRandom){
+    btns += '<button class="ep-card-btn" onclick="startPoolQuiz()" title="Launch Random Quiz">▶ Launch</button>';
+  } else if(isDefault){
     btns += '<button class="ep-card-btn" onclick="openMiniReviewer(\'_default\')" title="Edit in Mini Reviewer">🔬 Edit</button>';
     btns += '<button class="ep-card-btn" onclick="window.open(\'https://maxmos47.github.io/quiz-reviewer/\',\'_blank\')" title="Open Reviewer Tool">🔗 Reviewer</button>';
   } else {
@@ -5795,11 +5819,12 @@ const _buildPoolCard = (opts) => {
     + '<div class="ep-card-header"><span class="ep-card-name">' + icon + ' ' + escName + '</span>'
     + '<div class="ep-card-btns">' + btns + '</div></div>'
     + statsHtml
-    + '<div style="display:flex;gap:7px;flex-wrap:wrap">'
+    + (isRandom ? '' : ('<div style="display:flex;gap:7px;flex-wrap:wrap">'
     + '<label class="ep-card-btn" style="cursor:pointer;padding:6px 10px;font-size:12px;background:var(--surface3)">📤 Import JSON<input type="file" id="' + fileId + '" accept=".json" style="display:none" onchange="importExamPoolJson(this,\'' + escId + '\')" ></label>'
     + '<button class="ep-card-btn danger" onclick="'+clearFn+'" style="padding:6px 10px;font-size:12px">🗑 Clear</button>'
-    + '</div>'
+    + '</div>'))
     + (isDefault ? '<div style="font-size:11px;color:var(--text3);margin-top:8px">🔗 Pool 1 syncs live from the Reviewer Tool. Import JSON to add additional questions.</div>' : '')
+    + (isRandom  ? '<div style="font-size:11px;color:var(--text3);margin-top:8px">🎲 Draws questions from ALL pools combined. Settings here are independent of individual pools.</div>' : '')
     + settingsPanel
     + '</div>';
 };
@@ -5807,11 +5832,20 @@ const _buildPoolCard = (opts) => {
 const renderExamPoolsManager = () => {
   const el = document.getElementById('exam-pools-list');
   if(!el) return;
+  // Random Pool card (all pools combined)
+  const allPoolDocs = [
+    ...Object.values(POOL_CACHE),
+    ..._examPoolsMeta.flatMap(p => Object.values(EXAM_CACHES[p.id]||{}))
+  ];
+  const rTotal = allPoolDocs.length, rAns = allPoolDocs.filter(d=>d.hasAnswer).length;
+  const rPct   = rTotal ? Math.round(rAns/rTotal*100) : 0;
+  let html = _buildPoolCard({ id:'_random', name:'Random Quiz (All Pools)', icon:'🎲', color:'#8e44ad',
+    total:rTotal, answered:rAns, pct:rPct, isRandom:true, settings:_randomSettings });
   // Pool 1 card
   const p1Docs = Object.values(POOL_CACHE);
   const p1Total = p1Docs.length, p1Ans = p1Docs.filter(d=>d.hasAnswer).length;
   const p1Pct   = p1Total ? Math.round(p1Ans/p1Total*100) : 0;
-  let html = _buildPoolCard({ id:'_default', name:'Main MCQ Pool', icon:'📚', color:'#27ae60',
+  html += _buildPoolCard({ id:'_default', name:'Main MCQ Pool', icon:'📚', color:'#27ae60',
     total:p1Total, answered:p1Ans, pct:p1Pct, isDefault:true, settings:_p1Settings });
   // Custom pool cards
   _examPoolsMeta.forEach(pool => {
